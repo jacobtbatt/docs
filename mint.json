@@ -2,10 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
   "logo": {
-    "dark": "/THNKS_PrimaryLogo_Teal.svg",
-    "light": "/THNKS_PrimaryLogo_Teal.svg"
+    "dark": "/logo/THNKS_PrimaryLogo_Teal.svg",
+    "light": "/logo/THNKS_PrimaryLogo_Teal.svg"
   },
-  "favicon": "/THNKS_PrimaryLogo_Teal.svg",
+  "favicon": "/logo/THNKS_PrimaryLogo_Teal.svg",
   "colors": {
     "primary": "#00B8C7",
     "light": "#FFFFFF",
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Getting Started Wtih Thnks as an Administrator",
       "pages": [
         "essentials/markdown",
         "essentials/code",
