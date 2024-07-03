@@ -63,9 +63,8 @@
         "thnks_help_articles/admin_best_practices",
         "thnks_help_articles/analytics",
         "thnks_help_articles/company_info",
-        "thnks_help_articles/flexible_payment",
-        "essentials/reusable-snippets"
-      ]
+        "thnks_help_articles/flexible_payment"
+            ]
     },
     {
       "group": "API Documentation",
