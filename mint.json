@@ -60,7 +60,7 @@
     {
       "group": "Getting Started Wtih Thnks as an Administrator",
       "pages": [
-        "essentials/markdown",
+        "thnks_help_articles/admin_best_practices",
         "essentials/code",
         "essentials/images",
         "essentials/settings",
