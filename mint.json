@@ -61,10 +61,9 @@
       "group": "Getting Started Wtih Thnks as an Administrator",
       "pages": [
         "thnks_help_articles/admin_best_practices",
-        "essentials/code",
         "thnks_help_articles/analytics",
-        "essentials/settings",
-        "essentials/navigation",
+        "thnks_help_articles/company_info",
+        "thnks_help_articles/flexible_payment",
         "essentials/reusable-snippets"
       ]
     },
