@@ -1,9 +1,9 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Thnks Documentation",
   "logo": {
     "dark": "/logo/THNKS_PrimaryLogo_Teal.svg",
-    "light": "/logo/THNKS_PrimaryLogo_Teal.svg"
+    "light": "/logo/THNKS_PrimaryLogo_Navy.svg"
   },
   "favicon": "/logo/THNKS_PrimaryLogo_Teal.svg",
   "colors": {
@@ -33,7 +33,7 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
+      "name": "Thnks Web App",
       "icon": "book-open-cover",
       "url": "https://mintlify.com/docs"
     },
@@ -63,7 +63,9 @@
         "thnks_help_articles/admin_best_practices",
         "thnks_help_articles/analytics",
         "thnks_help_articles/company_info",
-        "thnks_help_articles/flexible_payment"
+        "thnks_help_articles/flexible_payment",
+        "thnks_help_articles/changing_payment",
+        "thnks_help_articles/moving_balances"
             ]
     },
     {
