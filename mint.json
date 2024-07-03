@@ -79,5 +79,10 @@
   "footerSocials": {
     "x": "https://twitter.com/alwayssaythnks",
     "linkedin": "https://www.linkedin.com/company/thnks"
+  },
+  "analytics": {
+    "posthog": {
+        "apiKey": "phc_Kql3s3L53OL8e5vad6g7Q5M2Pu6yDvuuXf3pbkW7qTq"
+    }
   }
 }
