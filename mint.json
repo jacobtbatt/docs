@@ -59,7 +59,8 @@
         "admin_getting_started/flexible_payment",
         "admin_getting_started/changing_payment",
         "admin_getting_started/moving_balances",
-        "admin_getting_started/add_funds_balance"
+        "admin_getting_started/add_funds_balance",
+        "admin_getting_started/compliance_settings"
             ]
     },
     {
