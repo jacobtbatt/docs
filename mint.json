@@ -53,12 +53,13 @@
     {
       "group": "Getting Started Wtih Thnks as an Administrator",
       "pages": [
-        "thnks_help_articles/admin_best_practices",
-        "thnks_help_articles/analytics",
-        "thnks_help_articles/company_info",
-        "thnks_help_articles/flexible_payment",
-        "thnks_help_articles/changing_payment",
-        "thnks_help_articles/moving_balances"
+        "admin_getting_started/admin_best_practices",
+        "admin_getting_started/analytics",
+        "admin_getting_started/company_info",
+        "admin_getting_started/flexible_payment",
+        "admin_getting_started/changing_payment",
+        "admin_getting_started/moving_balances",
+        "admin_getting_started/add_funds_balance"
             ]
     },
     {
