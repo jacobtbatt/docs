@@ -22,25 +22,13 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Get Started",
+    "url": "https://app.thnks.com"
   },
   "tabs": [
     {
       "name": "API Reference",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Thnks Web App",
-      "icon": "window-maximize",
-      "url": "https://app.thnks.com"
-    },
-    {
-      "name": "Help Articles",
-      "icon": "book-open-cover",
-      "url": "https://help.thnks.com/"
     }
   ],
   "navigation": [
@@ -61,7 +49,8 @@
         "admin_getting_started/moving_balances",
         "admin_getting_started/add_funds_to_balance",
         "admin_getting_started/compliance_settings",
-        "admin_getting_started/add_users_to_team"
+        "admin_getting_started/add_users_to_team",
+        "admin_getting_started/spend_limits"
             ]
     },
     {
@@ -87,5 +76,8 @@
     "posthog": {
         "apiKey": "phc_Kql3s3L53OL8e5vad6g7Q5M2Pu6yDvuuXf3pbkW7qTq"
     }
+  },
+  "integrations": {
+    "intercom": "iwfxzmxt"
   }
 }
