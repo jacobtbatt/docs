@@ -8,7 +8,7 @@
   "favicon": "/logo/THNKS_PrimaryLogo_Teal.svg",
   "colors": {
     "primary": "#00B8C7",
-    "light": "#FFFFFF",
+    "light": "#00B8C7",
     "dark": "#00B8C7",
     "anchors": {
       "from": "#FFFFFF",
