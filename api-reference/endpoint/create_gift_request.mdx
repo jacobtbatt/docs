@@ -1,0 +1,27 @@
+---
+title: 'Send a Thnks via Webhook'
+api: 'POST /gift_requests'
+---
+
+<ParamField header="Content-Type" type="string" default="application/json" initialValue="application/json">
+This should always be `application/json`
+</ParamField>
+<ParamField body="gift_id" type="integer" required="true">
+Variable containing Thnks id of the item(s) the Customer wants to send
+</ParamField>
+<ParamField body="recipients" type="array">
+        <Expandable title="properties">
+            <ParamField body="email" type="string" required="true">
+            Variable containing email address of the recipient
+            </ParamField>
+            <ParamField body="first_name" type="string">
+            Variable containing first name of the recipient (optional)
+            </ParamField>
+            <ParamField body="last_name" type="string">
+            Variable containing last name of the recipient (optional)
+            </ParamField>
+            <ParamField body="message" type="string" required="true">
+            Variable containing the Thnks message
+            </ParamField>
+        </Expandable>
+</ParamField>

@@ -64,7 +64,8 @@
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/delete",
+        "api-reference/endpoint/create_gift_request"
       ]
     }
   ],
@@ -79,5 +80,12 @@
   },
   "integrations": {
     "intercom": "iwfxzmxt"
+  },
+  "api": {
+    "baseUrl": "https://api.thnks.com/api/v1/", 
+    "auth": {
+      "method": "key",
+      "name": "Authorization"
+    }
   }
 }
