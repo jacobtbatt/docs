@@ -8,6 +8,13 @@ This should always be `application/json`
 </ParamField>
 <ParamField body="gift_id" type="integer" required="true">
 Variable containing Thnks id of the item(s) the Customer wants to send
+
+The Account Manager will be responsible for providing the Customer with the ID(s) for a specific Thnks or set of Thnks needed for the Webhook set up, but the Customer can also find this themselves using the below instructions:
+1. Go to app.thnks.com and log in.
+2. Find the Thnks you wish to send and click on the title or image
+3. Once on the Thnks Details page, check the url, it should look something like this:
+https://app.thnks.com/#/send-thnks/thnks/5659
+4. The number at the end is your Thnks ID, which is “5659” above for a ‘Thnks A Latte’
 </ParamField>
 <ParamField body="recipients" type="array">
         <Expandable title="properties">
