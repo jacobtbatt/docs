@@ -60,12 +60,10 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Thnks Endpoints",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete",
-        "api-reference/endpoint/create_gift_request"
+        "api-reference/endpoint/create_gift_request",
+        "api-reference/endpoint/create_redemption_url"
       ]
     }
   ],

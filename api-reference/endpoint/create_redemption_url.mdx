@@ -1,15 +1,10 @@
 ---
-title: 'Send a Thnks via Webhook'
-api: 'POST /gift_requests'
+title: 'Create a Thnks Redemption URL via Webhook'
+api: 'POST https://admin.thnks.com/api/v1/webhooks/gift_requests'
 ---
 
 <ParamField header="Content-Type" type="string" default="application/json" initialValue="application/json">
 This should always be `application/json`
-</ParamField>
-<ParamField header="Idempotency-key" type="string" initialValue="UUIDv4">
-This header is only necessary in a few instances. It enables the same user ordering the same Thnks rapidly to receive a completely new Thnks each time. This is not our normal behavior for security reasons but check with our Product team to see if this applies for your use case.
-
-This should always be `UUIDv4` if in use
 </ParamField>
 <ParamField body="gift_id" type="integer" required="true">
 Variable containing Thnks id of the item(s) the Customer wants to send
@@ -21,10 +16,27 @@ The Account Manager will be responsible for providing the Customer with the ID(s
 https://app.thnks.com/#/send-thnks/thnks/5659
 4. The number at the end is your Thnks ID, which is “5659” above for a ‘Thnks A Latte’
 </ParamField>
+<ParamField body="include_carbon_neutral_cost" type="boolean" default="false">
+Default: false. Include Carbon neutral cost if allowed by rules.
+</ParamField>
+<ParamField body="reply_to_email" type="string">
+to@email.com (string, optional) - Custom reply-to email for thnks emails.
+</ParamField>
 <ParamField body="recipients" type="array">
         <Expandable title="properties">
             <ParamField body="email" type="string" required="true">
             Variable containing email address of the recipient
+            </ParamField>
+            <ParamField body="required_field_responses" type="array">
+            Should be provided if existed in enterprise.
+                <Expandable title="object">
+                    <ParamField body="gift_request_required_field_id" type="integer" required="true">
+                    The Required Field ID
+                    </ParamField>
+                    <ParamField body="response" type="string" required="true">
+                    The Response of the Required Field
+                    </ParamField>
+                </Expandable>
             </ParamField>
             <ParamField body="first_name" type="string">
             Variable containing first name of the recipient (optional)
