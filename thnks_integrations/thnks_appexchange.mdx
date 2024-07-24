@@ -203,3 +203,13 @@ There are 5 tabs:
   </Frame>
 
 Each tab comes pre-configured with default settings. If you wish to change these settings, there is an “Edit” button in the top right corner.
+
+#### Contact Settings
+
+This tab is where you can customize the logic that Salesforce will use for matching Thnks records with existing Contacts in your Salesforce instance. Since Thnks are sent either using email or SMS, this means that there will be two different fields to match against: an email address or a phone number. By default, the email field being used is the standard Email field (API name of “Email”), and the phone field being used is the standard Phone field (API name of “Phone”).
+
+However, you can change these so that Thnks matches Contacts based on any other field that is of type Email or Phone, respectively.
+  <Frame>
+  ![Specific Profiles](/thnks_integration_images/contact_settings.png)
+  ![Phone Matching](/thnks_integration_images/contact_phone_match.png)
+  </Frame>
