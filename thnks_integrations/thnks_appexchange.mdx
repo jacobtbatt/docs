@@ -1,0 +1,205 @@
+---
+title: 'Thnks Salesforce AppExchange'
+description: 'Use the latest version (v1.3) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities.'
+icon: 'salesforce'
+---
+
+The custom Thnks objects allow you to build more robust reporting and understand your ROI by pulling detailed reports on user activity and messaging effectiveness.
+
+New features of the App:
+* Automatic association of the Thnks object with open Opportunities and Accounts (in addition to Lead or Contact)
+* More streamlined reporting on key date/time stamping on Thnks Status (delivered, opened, redeemed, etc.)
+* Pre-built dashboard and underlying reports
+* Admin configuration page to control:
+  * How Thnks is matched when there are duplicate Contacts, Leads, or Opportunities
+  * Toggle for matching to Opportunities
+  * Toggle for creating Tasks
+  * What to do when no matching Lead/Contact is found
+  * Matching on custom phone and/or email fields on the Lead and Contact
+* Enhanced Activity logging via the Task object
+* Support for Thnks Required Field syncing
+
+## Integration Overview
+
+Thnks has partnered with Salesforce to provide our clients with an application built specifically for Salesforce and available on the AppExchange. Currently, this is a one-way integration, meaning that data is being sent from the Thnks product into your Salesforce environment.
+
+## What Does It Do?
+
+The Thnks Salesforce AppExchange application provides enhanced reporting capabilities by creating a Thnks record within Salesforce whenever a Thnks transaction is initiated.
+The data model in Salesforce is simple: there is a single object called “Thnks”, which is created shortly after a Thnks is sent out, and then updated as the status changes. Additionally, there is automation that is controlled within the Salesforce App (which you may customize the logic for) which determines what records in Salesforce a Thnks is associated with (Lead, Contact, Account and Opportunity). You may also configure a Task to be created so you can have visibility of Thnks in Salesforce’s standard activity feed.
+
+Date/times are stamped on the Thnks record as the Thnks is delivered, undelivered, opened, redeemed, expired, refunded and/or donated.
+
+## How Does It Work?
+
+When a Thnks user sends a Thnks, whether it’s via the web/mobile app, Chrome extension, an automated webhook, or a scheduled campaign, a record with the transaction information is created as a Thnks in Salesforce. As part of the creation of the Thnks record, and depending on what settings you have customized, the following may happen:
+* Thnks is associated with a Lead or Contact (never both)
+  * If Thnks is associated with a Contact, Thnks is associated with an open Opportunity if that Contact is tied to an Opportunity via the Opportunity Contact Role object
+  * If Thnks is associated with a Contact, the Account that the Contact belongs to is also associated with the Thnks record
+  * It is also possible that no association is made, if no matching Contact or Lead is found
+* A Task is created, associated with the Thnks record as the WhatId, and the Contact as the WhoId (more on this below)
+* As the Thnks transaction moves through various statuses (e.g. Opened, Redeemed), the Status field on the Thnks record will update accordingly, and the date and time at which this occurs will be stamped on dedicated fields
+* Other important details about the Thnks are included in the sync and placed on fields on the Thnks object such as the sender, various pricing fields, the Transaction ID, a link to the Thnks, and any custom fields you configure within the Thnks App.
+
+## System Requirements
+
+Below please find more information on the necessary requirements before installing our Salesforce App in your instance of Salesforce.
+
+### Supported Salesforce Editions
+
+| Salesforce Editions |                            |
+| ------------------- | ------------------------------------- |
+| Professional        | [Salesforce Professional Edition](https://www.salesforce.com/editions-pricing/sales-and-service-cloud/) provides Web Services API as an optional add-on. |                   |
+| Enterprise          |                                       |
+| Unlimited           |                                       |
+| Developer           |                                       |
+
+
+## Installation
+
+In this section, we’ll walk through installing the AppExchange application in your Salesforce instance. These instructions are meant to be a high-level overview, please contact your Salesforce Administrator to discuss the process for installation onto your specific instance and to determine whether or not a Sandbox should be used first.
+
+### Preparing Your Thnks Account for Salesforce
+
+Contact your Thnks Account Manager (or support@thnks.com) to enable the Salesforce App connection in your organization’s Thnks account. 
+
+Thnks offers two ways to connect your users’ Thnks activity to Salesforce:
+
+* **User Connection** - each user must enable their own Thnks \<\> Salesforce connection via their Thnks account profile. 
+  * Note: if a user does not enable their connection, their Thnks activity will not appear in Salesforce.
+* **Org Connection** - an SF admin can enable a single connection between Thnks and Salesforce. Individual users will not have to perform their own connections. 
+  * Note: For Thnks activity to appear in Salesforce, the email address of the Thnks user must match the email address of their Salesforce account.
+
+### Installing from the AppExchange
+
+To install Thnks, you’ll need to navigate to the Thnks App listing in the Salesforce AppExchange. [Here](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT&preview=%222021-02-10T20%3A06%3A08.000Z%22) is a direct link. Click on **“Get It Now”**, make sure you’re logged into the correct account, and a dialog box will appear: 
+
+<Steps>
+  <Step title="Choose The Instance">
+    Select the correct Salesforce instance, and decide whether you want to install in Production or in Sandbox, and proceed.
+  </Step>
+  <Step title="Confirm Details">
+    After confirming details and agreeing to the terms and conditions, click “Confirm and Install” to continue.
+  </Step>
+  <Step title="Determine Install Preferences">
+    Lastly, determine which users you’d like to initially install the application for. 
+      We recommend installing for specific profiles or for admins only and reconfiguring as needed.
+      <Frame>
+      ![Specific Profiles](/thnks_integration_images/profile_specific.png)
+      </Frame>
+  </Step>
+</Steps>
+
+If selecting **“Install for Specific Profiles”**, you will be able to choose one of three options for each individual profile:
+
+* No Access (Users with this profile will not be able to see any Thnks data)
+* Thnks Standard User (Users with this profile will be able to view all Thnks data, but will not be able to configure the Thnks settings)
+* Thnks Admin (Users with this profile will be able to view and edit all Thnks data, as well as configure the Thnks settings)
+
+<Frame>
+![Access Levels](/thnks_integration_images/access_levels.png)
+</Frame>
+
+At this point, you should receive an email from Salesforce confirming successful installation and should be redirected to this page with all of your installed packages. You’ve successfully installed the Thnks Salesforce App!
+
+### Upgrading from v1.1 to v1.3 of the AppExchange Listing
+
+If you have an old version of the Thnks AppExchange app installed in your instant of Salesforce, please follow the same instructions for install as if you were installing for the first time as seen above using [this link](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT&preview=%222021-02-10T20%3A06%3A08.000Z%22).
+
+The main considerations to keep in mind when upgrading:
+* The Thnks Status Log object will no longer be syncing records (but the old records will remain)
+* There will be many new fields on the Thnks object, such as Opportunity and Account lookups, as well as several new date/time fields to replace the need of the Thnks Status Log
+* There is now a tab called “Manage Thnks Settings” to configure various settings in the integration (see “Thnks Configuration” section below)
+
+#### Backfilling Thnks Records in 1.3
+
+If you have upgraded from 1.1 to 1.3, you will now notice that the Thnks Status Log object is no longer being used. Instead, there are new date/time fields to track the status of key events such as “Delivered Date/Time”, “Redeemed Date/Time”, etc.
+
+In order to backfill your historical Thnks records from 1.1 with the correct dates for these new fields, you’ll need to have a user with the Thnks admin permissions in Salesforce head to the “Manage Thnks Settings” and click “Enrich Old Thnks”. 
+
+<Frame>
+![Enrich Thnks Data](/thnks_integration_images/enrich_thnks.png)
+</Frame>
+
+This will automatically scan all Thnks Status Log records, take the date/time for each key event, and then backfill the fields in this section on the Thnks object.
+
+<Frame>
+![Conact Record](/thnks_integration_images/contact_record.png)
+</Frame>
+
+### Permissions
+
+#### Install
+
+<Frame>
+![Conact Record](/thnks_integration_images/permission_set.png)
+</Frame>
+
+#### Manually Updating Permissions
+
+If after installing the Thnks app following the install instructions above you need to change permissions, the recommended path is by assigning Permission Sets to the appropriate Users. Alternatively, you may also grant permissions to the Thnks objects at the Profile level.
+
+<Steps>
+  <Step title="Enter Setup">
+  </Step>
+  <Step title="Click Into Profiles Under the User Section">
+    <Frame>
+    ![Specific Profiles](/thnks_integration_images/profiles_settings.png)
+    </Frame>
+  </Step>
+  <Step title="Select the Profile You Wish to Change">
+  </Step>
+  <Step title="Click Edit at the Top of the Page">
+    <Frame>
+    ![Specific Profiles](/thnks_integration_images/standard_user.png)
+    </Frame>
+  </Step>
+  <Step title="Scroll Down to “Custom Object Permissions” and Look for “Thnks”">
+    <Frame>
+    ![Specific Profiles](/thnks_integration_images/custom_object.png)
+    </Frame>
+  </Step>
+  <Step title="Check the Various Access You Wish for This Profile to Have (Read, Create, Edit, Delete, View All, Modify All)">
+    <Frame>
+    ![Specific Profiles](/thnks_integration_images/profile_access.png)
+    </Frame>
+    You can ignore Thnks Status Logs, as this is no longer used in the integration
+
+    View All would be the recommended access for the majority of end users
+  </Step>
+</Steps>
+
+#### Permission Sets
+
+Alternatively, you can assign a Permission Set to individual users. From Setup, click into Users, and then choose any User which you wish to grant additional permissions to. Under “Permission Set Assignments”, click “Edit Assignments”. 
+
+<Frame>
+![Specific Profiles](/thnks_integration_images/assignments.png)
+</Frame>
+
+There are two Permission Sets to choose from:
+*	Thnks Admin (grants View/Modify All access to the Thnks object, as well as allowing this User to configure the Thnks settings)
+*	Thnks Standard User (grants View All access to the Thnks object)
+  <Frame>
+  ![Specific Profiles](/thnks_integration_images/user_permissions.png)
+  </Frame>
+
+## Thnks Configuration
+
+Once you have Thnks installed in your Salesforce environment, you will want to review the integration settings. If you click the App Launcher in Salesforce (this is the 9 dots in the top left), and then type in “Thnks”, the item “Manage Thnks Settings” should appear. Click into that.
+  <Frame>
+  ![Specific Profiles](/thnks_integration_images/9_dots.png)
+  ![Specific Profiles](/thnks_integration_images/thnks_typing.png)
+  </Frame>
+
+There are 5 tabs:
+* Contact Settings
+* Lead Settings
+* Opportunity Settings
+* Fields Mapping
+* Others
+  <Frame>
+  ![Specific Profiles](/thnks_integration_images/thnks_tabs.png)
+  </Frame>
+
+Each tab comes pre-configured with default settings. If you wish to change these settings, there is an “Edit” button in the top right corner.

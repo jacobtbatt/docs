@@ -39,18 +39,9 @@
       ]
     },
     {
-      "group": "Getting Started Wtih Thnks as an Administrator",
+      "group": "Integrations",
       "pages": [
-        "admin_getting_started/admin_best_practices",
-        "admin_getting_started/analytics",
-        "admin_getting_started/company_info",
-        "admin_getting_started/flexible_payment",
-        "admin_getting_started/changing_payment",
-        "admin_getting_started/moving_balances",
-        "admin_getting_started/add_funds_to_balance",
-        "admin_getting_started/compliance_settings",
-        "admin_getting_started/add_users_to_team",
-        "admin_getting_started/spend_limits"
+        "thnks_integrations/thnks_appexchange"
             ]
     },
     {
