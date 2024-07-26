@@ -54,7 +54,8 @@
       "group": "Thnks Endpoints",
       "pages": [
         "api-reference/endpoint/create_gift_request",
-        "api-reference/endpoint/create_redemption_url"
+        "api-reference/endpoint/create_redemption_url",
+        "api-reference/endpoint/status_api"
       ]
     }
   ],
@@ -74,7 +75,7 @@
     "intercom": "iwfxzmxt"
   },
   "api": {
-    "baseUrl": "https://api.thnks.com/api/v1/",
+    "baseUrl": "https://admin.thnks.com/api/v1",
     "auth": {
       "method": "key",
       "name": "Authorization"

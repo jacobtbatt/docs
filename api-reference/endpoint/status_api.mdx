@@ -1,0 +1,64 @@
+---
+title: 'Status API'
+api: 'POST /admin/enterprises/{enterprise_id}/webhook_urls'
+---
+
+<ParamField header="Content-Type" type="string" default="application/json" initialValue="application/json" placeholder="application/json">
+This should always be `application/json`
+</ParamField>
+<ParamField body="target_url" type="string" required="true">
+</ParamField>
+<ParamField path="enterprise_id" type="integer">
+</ParamField>
+
+<ResponseExample>
+```json Response - Example
+{
+    "recipient_transaction_id": 1,
+    "gift_transaction_id": 2,
+    "tracking_status": "received",
+    "receiving_status": "accepted",
+    "sender": {
+        "id": 2,
+        "first_name": "John",
+        "last_name": "Smith",
+        "email": "john@example.com",
+        "enterprise": {
+            "id": 3,
+            "name": "Team Name",
+            "api_token": "<enterprise hierarchy token>"
+        }
+    }
+    "recipient": {
+        "first_name": "John",
+        "last_name": "Smith",
+        "email": "john@example.com"
+    },
+    "gift": {
+        "id": 4,
+        "name": "Gift Name"
+        "description": "Gift Description"
+    },
+    "message": "Some Message Text",
+    "cost_breakdown": {
+        "cost": 1000,
+        "commission": 200,
+        "tax": 300,
+        "total": 1500
+    },
+    "status_history": [
+        {
+            "status": "delivered",
+            "created_at": 1510035040
+        },
+        {
+            "status": "opened",
+            "created_at": 1510035040
+        }
+    ],
+    "email_preview_url": "https://api.thnks.com/api/v1/email/?purpose=receive_gift&recipient_transaction_token=<transaction token>"
+    "created_at": 1510035040,
+    "updated_at": 1510035040
+}
+```
+</ResponseExample>

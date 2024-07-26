@@ -7,14 +7,15 @@ description: 'Thnks API Documentation'
 
 Welcome to the new Thnks API Documentation.  As a Thnks Admin, you have access to many different automation features that are now being made public!
 
-## Authentication
+## Headers
 
-All API endpoints are authenticated using Authorization API tokens and are requested from a Thnks Team Member.
+All API endpoints are authenticated using an Authorization API token and are requested from a Thnks Team Member.
 
 ```json
-"security": [
+"headers": [
   {
-    "Authorization": []
+    "Authorization": "<api_key>",
+    "Content-Type": "application/json"
   }
 ]
 ```
