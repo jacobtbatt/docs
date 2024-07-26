@@ -65,6 +65,9 @@
   "analytics": {
     "posthog": {
         "apiKey": "phc_Kql3s3L53OL8e5vad6g7Q5M2Pu6yDvuuXf3pbkW7qTq"
+    },
+    "clearbit": {
+        "publicApiKey": "pk_b0c3ca5e0ce2ad73a4a46b04d2d29993"
     }
   },
   "integrations": {
