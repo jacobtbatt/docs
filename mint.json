@@ -41,7 +41,8 @@
     {
       "group": "Integrations",
       "pages": [
-        "thnks_integrations/thnks_appexchange"
+        "thnks_integrations/thnks_appexchange",
+        "thnks_integrations/sso"
             ]
     },
     {

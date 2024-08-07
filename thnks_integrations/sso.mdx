@@ -1,0 +1,35 @@
+---
+title: 'Single Sign-On'
+description: 'This documentation is recommended to be completed in conjunction with a member of the Thnks SSO team for exchanging sensitive information.
+
+
+Please complete the ‘Client to Provide’ section of your desired connection and send back to sso@thnks.com. A member of our team will follow up shortly.  In your email back please be sure to provide the connectionName used as well.'
+icon: 'lock'
+---
+
+Thnks is committed to providing a seamless and secure experience for our enterprise clients. To achieve this, we leverage Auth0, a robust and versatile authentication solution, to enable Single Sign-On (SSO) connections to the Thnks platform. This instruction sheet will guide you through the process of configuring connections using OpenID Connect (OIDC), Security Assertion Markup Language 2.0 (SAML2.0), or Azure Active Directory, depending on your organization's preference and requirements.
+
+## OIDC
+<Steps>
+  <Step title="Thnks Information">
+    | IdP Field | URL |
+    | -------- | ------------------------------------- |
+    | Post-back URL     | https://thnks.us.auth0.com/login/callback?connection=<Tooltip tip="yourConnectionName is provided by Thnks and will always be the name of your company.  If you feel comfortable completing without a Thnks Team member then please respond to sso@thnks.com with yourConnectionName (case sensitive) and your X.509 Signing Certificate">yourConnectionName</Tooltip>                     |
+    | Login Redirect URL     | https://thnks.us.auth0.com/login/callback                    |
+  </Step>
+  <Step title="Client Information">
+    In order to establish a sso connection, the client needs to provide the following:
+    | IdP Information | Example                              |
+    | --------  | ------------------------------------ |
+    | Client ID     | 0oa4ntasdawevvpA2j697            |
+    | Client Secret     | EASf9W2MC-lFreJWVusZAWRQWFeOzvv4BgcOUKw            |
+    | Issuer URL     | https://acme.okta.com            |
+    | Home Realm Discovery Domain     | acme.com            |
+  </Step>
+  <Step title="Verification">
+    Once Thnks has received the information from Step 2, we will create and test the connection in Auth0.
+  </Step>
+  <Step title="Testing">
+    Once connection has been finalized, Thnks will create or modify a user for the client test team to confirm SSO connection is complete.
+  </Step>
+</Steps>
