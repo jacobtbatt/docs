@@ -18,13 +18,41 @@ Thnks is committed to providing a seamless and secure experience for our enterpr
     | Login Redirect URL     | https://thnks.us.auth0.com/login/callback                    |
   </Step>
   <Step title="Client Information">
-    In order to establish a sso connection, the client needs to provide the following:
+    In order to establish a SSO connection, the client needs to provide the following:
     | IdP Information | Example                              |
     | --------  | ------------------------------------ |
     | Client ID     | 0oa4ntasdawevvpA2j697            |
     | Client Secret     | EASf9W2MC-lFreJWVusZAWRQWFeOzvv4BgcOUKw            |
     | Issuer URL     | https://acme.okta.com            |
     | Home Realm Discovery Domain     | acme.com            |
+  </Step>
+  <Step title="Verification">
+    Once Thnks has received the information from Step 2, we will create and test the connection in Auth0.
+  </Step>
+  <Step title="Testing">
+    Once connection has been finalized, Thnks will create or modify a user for the client test team to confirm SSO connection is complete.
+  </Step>
+</Steps>
+
+## SAML 2.0
+<Steps>
+  <Step title="Thnks Information">
+    | IdP Field | URL |
+    | -------- | ------------------------------------- |
+    | Post-back URL     | https://thnks.us.auth0.com/login/callback?connection=<Tooltip tip="yourConnectionName is provided by Thnks and will always be the name of your company.  If you feel comfortable completing without a Thnks Team member then please respond to sso@thnks.com with yourConnectionName (case sensitive) and your X.509 Signing Certificate">yourConnectionName</Tooltip>                     |
+    | Recipient URL     | https://thnks.us.auth0.com/login/callback?connection=<Tooltip tip="yourConnectionName is provided by Thnks and will always be the name of your company.  If you feel comfortable completing without a Thnks Team member then please respond to sso@thnks.com with yourConnectionName (case sensitive) and your X.509 Signing Certificate">yourConnectionName</Tooltip>                     |
+    | Destination URL     | https://thnks.us.auth0.com/login/callback?connection=<Tooltip tip="yourConnectionName is provided by Thnks and will always be the name of your company.  If you feel comfortable completing without a Thnks Team member then please respond to sso@thnks.com with yourConnectionName (case sensitive) and your X.509 Signing Certificate">yourConnectionName</Tooltip>                     |
+    | Entity ID/Audience URI     | urn:auth0:thnks:<Tooltip tip="yourConnectionName is provided by Thnks and will always be the name of your company.  If you feel comfortable completing without a Thnks Team member then please respond to sso@thnks.com with yourConnectionName (case sensitive) and your X.509 Signing Certificate">yourConnectionName</Tooltip>                     |
+    | Issuer URL     | Example: https://acme.okta.com                     |
+  </Step>
+  <Step title="Client Information">
+    In order to establish a SSO connection, the client needs to provide the following:
+    | IdP Information | Example                              |
+    | --------  | ------------------------------------ |
+    | Sign-In URL    | Example: https://sso.acme.com:9031/idp/SSO.saml2            |
+    | X.509 Signing Certificate     | Example: okta.cert            |
+    | Secure Hash Algorithim Preference     | SHA1 or SHA256 (Default: SHA256)            |
+    | Mapping Schema     | Example: ```{ "user_id": [  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn",  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"], "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress", "name": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" }```           |
   </Step>
   <Step title="Verification">
     Once Thnks has received the information from Step 2, we will create and test the connection in Auth0.
