@@ -1,0 +1,122 @@
+---
+title: 'Marketo'
+description: 'This integration allows you to set up a webhook in Marketo that automatically triggers sending a Thnks through a Smart Campaign. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to leads based on campaign actions, using dynamic data from Marketo.'
+---
+
+# Configuring a Webhook in Marketo to Automatically Send a Thnks
+
+This guide walks you through the steps to configure a webhook in Marketo that will automatically trigger the sending of a Thnks as part of a Marketo Smart Campaign.
+
+## Prerequisites
+- Access to the Thnks API.
+- Thnks API Key (Authorization Token).
+- URL for Thnks API endpoint.
+
+## Setup
+
+<Steps>
+  <Step title="Prepare Webhook Data">
+    Before setting up the webhook, ensure you have the following details:
+
+    <Steps>
+      <Step title="Thnks API URL">
+        `https://api.thnks.com/api/v1/gift_requests`
+      </Step>
+      <Step title="HTTP Method">
+        `POST`
+      </Step>
+      <Step title="Data (JSON format)">
+        Here’s an example of the JSON payload you will need to include in the request. You’ll need to replace the placeholders with the appropriate tokens from your Marketo leads:
+        
+        ```json
+        {
+          "gift_id": "<GIFT_ID>",
+          "recipients": [
+            {
+              "email": "{{lead.Email Address}}",
+              "first_name": "{{lead.First Name}}",
+              "last_name": "{{lead.Last Name}}",
+              "message": "Thank you for your time and support!",
+              "gift_redeem_type": "email"
+            }
+          ]
+        }
+        ```
+
+        - Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
+        - Use Marketo tokens (e.g., `{{lead.Email Address}}`) to populate dynamic lead information.
+      </Step>
+      <Step title="Headers">
+        You will need to add the following headers in the webhook:
+        - **Content-Type**: `application/json`
+        - **Authorization**: Your Thnks API key (Authorization Token).
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Create a Webhook in Marketo">
+    <Steps>
+      <Step title="Log into Marketo and go to the Admin section"/>
+      <Step title="Under Integrations, click Webhooks"/>
+      <Step title="Click New Webhook to create a new webhook">
+        - **Webhook Name**: Give your webhook a meaningful name, e.g., `Thnks_Welcome_Program_CA`.  
+        - **URL**: Use the Thnks API URL:  
+          `https://api.thnks.com/api/v1/gift_requests`
+        - **Request Type**: Set this to `POST`.
+        - **Template**: Copy the JSON template mentioned above and adjust as needed with the correct tokens for dynamic data population.
+        - **Request Token Encoding**: None.
+        - **Response Type**: Set to `JSON`.
+      </Step>
+      <Step title="Add Custom Headers">
+        - **Content-Type**: `application/json`  
+        - **Authorization**: Paste your Thnks API Key.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Map Webhook Response (Optional)">
+    <Steps>
+      <Step title="Response Mappings">
+        If you want to capture response data, you can map response attributes to Marketo fields. For example, you can capture a response code or success status.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Add Webhook to Smart Campaign">
+    <Steps>
+      <Step title="Create or Edit a Smart Campaign in Marketo"/>
+      <Step title="In the Flow tab of the campaign, add the Call Webhook action"/>
+      <Step title="Select the webhook you just created (e.g., Thnks_Welcome_Program_CA)"/>
+      <Step title="Adjust other flow actions and campaign settings as needed"/>
+    </Steps>
+  </Step>
+
+  <Step title="Test and Verify">
+    <Steps>
+      <Step title="Run a test by triggering the Smart Campaign with a test lead"/>
+      <Step title="Check the response from Thnks in the webhook log"/>
+      <Step title="Make any necessary adjustments to the payload or tokens based on the test results"/>
+    </Steps>
+  </Step>
+
+  <Step title="Best Practices">
+    <Steps>
+      <Step title="Error Handling">
+        Include error handling in your campaign to manage cases where the webhook might fail.
+      </Step>
+      <Step title="Security">
+        Ensure your webhook is set up securely and tokens are protected.
+      </Step>
+      <Step title="Testing">
+        Run multiple tests with different scenarios to ensure all lead tokens and variables are working correctly.
+      </Step>
+    </Steps>
+  </Step>
+</Steps>
+
+Following this process, you can automatically trigger a Thnks gift to be sent as part of a Marketo Smart Campaign using webhooks.
+
+## References
+- [Use a Webhook in a Smart Campaign](https://experienceleague.adobe.com/en/docs/marketo/using/product-docs/core-marketo-concepts/smart-campaigns/flow-actions/use-a-webhook-in-a-smart-campaign)
+- [Create a Webhook](https://experienceleague.adobe.com/en/docs/marketo/using/product-docs/administration/additional-integrations/create-a-webhook)
+- [Thnks Webhook Overview](7)
