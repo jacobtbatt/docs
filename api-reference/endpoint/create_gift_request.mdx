@@ -50,6 +50,17 @@ The Account Manager will be responsible for providing the Customer with the ID(s
             Thank You"`
             for a multiline Thnks
             </ParamField>
+            <ParamField body="required_field_responses" type="array">
+            Should be provided if existed in enterprise.
+                <Expandable title="object">
+                    <ParamField body="gift_request_required_field_id" type="integer" required="true">
+                    The Required Field ID
+                    </ParamField>
+                    <ParamField body="response" type="string" required="true">
+                    The Response of the Required Field
+                    </ParamField>
+                </Expandable>
+            </ParamField>
         </Expandable>
 </ParamField>
 
