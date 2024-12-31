@@ -39,12 +39,17 @@
       ]
     },
     {
-      "group": "Integrations",
+      "group": "Start An Integration",
       "pages": [
-        "thnks_integrations/thnks_appexchange",
         "thnks_integrations/sso",
         "thnks_integrations/zapier",
         "thnks_integrations/marketo"
+        ]
+    },
+    {
+      "group": "SalesForce AppExchange",
+      "pages": [
+        "thnks_integrations/thnks_appexchange"
         ]
     },
     {
