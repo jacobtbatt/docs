@@ -1,0 +1,59 @@
+---
+title: 'Overview'
+description: 'Use the latest version (v1.3) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities.'
+---
+
+The custom Thnks objects allow you to build more robust reporting and understand your ROI by pulling detailed reports on user activity and messaging effectiveness.
+
+New features of the App:
+
+* Automatic association of the Thnks object with open Opportunities and Accounts (in addition to Lead or Contact)
+
+* More streamlined reporting on key date/time stamping on Thnks Status (delivered, opened, redeemed, etc.)
+
+* Pre-built dashboard and underlying reports
+
+* Admin configuration page to control:
+
+  * How Thnks is matched when there are duplicate Contacts, Leads, or Opportunities
+
+  * Toggle for matching to Opportunities
+
+  * Toggle for creating Tasks
+
+  * What to do when no matching Lead/Contact is found
+
+  * Matching on custom phone and/or email fields on the Lead and Contact
+
+* Enhanced Activity logging via the Task object
+
+* Support for Thnks Required Field syncing
+
+## Integration Overview
+
+Thnks has partnered with Salesforce to provide our clients with an application built specifically for Salesforce and available on the AppExchange. Currently, this is a one-way integration, meaning that data is being sent from the Thnks product into your Salesforce environment.
+
+## What Does It Do?
+
+The Thnks Salesforce AppExchange application provides enhanced reporting capabilities by creating a Thnks record within Salesforce whenever a Thnks transaction is initiated.
+The data model in Salesforce is simple: there is a single object called “Thnks”, which is created shortly after a Thnks is sent out, and then updated as the status changes. Additionally, there is automation that is controlled within the Salesforce App (which you may customize the logic for) which determines what records in Salesforce a Thnks is associated with (Lead, Contact, Account and Opportunity). You may also configure a Task to be created so you can have visibility of Thnks in Salesforce’s standard activity feed.
+
+Date/times are stamped on the Thnks record as the Thnks is delivered, undelivered, opened, redeemed, expired, refunded and/or donated.
+
+## How Does It Work?
+
+When a Thnks user sends a Thnks, whether it’s via the web/mobile app, Chrome extension, an automated webhook, or a scheduled campaign, a record with the transaction information is created as a Thnks in Salesforce. As part of the creation of the Thnks record, and depending on what settings you have customized, the following may happen:
+
+* Thnks is associated with a Lead or Contact (never both)
+
+  * If Thnks is associated with a Contact, Thnks is associated with an open Opportunity if that Contact is tied to an Opportunity via the Opportunity Contact Role object
+
+  * If Thnks is associated with a Contact, the Account that the Contact belongs to is also associated with the Thnks record
+
+  * It is also possible that no association is made, if no matching Contact or Lead is found
+
+* A Task is created, associated with the Thnks record as the WhatId, and the Contact as the WhoId (more on this below)
+
+* As the Thnks transaction moves through various statuses (e.g. Opened, Redeemed), the Status field on the Thnks record will update accordingly, and the date and time at which this occurs will be stamped on dedicated fields
+
+* Other important details about the Thnks are included in the sync and placed on fields on the Thnks object such as the sender, various pricing fields, the Transaction ID, a link to the Thnks, and any custom fields you configure within the Thnks App.
