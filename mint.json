@@ -84,7 +84,8 @@
     {
       "group": "HRIS",
       "pages": [
-        "hris/overview"
+        "hris/overview",
+        "hris/platforms"
         ]
     },
     {
