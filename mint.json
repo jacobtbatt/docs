@@ -60,7 +60,7 @@
         ]
     },
     {
-      "group": "SalesForce AppExchange",
+      "group": "Salesforce AppExchange",
       "pages": [
         "appexchange/overview",
         "appexchange/install",
