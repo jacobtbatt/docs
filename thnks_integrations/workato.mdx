@@ -1,39 +1,41 @@
 ---
 title: "Workato"
 description: "This integration allows you to set up a recipe in Workato that automatically triggers sending a Thnks via an HTTP action. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to recipients based on trigger events, using dynamic data from Workato."
-icon: "chart-pie"
 ---
 
-# Configuring Workato to Automatically Send a Thnks  
+# Configuring Workato to Automatically Send a Thnks
 
 This guide walks you through automatically triggering the sending of a Thnks using Workato recipes.
 
-## Prerequisites  
+## Prerequisites
 
-* Access to the Thnks API.  
-* Thnks API Key (Authorization Token).  
-* URL for Thnks API endpoint.  
-* Administrative access to your Workato workspace.  
+* Access to the Thnks API.
 
-## Setup  
+* Thnks API Key (Authorization Token).
 
-<Steps>  
-  <Step title="Prepare HTTP Request Data">  
-    Before configuring your Workato recipe, ensure you have the following details:  
+* URL for Thnks API endpoint.
 
-    <Steps>  
-      <Step title="Thnks API URL">  
-        `https://api.thnks.com/api/v1/gift_requests`  
-      </Step>  
+* Administrative access to your Workato workspace.
 
-      <Step title="HTTP Method">  
-        `POST`  
-      </Step>  
+## Setup
 
-      <Step title="Data (JSON format)">  
-        Here’s an example of the JSON payload you will need to include in the HTTP action. Replace the placeholders with dynamic data from Workato variables:  
+<Steps>
+  <Step title="Prepare HTTP Request Data">
+    Before configuring your Workato recipe, ensure you have the following details:
 
-        ```json  
+    <Steps>
+      <Step title="Thnks API URL">
+        `https://api.thnks.com/api/v1/gift_requests`
+      </Step>
+
+      <Step title="HTTP Method">
+        `POST`
+      </Step>
+
+      <Step title="Data (JSON format)">
+        Here’s an example of the JSON payload you will need to include in the HTTP action. Replace the placeholders with dynamic data from Workato variables:
+
+        ```json
         {  
           "gift_id": <GIFT_ID>,  
           "recipients": [  
@@ -46,91 +48,108 @@ This guide walks you through automatically triggering the sending of a Thnks usi
             }  
           ]  
         }  
-        ```  
+        ```
 
-        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.  
-        * Use Workato variables (e.g., `{{email}}`, `{{first_name}}`) to populate recipient data dynamically.  
-      </Step>  
+        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
 
-      <Step title="Headers">  
-        You will need to add the following headers in the HTTP action:  
+        * Use Workato variables (e.g., `{{email}}`, `{{first_name}}`) to populate recipient data dynamically.
+      </Step>
 
-        * **Content-Type**: `application/json`  
-        * **Authorization**: Your Thnks API key (Authorization Token).  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Headers">
+        You will need to add the following headers in the HTTP action:
 
-  <Step title="Create a Recipe in Workato">  
-    <Steps>  
-      <Step title="Log into Workato and Create a New Recipe">  
-        Open your Workato workspace and click **+ Create recipe** to start a new recipe.  
-      </Step>  
+        * **Content-Type**: `application/json`
 
-      <Step title="Define the Trigger">  
-        Choose a trigger based on the source system or event, such as:  
-        * **New Event**: Trigger when a new event occurs in a connected app like Salesforce, HubSpot, or a webhook.  
-        * **Scheduled Trigger**: Run the recipe at a specified interval.  
-      </Step>  
+        * **Authorization**: Your Thnks API key (Authorization Token).
+      </Step>
+    </Steps>
+  </Step>
 
-      <Step title="Add an HTTP Action">  
-        * Add an **Action step** and select **HTTP**.  
-        * Configure the HTTP action as follows:  
-          * **Method**: `POST`  
-          * **Endpoint URL**: `https://api.thnks.com/api/v1/gift_requests`  
-          * **Headers**:  
-            * **Content-Type**: `application/json`  
-            * **Authorization**: Enter your Thnks API Key.  
-          * **Request Body**: Copy the JSON payload mentioned above and replace placeholders with Workato variables.  
-        * Save the action.  
-      </Step>  
+  <Step title="Create a Recipe in Workato">
+    <Steps>
+      <Step title="Log into Workato and Create a New Recipe">
+        Open your Workato workspace and click **+ Create recipe** to start a new recipe.
+      </Step>
 
-      <Step title="Add Conditional Logic or Additional Steps (Optional)">  
-        Use additional actions or conditions to customize the workflow, such as:  
-        * **Conditional Logic**: Add an **If/Else** condition to determine when the Thnks gift should be sent.  
-        * **Data Transformations**: Use the **Data Mapping** feature to format or manipulate variables.  
-        * **Error Handling**: Add steps to retry or log errors in case of API call failure.  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Define the Trigger">
+        Choose a trigger based on the source system or event, such as:
 
-  <Step title="Test and Activate the Recipe">  
-    <Steps>  
-      <Step title="Run the Recipe in Test Mode">  
-        Use Workato’s test mode to simulate the recipe execution and ensure the HTTP action sends data correctly to the Thnks API.  
-      </Step>  
+        * **New Event**: Trigger when a new event occurs in a connected app like Salesforce, HubSpot, or a webhook.
 
-      <Step title="Check Execution Logs">  
-        Verify the response from the Thnks API in the **Job History** or execution logs to ensure the gift was sent successfully.  
-      </Step>  
+        * **Scheduled Trigger**: Run the recipe at a specified interval.
+      </Step>
 
-      <Step title="Activate the Recipe">  
-        Once verified, activate the recipe to enable automated Thnks sending.  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Add an HTTP Action">
+        * Add an **Action step** and select **HTTP**.
 
-  <Step title="Best Practices">  
-    <Steps>  
-      <Step title="Error Handling">  
-        Include error-handling steps to retry failed API calls or log issues for manual review.  
-      </Step>  
+        * Configure the HTTP action as follows:
 
-      <Step title="Security">  
-        Use Workato’s **Lookup Table** or **Encrypted Fields** to securely store your API Key and other sensitive data.  
-      </Step>  
+          * **Method**: `POST`
 
-      <Step title="Testing">  
-        Test the recipe with various scenarios to ensure all dynamic variables, triggers, and conditions work as intended.  
-      </Step>  
-    </Steps>  
-  </Step>  
-</Steps>  
+          * **Endpoint URL**: `https://api.thnks.com/api/v1/gift_requests`
 
-Following this process, you can automatically trigger a Thnks gift to be sent as part of a Workato recipe using the HTTP action.  
+          * **Headers**:
 
-## References  
+            * **Content-Type**: `application/json`
 
-* [Workato HTTP Action Documentation](https://docs.workato.com/actions/http.html)  
-* [Workato Recipes Overview](https://docs.workato.com/recipes.html)  
-* [Thnks API Documentation](https://thnks.com/developers/api-docs)  
+            * **Authorization**: Enter your Thnks API Key.
+
+          * **Request Body**: Copy the JSON payload mentioned above and replace placeholders with Workato variables.
+
+        * Save the action.
+      </Step>
+
+      <Step title="Add Conditional Logic or Additional Steps (Optional)">
+        Use additional actions or conditions to customize the workflow, such as:
+
+        * **Conditional Logic**: Add an **If/Else** condition to determine when the Thnks gift should be sent.
+
+        * **Data Transformations**: Use the **Data Mapping** feature to format or manipulate variables.
+
+        * **Error Handling**: Add steps to retry or log errors in case of API call failure.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Test and Activate the Recipe">
+    <Steps>
+      <Step title="Run the Recipe in Test Mode">
+        Use Workato’s test mode to simulate the recipe execution and ensure the HTTP action sends data correctly to the Thnks API.
+      </Step>
+
+      <Step title="Check Execution Logs">
+        Verify the response from the Thnks API in the **Job History** or execution logs to ensure the gift was sent successfully.
+      </Step>
+
+      <Step title="Activate the Recipe">
+        Once verified, activate the recipe to enable automated Thnks sending.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Best Practices">
+    <Steps>
+      <Step title="Error Handling">
+        Include error-handling steps to retry failed API calls or log issues for manual review.
+      </Step>
+
+      <Step title="Security">
+        Use Workato’s **Lookup Table** or **Encrypted Fields** to securely store your API Key and other sensitive data.
+      </Step>
+
+      <Step title="Testing">
+        Test the recipe with various scenarios to ensure all dynamic variables, triggers, and conditions work as intended.
+      </Step>
+    </Steps>
+  </Step>
+</Steps>
+
+Following this process, you can automatically trigger a Thnks gift to be sent as part of a Workato recipe using the HTTP action.
+
+## References
+
+* [Workato HTTP Action Documentation](https://docs.workato.com/actions/http.html)
+
+* [Workato Recipes Overview](https://docs.workato.com/recipes.html)
+
+* [Thnks API Documentation](https://thnks.com/developers/api-docs)

@@ -1,39 +1,41 @@
 ---
 title: "n8n"
 description: "This integration allows you to set up a workflow in N8n that automatically triggers sending a Thnks via the HTTP Request node. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to recipients based on trigger events, using dynamic data from N8n."
-icon: "diagram-sankey"
 ---
 
-# Configuring N8n to Automatically Send a Thnks  
+# Configuring N8n to Automatically Send a Thnks
 
 This guide walks you through automatically triggering the sending of a Thnks gift using N8n workflows.
 
-## Prerequisites  
+## Prerequisites
 
-* Access to the Thnks API.  
-* Thnks API Key (Authorization Token).  
-* URL for Thnks API endpoint.  
-* Administrative access to your N8n instance.  
+* Access to the Thnks API.
 
-## Setup  
+* Thnks API Key (Authorization Token).
 
-<Steps>  
-  <Step title="Prepare Webhook Data">  
-    Before configuring your N8n workflow, ensure you have the following details:  
+* URL for Thnks API endpoint.
 
-    <Steps>  
-      <Step title="Thnks API URL">  
-        `https://api.thnks.com/api/v1/gift_requests`  
-      </Step>  
+* Administrative access to your N8n instance.
 
-      <Step title="HTTP Method">  
-        `POST`  
-      </Step>  
+## Setup
 
-      <Step title="Data (JSON format)">  
-        Here’s an example of the JSON payload you will need to include in the HTTP Request node. Replace the placeholders with dynamic data from your workflow:  
+<Steps>
+  <Step title="Prepare Webhook Data">
+    Before configuring your N8n workflow, ensure you have the following details:
 
-        ```json  
+    <Steps>
+      <Step title="Thnks API URL">
+        `https://api.thnks.com/api/v1/gift_requests`
+      </Step>
+
+      <Step title="HTTP Method">
+        `POST`
+      </Step>
+
+      <Step title="Data (JSON format)">
+        Here’s an example of the JSON payload you will need to include in the HTTP Request node. Replace the placeholders with dynamic data from your workflow:
+
+        ```json
         {  
           "gift_id": <GIFT_ID>,  
           "recipients": [  
@@ -46,92 +48,110 @@ This guide walks you through automatically triggering the sending of a Thnks gif
             }  
           ]  
         }  
-        ```  
+        ```
 
-        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.  
-        * Use N8n variables (e.g., `{{ $json.email }}`) to dynamically populate recipient data from the workflow.  
-      </Step>  
+        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
 
-      <Step title="Headers">  
-        You will need to add the following headers in the HTTP Request node:  
+        * Use N8n variables (e.g., `{{ $json.email }}`) to dynamically populate recipient data from the workflow.
+      </Step>
 
-        * **Content-Type**: `application/json`  
-        * **Authorization**: Your Thnks API key (Authorization Token).  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Headers">
+        You will need to add the following headers in the HTTP Request node:
 
-  <Step title="Create a Workflow in N8n">  
-    <Steps>  
-      <Step title="Log into N8n and Create a New Workflow">  
-        Open your N8n instance and click **+ New Workflow** to start creating a new workflow.  
-      </Step>  
+        * **Content-Type**: `application/json`
 
-      <Step title="Add a Trigger Node">  
-        Add a trigger node to specify the event that starts the workflow. For example:  
-        * **Webhook**: Trigger the workflow via an external webhook.  
-        * **Schedule Trigger**: Run the workflow on a schedule.  
-        * **App-Specific Trigger**: Use triggers from supported apps like Salesforce, HubSpot, or other CRMs.  
-      </Step>  
+        * **Authorization**: Your Thnks API key (Authorization Token).
+      </Step>
+    </Steps>
+  </Step>
 
-      <Step title="Add an HTTP Request Node">  
-        * Connect the HTTP Request node to your trigger node.  
-        * Configure the HTTP Request node as follows:  
-          * **Method**: `POST`  
-          * **URL**: `https://api.thnks.com/api/v1/gift_requests`  
-          * **Headers**:  
-            * **Content-Type**: `application/json`  
-            * **Authorization**: Paste your Thnks API Key.  
-          * **Body Type**: `JSON`  
-          * **JSON/RAW Parameters**: Copy the JSON payload mentioned above and adjust it using N8n variables.  
-      </Step>  
+  <Step title="Create a Workflow in N8n">
+    <Steps>
+      <Step title="Log into N8n and Create a New Workflow">
+        Open your N8n instance and click **+ New Workflow** to start creating a new workflow.
+      </Step>
 
-      <Step title="Add Additional Workflow Logic (Optional)">  
-        Use additional nodes to handle workflow logic, such as:  
-        * **Data Transformation**: Use the Set or Function nodes to transform or map data.  
-        * **Conditional Logic**: Use the If node to set conditions for sending a Thnks.  
-        * **Error Handling**: Add a Catch node to handle errors during the API call.  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Add a Trigger Node">
+        Add a trigger node to specify the event that starts the workflow. For example:
 
-  <Step title="Test and Activate the Workflow">  
-    <Steps>  
-      <Step title="Test the Workflow">  
-        Run the workflow using sample data to verify the HTTP Request node sends data correctly to the Thnks API.  
-      </Step>  
+        * **Webhook**: Trigger the workflow via an external webhook.
 
-      <Step title="Check Logs">  
-        View the execution logs in N8n to verify the response from the Thnks API and confirm that the gift was sent successfully.  
-      </Step>  
+        * **Schedule Trigger**: Run the workflow on a schedule.
 
-      <Step title="Activate the Workflow">  
-        Once verified, activate the workflow to enable automated Thnks sending.  
-      </Step>  
-    </Steps>  
-  </Step>  
+        * **App-Specific Trigger**: Use triggers from supported apps like Salesforce, HubSpot, or other CRMs.
+      </Step>
 
-  <Step title="Best Practices">  
-    <Steps>  
-      <Step title="Error Handling">  
-        Use error-handling nodes in N8n to manage failed API calls and implement retries if necessary.  
-      </Step>  
+      <Step title="Add an HTTP Request Node">
+        * Connect the HTTP Request node to your trigger node.
 
-      <Step title="Security">  
-        Store your API key securely using N8n environment variables or credentials manager. Avoid hardcoding sensitive data in nodes.  
-      </Step>  
+        * Configure the HTTP Request node as follows:
 
-      <Step title="Testing">  
-        Test the workflow with different scenarios to ensure all tokens, variables, and data mappings are correct.  
-      </Step>  
-    </Steps>  
-  </Step>  
-</Steps>  
+          * **Method**: `POST`
 
-Following this process, you can automatically trigger a Thnks gift to be sent as part of an N8n workflow using the HTTP Request node.  
+          * **URL**: `https://api.thnks.com/api/v1/gift_requests`
 
-## References  
+          * **Headers**:
 
-* [N8n Documentation](https://docs.n8n.io/)  
-* [HTTP Request Node Guide](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest/)  
-* [Thnks API Documentation](https://thnks.com/developers/api-docs)  
+            * **Content-Type**: `application/json`
+
+            * **Authorization**: Paste your Thnks API Key.
+
+          * **Body Type**: `JSON`
+
+          * **JSON/RAW Parameters**: Copy the JSON payload mentioned above and adjust it using N8n variables.
+      </Step>
+
+      <Step title="Add Additional Workflow Logic (Optional)">
+        Use additional nodes to handle workflow logic, such as:
+
+        * **Data Transformation**: Use the Set or Function nodes to transform or map data.
+
+        * **Conditional Logic**: Use the If node to set conditions for sending a Thnks.
+
+        * **Error Handling**: Add a Catch node to handle errors during the API call.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Test and Activate the Workflow">
+    <Steps>
+      <Step title="Test the Workflow">
+        Run the workflow using sample data to verify the HTTP Request node sends data correctly to the Thnks API.
+      </Step>
+
+      <Step title="Check Logs">
+        View the execution logs in N8n to verify the response from the Thnks API and confirm that the gift was sent successfully.
+      </Step>
+
+      <Step title="Activate the Workflow">
+        Once verified, activate the workflow to enable automated Thnks sending.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Best Practices">
+    <Steps>
+      <Step title="Error Handling">
+        Use error-handling nodes in N8n to manage failed API calls and implement retries if necessary.
+      </Step>
+
+      <Step title="Security">
+        Store your API key securely using N8n environment variables or credentials manager. Avoid hardcoding sensitive data in nodes.
+      </Step>
+
+      <Step title="Testing">
+        Test the workflow with different scenarios to ensure all tokens, variables, and data mappings are correct.
+      </Step>
+    </Steps>
+  </Step>
+</Steps>
+
+Following this process, you can automatically trigger a Thnks gift to be sent as part of an N8n workflow using the HTTP Request node.
+
+## References
+
+* [N8n Documentation](https://docs.n8n.io/)
+
+* [HTTP Request Node Guide](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest/)
+
+* [Thnks API Documentation](https://thnks.com/developers/api-docs)

@@ -1,12 +1,11 @@
 ---
-title: 'Thnks Zapier Integration'
+title: 'Zapier'
 description: 'Automate the sending of Thnks through Zapier.'
-icon: 'webhook'
 ---
 
 Here’s the updated documentation with the **Action Fields** section converted into a table and reflecting that there is no separate **Sender Email** field:
 
----
+***
 
 # Thnks Zapier App Integration
 
@@ -15,22 +14,30 @@ This integration allows you to either **Send a Thnks** or **Create a Redemption 
 ## Features
 
 1. **Send a Thnks**
-   - Easily send a Thnks through a Zapier action.
-   - Automatically personalize your Thnks by passing in recipient details.
-   
+
+   * Easily send a Thnks through a Zapier action.
+
+   * Automatically personalize your Thnks by passing in recipient details.
+
 2. **Create a Redemption URL**
-   - Generate a unique redemption URL for the Thnks.
-   - Share the redemption URL through various channels such as email or text.
+
+   * Generate a unique redemption URL for the Thnks.
+
+   * Share the redemption URL through various channels such as email or text.
 
 ## Setup Guide
 
 ### Step 1: Add Thnks to Your Zapier Organization
+
 The Thnks Zapier app is private and can be added to your Zapier organization via the following link:
 [Add Thnks to Zapier](https://zapier.com/developer/public-invite/208130/5053215cae8a7d8e77abe966ba25e098/)
 
 ### Step 2: Connect Your Thnks Account
+
 1. In Zapier, search for the **Thnks** app.
+
 2. Click **Connect a new account**.
+
 3. Enter your **Thnks API Key** provided by a Thnks team member and authenticate.
 
 ### Step 3: Create a Zap
@@ -38,60 +45,83 @@ The Thnks Zapier app is private and can be added to your Zapier organization via
 #### Option 1: Send a Thnks
 
 1. **Trigger**: Select the trigger app and event to start your Zap workflow.
+
 2. **Action**: Choose the **Thnks** app and the action event:
-    - **Send a Thnks**
+
+   * **Send a Thnks**
+
 3. **Customize Thnks**:
-    - **Thnks ID**: Enter the Thnks ID, which can be found on the Thnks site in grey underneath the title of the Thnks.
-    - **Recipient Details**: 
-        - **Email** (required): Enter the recipient’s email.
-        - **First Name** (optional): Enter the recipient’s first name.
-        - **Last Name** (optional): Enter the recipient’s last name.
-    - **Message** (required): Enter the message to accompany the Thnks. This message operates in standard markdown language, so new lines should be denoted by `\n`. For example:
-      ```
-      I want to send a Thnks!\n\nThnks,\nJacob Batt
-      ```
+
+   * **Thnks ID**: Enter the Thnks ID, which can be found on the Thnks site in grey underneath the title of the Thnks.
+
+   * **Recipient Details**:
+
+     * **Email** (required): Enter the recipient’s email.
+
+     * **First Name** (optional): Enter the recipient’s first name.
+
+     * **Last Name** (optional): Enter the recipient’s last name.
+
+   * **Message** (required): Enter the message to accompany the Thnks. This message operates in standard markdown language, so new lines should be denoted by `\n`. For example:```
+     I want to send a Thnks!\n\nThnks,\nJacob Batt
+     ```
+
 4. **Test & Activate**: Test the Zap to ensure everything is working, then activate it to start sending Thnks.
 
 #### Option 2: Create a Redemption URL
 
 1. **Trigger**: Select the trigger app and event to start your Zap workflow.
+
 2. **Action**: Choose the **Thnks** app and the action event:
-    - **Create a Redemption URL**
+
+   * **Create a Redemption URL**
+
 3. **Customize Redemption URL**:
-    - **Thnks ID**: Enter the Thnks ID, which can be found on the Thnks site in grey underneath the title of the Thnks.
-    - **Recipient Details**: 
-        - **Email** (required): Enter the recipient’s email.
-        - **First Name** (optional): Enter the recipient’s first name.
-        - **Last Name** (optional): Enter the recipient’s last name.
-    - **Message** (required): Enter the message to accompany the Thnks. This message operates in standard markdown language, so new lines should be denoted by `\n`. For example:
-      ```
-      I want to send a Thnks!\n\nThnks,\nJacob Batt
-      ```
+
+   * **Thnks ID**: Enter the Thnks ID, which can be found on the Thnks site in grey underneath the title of the Thnks.
+
+   * **Recipient Details**:
+
+     * **Email** (required): Enter the recipient’s email.
+
+     * **First Name** (optional): Enter the recipient’s first name.
+
+     * **Last Name** (optional): Enter the recipient’s last name.
+
+   * **Message** (required): Enter the message to accompany the Thnks. This message operates in standard markdown language, so new lines should be denoted by `\n`. For example:```
+     I want to send a Thnks!\n\nThnks,\nJacob Batt
+     ```
+
 4. **Test & Activate**: Test the Zap to ensure the redemption URL is created correctly, then activate it to start generating URLs.
 
 ## Action Fields
 
-| **Field**          | **Required** | **Description**                                                                                                                                               |
-|--------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Thnks ID**       | Yes          | The unique identifier for the Thnks (found on the Thnks site in grey underneath the title).                                                                    |
-| **Recipient Email**| Yes          | The email of the recipient.                                                                                                                                   |
-| **First Name**     | No           | The first name of the recipient.                                                                                                                              |
-| **Last Name**      | No           | The last name of the recipient.                                                                                                                               |
-| **Message**        | Yes          | A custom message that accompanies the Thnks or Redemption URL. Must be formatted with markdown-style new lines (`\n`). Example: `I want to send a Thnks!\n\nThnks,\nJacob Batt`. |
+| **Field**           | **Required** | **Description**                                                                                                                                                                  |
+| ------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Thnks ID**        | Yes          | The unique identifier for the Thnks (found on the Thnks site in grey underneath the title).                                                                                      |
+| **Recipient Email** | Yes          | The email of the recipient.                                                                                                                                                      |
+| **First Name**      | No           | The first name of the recipient.                                                                                                                                                 |
+| **Last Name**       | No           | The last name of the recipient.                                                                                                                                                  |
+| **Message**         | Yes          | A custom message that accompanies the Thnks or Redemption URL. Must be formatted with markdown-style new lines (`\n`). Example: `I want to send a Thnks!\n\nThnks,\nJacob Batt`. |
 
 ## Error Handling
 
-- If any required fields are missing, the action will fail, and Zapier will notify you with the appropriate error message.
-- Ensure the **Thnks ID** is valid by using the correct ID from the Thnks site.
-- If an invalid email is provided, the action will fail and request a valid email format.
+* If any required fields are missing, the action will fail, and Zapier will notify you with the appropriate error message.
+
+* Ensure the **Thnks ID** is valid by using the correct ID from the Thnks site.
+
+* If an invalid email is provided, the action will fail and request a valid email format.
 
 ## FAQ
 
 ### What is a Thnks ID?
+
 A Thnks ID is the unique identifier associated with each Thnks option. It can be found on the Thnks site in grey underneath the title.
 
 ### Can I personalize my Thnks?
+
 Yes, when sending a Thnks, you can include a personalized message, recipient name, and recipient email.
 
 ### What happens if I don’t provide a recipient email when creating a redemption URL?
+
 The recipient email is required to generate the redemption URL.

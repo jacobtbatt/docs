@@ -1,39 +1,41 @@
 ---
 title: "Make (formerly Integromat)"
 description: "This integration allows you to set up a scenario in Make that automatically triggers sending a Thnks via an HTTP module. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to recipients based on trigger events, using dynamic data from Make."
-icon: "books"
 ---
 
-# Configuring Make to Automatically Send a Thnks  
+# Configuring Make to Automatically Send a Thnks
 
 This guide walks you through automatically triggering the sending of a Thnks using Make scenarios.
 
-## Prerequisites  
+## Prerequisites
 
-* Access to the Thnks API.  
-* Thnks API Key (Authorization Token).  
-* URL for Thnks API endpoint.  
-* Administrative access to your Make account.  
+* Access to the Thnks API.
 
-## Setup  
+* Thnks API Key (Authorization Token).
 
-<Steps>  
-  <Step title="Prepare HTTP Request Data">  
-    Before configuring your Make scenario, ensure you have the following details:  
+* URL for Thnks API endpoint.
 
-    <Steps>  
-      <Step title="Thnks API URL">  
-        `https://api.thnks.com/api/v1/gift_requests`  
-      </Step>  
+* Administrative access to your Make account.
 
-      <Step title="HTTP Method">  
-        `POST`  
-      </Step>  
+## Setup
 
-      <Step title="Data (JSON format)">  
-        Here’s an example of the JSON payload you will need to include in the HTTP module. Replace the placeholders with dynamic data from Make variables:  
+<Steps>
+  <Step title="Prepare HTTP Request Data">
+    Before configuring your Make scenario, ensure you have the following details:
 
-        ```json  
+    <Steps>
+      <Step title="Thnks API URL">
+        `https://api.thnks.com/api/v1/gift_requests`
+      </Step>
+
+      <Step title="HTTP Method">
+        `POST`
+      </Step>
+
+      <Step title="Data (JSON format)">
+        Here’s an example of the JSON payload you will need to include in the HTTP module. Replace the placeholders with dynamic data from Make variables:
+
+        ```json
         {  
           "gift_id": <GIFT_ID>,  
           "recipients": [  
@@ -46,92 +48,110 @@ This guide walks you through automatically triggering the sending of a Thnks usi
             }  
           ]  
         }  
-        ```  
+        ```
 
-        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.  
-        * Use Make variables (e.g., `{{email}}`) to dynamically populate recipient data from earlier modules in the scenario.  
-      </Step>  
+        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
 
-      <Step title="Headers">  
-        You will need to add the following headers in the HTTP module:  
+        * Use Make variables (e.g., `{{email}}`) to dynamically populate recipient data from earlier modules in the scenario.
+      </Step>
 
-        * **Content-Type**: `application/json`  
-        * **Authorization**: Your Thnks API key (Authorization Token).  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Headers">
+        You will need to add the following headers in the HTTP module:
 
-  <Step title="Create a Scenario in Make">  
-    <Steps>  
-      <Step title="Log into Make and Create a New Scenario">  
-        Open Make, click **+ Create a new scenario**, and start building your automation.  
-      </Step>  
+        * **Content-Type**: `application/json`
 
-      <Step title="Choose a Trigger Module">  
-        Select a trigger module to define the event that starts your scenario. Examples include:  
-        * **Webhook**: Use the **Custom Webhook** module to start the scenario via an external webhook.  
-        * **App-Specific Trigger**: Select a trigger from supported apps like Salesforce, HubSpot, or Google Sheets.  
-        * **Scheduled Trigger**: Use the **Scheduler** module to run the scenario at regular intervals.  
-      </Step>  
+        * **Authorization**: Your Thnks API key (Authorization Token).
+      </Step>
+    </Steps>
+  </Step>
 
-      <Step title="Add an HTTP Module">  
-        * Add the **HTTP** module to send the Thnks request.  
-        * Configure the HTTP module as follows:  
-          * **Method**: `POST`  
-          * **URL**: `https://api.thnks.com/api/v1/gift_requests`  
-          * **Headers**:  
-            * **Content-Type**: `application/json`  
-            * **Authorization**: Enter your Thnks API Key.  
-          * **Body**: Copy the JSON payload mentioned above and replace placeholders with Make variables.  
-        * Save the module configuration.  
-      </Step>  
+  <Step title="Create a Scenario in Make">
+    <Steps>
+      <Step title="Log into Make and Create a New Scenario">
+        Open Make, click **+ Create a new scenario**, and start building your automation.
+      </Step>
 
-      <Step title="Add Additional Modules (Optional)">  
-        Use additional modules to customize the scenario, such as:  
-        * **Filters**: Add a filter to control when the HTTP module executes based on specific conditions.  
-        * **Data Transformation**: Use the **Set Variable** or **Text Parser** modules to manipulate or transform data.  
-        * **Error Handling**: Add a **Router** module to handle errors or log failed requests.  
-      </Step>  
-    </Steps>  
-  </Step>  
+      <Step title="Choose a Trigger Module">
+        Select a trigger module to define the event that starts your scenario. Examples include:
 
-  <Step title="Test and Activate the Scenario">  
-    <Steps>  
-      <Step title="Run the Scenario in Test Mode">  
-        Use Make’s test mode to run the scenario with sample data and verify that the HTTP module sends data correctly to the Thnks API.  
-      </Step>  
+        * **Webhook**: Use the **Custom Webhook** module to start the scenario via an external webhook.
 
-      <Step title="Check Execution History">  
-        Review the execution history in Make to confirm that the API call was successful and the Thnks gift was sent.  
-      </Step>  
+        * **App-Specific Trigger**: Select a trigger from supported apps like Salesforce, HubSpot, or Google Sheets.
 
-      <Step title="Activate the Scenario">  
-        Once verified, turn on the scenario to enable automated Thnks sending.  
-      </Step>  
-    </Steps>  
-  </Step>  
+        * **Scheduled Trigger**: Use the **Scheduler** module to run the scenario at regular intervals.
+      </Step>
 
-  <Step title="Best Practices">  
-    <Steps>  
-      <Step title="Error Handling">  
-        Use error-handling features like routers or custom error paths to handle failed API calls.  
-      </Step>  
+      <Step title="Add an HTTP Module">
+        * Add the **HTTP** module to send the Thnks request.
 
-      <Step title="Security">  
-        Store your API key securely using the **Data Stores** or **Environment Variables** feature in Make. Avoid hardcoding sensitive data in modules.  
-      </Step>  
+        * Configure the HTTP module as follows:
 
-      <Step title="Testing">  
-        Test the scenario with various data inputs to ensure all variables, conditions, and modules function as intended.  
-      </Step>  
-    </Steps>  
-  </Step>  
-</Steps>  
+          * **Method**: `POST`
 
-Following this process, you can automatically trigger a Thnks gift to be sent as part of a Make scenario using the HTTP module.  
+          * **URL**: `https://api.thnks.com/api/v1/gift_requests`
 
-## References  
+          * **Headers**:
 
-* [HTTP Module Documentation](https://www.make.com/en/help/app/http)  
-* [Make Scenarios Overview](https://www.make.com/en/help/automation/scenarios)  
-* [Thnks API Documentation](https://thnks.com/developers/api-docs)  
+            * **Content-Type**: `application/json`
+
+            * **Authorization**: Enter your Thnks API Key.
+
+          * **Body**: Copy the JSON payload mentioned above and replace placeholders with Make variables.
+
+        * Save the module configuration.
+      </Step>
+
+      <Step title="Add Additional Modules (Optional)">
+        Use additional modules to customize the scenario, such as:
+
+        * **Filters**: Add a filter to control when the HTTP module executes based on specific conditions.
+
+        * **Data Transformation**: Use the **Set Variable** or **Text Parser** modules to manipulate or transform data.
+
+        * **Error Handling**: Add a **Router** module to handle errors or log failed requests.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Test and Activate the Scenario">
+    <Steps>
+      <Step title="Run the Scenario in Test Mode">
+        Use Make’s test mode to run the scenario with sample data and verify that the HTTP module sends data correctly to the Thnks API.
+      </Step>
+
+      <Step title="Check Execution History">
+        Review the execution history in Make to confirm that the API call was successful and the Thnks gift was sent.
+      </Step>
+
+      <Step title="Activate the Scenario">
+        Once verified, turn on the scenario to enable automated Thnks sending.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Best Practices">
+    <Steps>
+      <Step title="Error Handling">
+        Use error-handling features like routers or custom error paths to handle failed API calls.
+      </Step>
+
+      <Step title="Security">
+        Store your API key securely using the **Data Stores** or **Environment Variables** feature in Make. Avoid hardcoding sensitive data in modules.
+      </Step>
+
+      <Step title="Testing">
+        Test the scenario with various data inputs to ensure all variables, conditions, and modules function as intended.
+      </Step>
+    </Steps>
+  </Step>
+</Steps>
+
+Following this process, you can automatically trigger a Thnks gift to be sent as part of a Make scenario using the HTTP module.
+
+## References
+
+* [HTTP Module Documentation](https://www.make.com/en/help/app/http)
+
+* [Make Scenarios Overview](https://www.make.com/en/help/automation/scenarios)
+
+* [Thnks API Documentation](https://thnks.com/developers/api-docs)
