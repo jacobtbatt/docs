@@ -1,0 +1,75 @@
+---
+title: 'Overview'
+description: 'Automating the Sending of Thnks via a POST Request'
+---
+ 
+
+Thnks enables customers to automate the sending of gestures of gratitude through a simple POST request to its webhook endpoint. This functionality allows seamless integration with marketing campaigns, survey completions, or other automated workflows, providing a straightforward way to enhance customer and partner relationships with genuine acts of appreciation.
+
+## What is a Webhook?
+
+A webhook is a mechanism that allows one application to send real-time data to another. This is achieved via an HTTP POST request containing a JSON payload sent to a specified URL. In the case of Thnks, the webhook is used to trigger the sending of a Thnks, making the process efficient and automated.
+
+## Setting Up the Thnks Webhook
+
+### Webhook Details
+
+* **Endpoint URL**: [`https://api.thnks.com/api/v1/gift_requests`](https://api.thnks.com/api/v1/gift_requests)
+
+* **HTTP Method**: `POST`
+
+* **Headers**:
+
+  * `Content-Type`: `application/json`
+
+  * `Authorization`: `<Your API Key>`
+
+* **Data Format (JSON)**:
+```json
+  {
+    "gift_id": <GIFT_ID>,
+    "recipients": [
+      {
+        "email": "<RECIPIENT_EMAIL>",
+        "first_name": "<RECIPIENT_FIRST_NAME>",
+        "last_name": "<RECIPIENT_LAST_NAME>",
+        "message": "<MESSAGE>",
+        "gift_redeem_type": "email"
+      }
+    ]
+  }
+  ```
+
+  ### Required Fields
+
+The following fields are required in the JSON payload for the webhook:
+
+| **Field**                  | **Description**                                                                 |
+|----------------------------|---------------------------------------------------------------------------------|
+| `gift_id`                 | The identifier for the Thnks item the customer wants to send.                   |
+| `recipients`              | An array containing recipient details. Each recipient object must include:      |
+| - `email`                 | The email address of the recipient.                                             |
+| - `first_name` (optional) | The first name of the recipient.                                                |
+| - `last_name` (optional)  | The last name of the recipient.                                                 |
+| - `message`               | A personalized message to accompany the Thnks.                                 |
+| - `gift_redeem_type`      | Specifies the delivery method, always set to `"email"`.                      |
+
+**Note**: Avoid using `<` and `>` characters around variables. Simply enclose values in double quotes, except for `gift_id`.
+
+---
+
+### Finding `gift_id`
+
+To find the `gift_id` for a specific Thnks item:
+
+1. Log into the [Thnks application](https://app.thnks.com).
+2. Locate the Thnks item you want to send.
+3. Navigate to the Thnks Details page. The URL will include the `gift_id`.  
+   Example: https://app.thnks.com/#/send-thnks/thnks/5659
+   Here, `5659` is the `gift_id`.
+
+---
+
+### Getting the Authorization Token
+
+An API key is required to authenticate webhook requests. This token is tied to the sender’s account. Follow the instructions
