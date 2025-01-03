@@ -1,0 +1,129 @@
+---
+title: "HubSpot"
+description: "This integration allows you to set up a workflow in HubSpot that automatically triggers sending a Thnks through an action. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to contacts based on workflow criteria, using dynamic data from HubSpot."
+icon: "hubspot-logo"
+---
+
+# Configuring a Workflow in HubSpot to Automatically Send a Thnks  
+
+This guide walks you through automatically triggering the sending of a Thnks as part of a HubSpot workflow.
+
+## Prerequisites  
+
+* Access to the Thnks API.  
+* Thnks API Key (Authorization Token).  
+* URL for Thnks API endpoint.
+* Hubspot Operations Hub Professional, Enterprise License 
+
+## Setup  
+
+<Steps>  
+  <Step title="Prepare Webhook Data">  
+    Before setting up the webhook, ensure you have the following details:  
+
+    <Steps>  
+      <Step title="Thnks API URL">  
+        `https://api.thnks.com/api/v1/gift_requests`  
+      </Step>  
+
+      <Step title="HTTP Method">  
+        `POST`  
+      </Step>  
+
+      <Step title="Data (JSON format)">  
+        Here’s an example of the JSON payload you will need to include in the request. You’ll need to replace the placeholders with the appropriate HubSpot contact tokens:  
+
+        ```json  
+        {  
+          "gift_id": <GIFT_ID>,  
+          "recipients": [  
+            {  
+              "email": "{{contact.email}}",  
+              "first_name": "{{contact.firstname}}",  
+              "last_name": "{{contact.lastname}}",  
+              "message": "Thank you for your time and support!",  
+              "gift_redeem_type": "email"  
+            }  
+          ]  
+        }  
+        ```  
+
+        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.  
+        * Use HubSpot tokens (e.g., `{{contact.email}}`) to populate dynamic contact information.  
+      </Step>  
+
+      <Step title="Headers">  
+        You will need to add the following headers in the webhook:  
+
+        * **Content-Type**: `application/json`  
+        * **Authorization**: Your Thnks API key (Authorization Token).  
+      </Step>  
+    </Steps>  
+  </Step>  
+
+  <Step title="Create a Workflow in HubSpot">  
+    <Steps>  
+      <Step title="Log into HubSpot and navigate to Workflows">  
+        Go to the HubSpot Workflows tool in your account.  
+      </Step>  
+
+      <Step title="Create a New Workflow or Edit an Existing One">  
+        * Choose whether to create a new workflow or edit an existing one.  
+        * Define the workflow trigger criteria, such as `Contact enrollment` or any custom property change.  
+      </Step>  
+
+      <Step title="Add the Webhook Action">  
+        * In the workflow editor, click **+** to add an action.  
+        * Select **Trigger a Webhook**.  
+        * Configure the webhook as follows:  
+          * **Webhook URL**: `https://api.thnks.com/api/v1/gift_requests`  
+          * **Method**: `POST`  
+          * **Request Body**: Add the JSON template mentioned above, adjusting it with HubSpot tokens.  
+          * **Headers**:  
+            * **Content-Type**: `application/json`  
+            * **Authorization**: Paste your Thnks API Key.  
+        * Save the webhook configuration.  
+      </Step>  
+    </Steps>  
+  </Step>  
+
+  <Step title="Test and Activate the Workflow">  
+    <Steps>  
+      <Step title="Run a Test">  
+        Test the workflow using a test contact to ensure the webhook triggers correctly.  
+      </Step>  
+
+      <Step title="Check Response Logs">  
+        Verify the response from Thnks in the webhook execution logs within HubSpot.  
+      </Step>  
+
+      <Step title="Activate the Workflow">  
+        Once verified, activate the workflow for live use.  
+      </Step>  
+    </Steps>  
+  </Step>  
+
+  <Step title="Best Practices">  
+    <Steps>  
+      <Step title="Error Handling">  
+        Include error handling in your workflow to manage cases where the webhook might fail, such as retry mechanisms.  
+      </Step>  
+
+      <Step title="Security">  
+        Ensure your API Key is securely stored and not exposed in public or shared workflows.  
+      </Step>  
+
+      <Step title="Testing">  
+        Test the workflow extensively with different contact scenarios to ensure all tokens and data mapping work as expected.  
+      </Step>  
+    </Steps>  
+  </Step>  
+</Steps>  
+
+Following this process, you can automatically trigger a Thnks gift to be sent as part of a HubSpot workflow using webhooks.  
+
+## References  
+
+* [Using Webhooks in HubSpot Workflows](https://knowledge.hubspot.com/workflows/how-do-i-use-webhooks-with-hubspot-workflows)  
+* [Thnks API Documentation](https://thnks.com/developers/api-docs)  
+* [HubSpot Workflow Tool Overview](https://knowledge.hubspot.com/workflows/create-workflows)  

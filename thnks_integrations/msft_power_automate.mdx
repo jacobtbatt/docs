@@ -1,0 +1,137 @@
+---
+title: "Microsoft Power Automate"
+description: "This integration allows you to set up a flow in Microsoft Power Automate that automatically triggers sending a Thnks via an HTTP action. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to recipients based on trigger events, using dynamic data from Power Automate."
+icon: "circle-arrow-right"
+---
+
+# Configuring Microsoft Power Automate to Automatically Send a Thnks  
+
+This guide walks you through automatically triggering the sending of a Thnks using Power Automate flows.
+
+## Prerequisites  
+
+* Access to the Thnks API.  
+* Thnks API Key (Authorization Token).  
+* URL for Thnks API endpoint.  
+* Administrative access to your Microsoft Power Automate environment.  
+
+## Setup  
+
+<Steps>  
+  <Step title="Prepare HTTP Request Data">  
+    Before configuring your Power Automate flow, ensure you have the following details:  
+
+    <Steps>  
+      <Step title="Thnks API URL">  
+        `https://api.thnks.com/api/v1/gift_requests`  
+      </Step>  
+
+      <Step title="HTTP Method">  
+        `POST`  
+      </Step>  
+
+      <Step title="Data (JSON format)">  
+        Here’s an example of the JSON payload you will need to include in the HTTP action. Replace the placeholders with dynamic data from Power Automate tokens:  
+
+        ```json  
+        {  
+          "gift_id": <GIFT_ID>,  
+          "recipients": [  
+            {  
+              "email": "@{triggerOutputs()?['body/email']}",  
+              "first_name": "@{triggerOutputs()?['body/firstName']}",  
+              "last_name": "@{triggerOutputs()?['body/lastName']}",  
+              "message": "Thank you for your time and support!",  
+              "gift_redeem_type": "email"  
+            }  
+          ]  
+        }  
+        ```  
+
+        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.  
+        * Use Power Automate expressions (e.g., `@{triggerOutputs()?['body/email']}`) to dynamically populate recipient data.  
+      </Step>  
+
+      <Step title="Headers">  
+        You will need to add the following headers in the HTTP action:  
+
+        * **Content-Type**: `application/json`  
+        * **Authorization**: Your Thnks API key (Authorization Token).  
+      </Step>  
+    </Steps>  
+  </Step>  
+
+  <Step title="Create a Flow in Power Automate">  
+    <Steps>  
+      <Step title="Log into Power Automate and Create a New Flow">  
+        Open Power Automate and click **+ Create** to start building a new flow.  
+      </Step>  
+
+      <Step title="Choose a Trigger">  
+        Select a trigger to define the event that starts your flow. Examples include:  
+        * **When a record is updated**: Trigger the flow when a record is updated in a connected app like Microsoft Dynamics, Salesforce, or SharePoint.  
+        * **When an HTTP request is received**: Trigger the flow via an incoming webhook.  
+        * **Scheduled Flow**: Run the flow on a predefined schedule.  
+      </Step>  
+
+      <Step title="Add an HTTP Action">  
+        * Click **+ New step** and search for **HTTP** to add an HTTP action.  
+        * Configure the HTTP action as follows:  
+          * **Method**: `POST`  
+          * **URI**: `https://api.thnks.com/api/v1/gift_requests`  
+          * **Headers**:  
+            * **Content-Type**: `application/json`  
+            * **Authorization**: Paste your Thnks API Key.  
+          * **Body**: Copy the JSON payload mentioned above and replace placeholders with Power Automate expressions.  
+        * Save the HTTP action.  
+      </Step>  
+
+      <Step title="Add Additional Actions or Conditions (Optional)">  
+        Use additional actions or conditions to enhance the flow, such as:  
+        * **Condition**: Add a condition to determine when the HTTP action should be executed.  
+        * **Data Operations**: Use the Compose or Parse JSON actions to transform or manipulate data before sending it.  
+        * **Error Handling**: Add a parallel branch to handle errors or log failed requests.  
+      </Step>  
+    </Steps>  
+  </Step>  
+
+  <Step title="Test and Activate the Flow">  
+    <Steps>  
+      <Step title="Run the Flow Manually or with Test Data">  
+        Use Power Automate’s test feature to trigger the flow with sample data and ensure the HTTP action sends data correctly to the Thnks API.  
+      </Step>  
+
+      <Step title="Check Run History">  
+        Review the flow’s **Run History** to verify the API call was successful and the Thnks gift was sent.  
+      </Step>  
+
+      <Step title="Activate the Flow">  
+        Once verified, turn on the flow to enable automated Thnks sending.  
+      </Step>  
+    </Steps>  
+  </Step>  
+
+  <Step title="Best Practices">  
+    <Steps>  
+      <Step title="Error Handling">  
+        Add error-handling logic to retry failed API calls or log issues for manual review.  
+      </Step>  
+
+      <Step title="Security">  
+        Use Power Automate’s **Environment Variables** or **Key Vault** connectors to securely store your API Key and other sensitive data.  
+      </Step>  
+
+      <Step title="Testing">  
+        Test the flow thoroughly with various scenarios to ensure all triggers, actions, and conditions work as intended.  
+      </Step>  
+    </Steps>  
+  </Step>  
+</Steps>  
+
+Following this process, you can automatically trigger a Thnks gift to be sent as part of a Power Automate flow using the HTTP action.  
+
+## References  
+
+* [HTTP Action Documentation](https://learn.microsoft.com/en-us/power-automate/using-http-actions)  
+* [Power Automate Triggers and Actions Overview](https://learn.microsoft.com/en-us/power-automate/overview)  
+* [Thnks API Documentation](https://thnks.com/developers/api-docs)  

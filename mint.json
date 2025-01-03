@@ -41,15 +41,48 @@
     {
       "group": "Start An Integration",
       "pages": [
-        "thnks_integrations/sso",
-        "thnks_integrations/zapier",
-        "thnks_integrations/marketo"
+        "thnks_integrations/hubspot",
+        "thnks_integrations/make",
+        "thnks_integrations/marketo",
+        "thnks_integrations/msft_power_automate",
+        "thnks_integrations/n8n",
+        "thnks_integrations/salesforce",
+        "thnks_integrations/workato",
+        "thnks_integrations/zapier"
+        ]
+    },
+    {
+      "group": "Browser Extension",
+      "pages": [
+        "browser-extension/overview"
         ]
     },
     {
       "group": "SalesForce AppExchange",
       "pages": [
-        "thnks_integrations/thnks_appexchange"
+        "appexchange/overview",
+        "appexchange/install",
+        "appexchange/datamodel",
+        "appexchange/objectdictionary",
+        "appexchange/faq"
+        ]
+    },
+    {
+      "group": "SAP Concur",
+      "pages": [
+        "concur/overview"
+        ]
+    },
+    {
+      "group": "Single Sign On (SSO)",
+      "pages": [
+        "single-sign-on/sso"
+        ]
+    },
+    {
+      "group": "HRIS",
+      "pages": [
+        "hris/overview"
         ]
     },
     {
