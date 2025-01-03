@@ -42,6 +42,7 @@
     {
       "group": "Start An Integration",
       "pages": [
+      "thnks_integrations/overview",
         "thnks_integrations/hubspot",
         "thnks_integrations/make",
         "thnks_integrations/marketo",
