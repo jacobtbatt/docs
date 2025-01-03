@@ -1,0 +1,45 @@
+---
+title: 'FAQ'
+description: 'Use the latest version (v1.3) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities.'
+icon: 'salesforce'
+---
+
+## Frequently Asked Questions
+
+* **Q. I can’t find my Thnks on a Contact record; how do I fix this?**<Frame>
+    ![Thnks Page Layout Customization](/thnks_sf_doc_images/page_layout.png)
+  </Frame>
+
+  * A.	Thnks related lists will need to be manually added onto your relevant page layouts for the Contact object (as well as Lead, Account and Opportunity). To do this, your Salesforce Administrator must go into Setup, and then Object Manager. Find Contact, and then go into the Page Layouts tab. From there, click into the relevant page layout, and go to the “Related Lists” section, and manually drag Thnks in.
+
+* **Q. Why can’t my Users see Thnks records, but I can?**
+
+  * A.	Please see the permissions section above. Your users may not have access because they were not granted the correct permissions when you installed the Thnks app.
+
+* **Q. Why are Tasks not being created?**
+
+  * A.	Please ensure that “Task Syncing” has been enabled in the “Others” tab within the “Manage Thnks Settings” page. Check the “Thnks Configuration” section above.
+
+* **Q. I’ve upgraded from 1.1 to 1.3, but I am not seeing the new fields on the Thnks object. What do I need to do?**<Frame>
+    ![Thnks Page Layout Customization](/thnks_sf_doc_images/page_layout_upgrade.png)
+  </Frame>
+
+  * A.	If you’ve upgraded, you will need to manually add the new fields onto the existing page layout for Thnks. As above, head into Object Manager and search for Thnks. Find the Page Layouts tab, and then manually add the fields you wish to see.
+
+* **Q. Thnks are being associated with Contacts, but none of our open pipeline is being associated.**
+
+  * A.	For Thnks to be associated with Opportunities, a few things need to be happening:
+
+    1. Ensure that in the “Manage Thnks Settings'' tab, underneath “Opportunity Settings”, “Opportunity Matching” is toggled on.
+
+    2. Check that the Contacts in question are being related to Opportunities via the Opportunity Contact Role object.
+
+    3. Ensure that at the time of the Thnks being sent, the Opportunity was in an open stage.
+
+* **Q. I have a question or need support, who do I contact?**
+
+  * A.	Reach out to our team by emailing [support@thnks.com](mailto:support@thnks.com) and we will be happy to assist!
+
+* **Q. I have a feature or functionality request, who do I contact?**
+
+  * A.	Reach out to your Thnks account manager or our team by emailing [support@thnks.com](mailto:support@thnks.com), we'd love to hear from you!
