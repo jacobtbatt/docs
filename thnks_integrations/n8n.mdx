@@ -1,11 +1,11 @@
 ---
 title: "n8n"
-description: "This integration allows you to set up a workflow in N8n that automatically triggers sending a Thnks via the HTTP Request node. By leveraging the Thnks API, it enables personalized appreciation messages to be sent to recipients based on trigger events, using dynamic data from N8n."
+description: "This integration allows you to set up a workflow in n8n that automatically triggers sending a Thnks via the HTTP Request node."
 ---
 
-# Configuring N8n to Automatically Send a Thnks
+# Configuring n8n to Automatically Send a Thnks
 
-This guide walks you through automatically triggering the sending of a Thnks gift using N8n workflows.
+This guide walks you through automatically triggering the sending of a Thnks using n8n workflows.
 
 ## Prerequisites
 
@@ -15,13 +15,13 @@ This guide walks you through automatically triggering the sending of a Thnks gif
 
 * URL for Thnks API endpoint.
 
-* Administrative access to your N8n instance.
+* Administrative access to your n8n instance.
 
 ## Setup
 
 <Steps>
   <Step title="Prepare Webhook Data">
-    Before configuring your N8n workflow, ensure you have the following details:
+    Before configuring your n8n workflow, ensure you have the following details:
 
     <Steps>
       <Step title="Thnks API URL">
@@ -52,7 +52,7 @@ This guide walks you through automatically triggering the sending of a Thnks gif
 
         * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
 
-        * Use N8n variables (e.g., `{{ $json.email }}`) to dynamically populate recipient data from the workflow.
+        * Use n8n variables (e.g., `{{ $json.email }}`) to dynamically populate recipient data from the workflow.
       </Step>
 
       <Step title="Headers">
@@ -65,10 +65,10 @@ This guide walks you through automatically triggering the sending of a Thnks gif
     </Steps>
   </Step>
 
-  <Step title="Create a Workflow in N8n">
+  <Step title="Create a Workflow in n8n">
     <Steps>
-      <Step title="Log into N8n and Create a New Workflow">
-        Open your N8n instance and click **+ New Workflow** to start creating a new workflow.
+      <Step title="Log into n8n and Create a New Workflow">
+        Open your n8n instance and click **+ New Workflow** to start creating a new workflow.
       </Step>
 
       <Step title="Add a Trigger Node">
@@ -98,7 +98,7 @@ This guide walks you through automatically triggering the sending of a Thnks gif
 
           * **Body Type**: `JSON`
 
-          * **JSON/RAW Parameters**: Copy the JSON payload mentioned above and adjust it using N8n variables.
+          * **JSON/RAW Parameters**: Copy the JSON payload mentioned above and adjust it using n8n variables.
       </Step>
 
       <Step title="Add Additional Workflow Logic (Optional)">
@@ -150,7 +150,7 @@ Following this process, you can automatically trigger a Thnks gift to be sent as
 
 ## References
 
-* [N8n Documentation](https://docs.n8n.io/)
+* [n8n Documentation](https://docs.n8n.io/)
 
 * [HTTP Request Node Guide](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest/)
 
