@@ -7,28 +7,8 @@ api: 'POST https://api.thnks.com/api/v1/gift_requests'
   This should always be `application/json`
 </ParamField>
 
-<ParamField header="Idempotency-key" type="string" initialValue="UUIDv4">
-  This header is only necessary in a few instances. It enables the same user ordering the same Thnks rapidly to receive a completely new Thnks each time. This is not our normal behavior for security reasons but check with our Product team to see if this applies for your use case.
-
-  This should always be `UUIDv4` if in use
-</ParamField>
-
 <ParamField body="gift_id" type="integer" required="true">
-  Variable containing Thnks id of the item(s) the Customer wants to send
-
-  The Account Manager will be responsible for providing the Customer with the ID(s) for a specific Thnks or set of Thnks needed for the Webhook set up, but the Customer can also find this themselves using the below instructions:
-
-  1. Go to app.thnks.com and log in.
-
-  2. Find the Thnks you wish to send and click on the title or image
-
-  3. Once on the Thnks Details page, look for the Thnks ID here
-
-       <img className="block dark:hidden" src="/api_images/thnks_id.png" alt="Thnks ID" />
-
-       <img className="hidden dark:block" src="/api_images/thnks_id.png" alt="Thnks ID" />
-
-  4. The number shown in the picture is your Thnks ID, which is “42997” above for a 'A Caffeine Boost'
+  Variable containing Thnks ID of the Thnks to be sent
 </ParamField>
 
 <ParamField body="recipients" type="array">
@@ -51,7 +31,7 @@ api: 'POST https://api.thnks.com/api/v1/gift_requests'
       Use
       `"Hello,\nThank you"` instead of
       `"Hello,
-                              Thank You"`
+                                    Thank You"`
       for a multiline Thnks
     </ParamField>
 
