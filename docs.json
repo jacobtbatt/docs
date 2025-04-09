@@ -1,0 +1,146 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Thnks Documentation",
+  "colors": {
+    "primary": "#00B8C7",
+    "light": "#00B8C7",
+    "dark": "#00B8C7"
+  },
+  "favicon": "/logo/thnks_favicon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "get-started/request"
+            ]
+          },
+          {
+            "group": "Start An Integration",
+            "pages": [
+              "thnks_integrations/overview",
+              "thnks_integrations/hubspot",
+              "thnks_integrations/make",
+              "thnks_integrations/marketo",
+              "thnks_integrations/msft_power_automate",
+              "thnks_integrations/n8n",
+              "thnks_integrations/salesforce",
+              "thnks_integrations/workato",
+              "thnks_integrations/zapier"
+            ]
+          },
+          {
+            "group": "Browser Extension",
+            "pages": [
+              "browser-extension/overview"
+            ]
+          },
+          {
+            "group": "Salesforce AppExchange",
+            "pages": [
+              "appexchange/overview",
+              "appexchange/install",
+              "appexchange/datamodel",
+              "appexchange/objectdictionary",
+              "appexchange/faq"
+            ]
+          },
+          {
+            "group": "SAP Concur",
+            "pages": [
+              "concur/overview"
+            ]
+          },
+          {
+            "group": "Single Sign On (SSO)",
+            "pages": [
+              "single-sign-on/sso"
+            ]
+          },
+          {
+            "group": "HRIS",
+            "pages": [
+              "hris/overview",
+              "hris/platforms"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Thnks Endpoints",
+            "pages": [
+              "api-reference/endpoint/create_gift_request",
+              "api-reference/endpoint/create_redemption_url"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/THNKS_PrimaryLogo_Navy.svg",
+    "dark": "/logo/THNKS_PrimaryLogo_Teal.svg"
+  },
+  "api": {
+    "mdx": {
+      "server": "https://admin.thnks.com/api/v1",
+      "auth": {
+        "method": "key",
+        "name": "Authorization"
+      }
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@thnks.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://thnks.com/platform/plans"
+    }
+  },
+  "seo": {
+    "metatags": {
+      "google-site-verification": "su8vTodsK4IYxDXNbapbLpO5wJNrqns6hJEPc6r1rbI"
+    },
+    "indexing": "navigable"
+  },
+  "footer": {
+    "socials": {
+      "x": "https://twitter.com/alwayssaythnks",
+      "linkedin": "https://www.linkedin.com/company/thnks"
+    }
+  },
+  "integrations": {
+    "clearbit": {
+      "publicApiKey": "pk_b0c3ca5e0ce2ad73a4a46b04d2d29993"
+    },
+    "posthog": {
+      "apiKey": "phc_Kql3s3L53OL8e5vad6g7Q5M2Pu6yDvuuXf3pbkW7qTq"
+    },
+    "intercom": {
+      "appId": "iwfxzmxt"
+    },
+    "ga4": {
+      "measurementId": "G-J1MSJZ54JW"
+    }
+  }
+}
