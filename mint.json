@@ -122,6 +122,9 @@
     "auth": {
       "method": "key",
       "name": "Authorization"
+    },
+  "metadata": {
+      "google-site-verification": "su8vTodsK4IYxDXNbapbLpO5wJNrqns6hJEPc6r1rbI"
     }
   }
 }
