@@ -61,6 +61,13 @@
             "pages": [
               "single-sign-on/sso"
             ]
+          },
+          {
+            "group": "HRIS",
+            "pages": [
+              "hris/overview",
+              "hris/platforms"
+              ]
           }
         ]
       },
