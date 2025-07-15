@@ -44,10 +44,12 @@
             "group": "Salesforce AppExchange",
             "pages": [
               "appexchange/overview",
+              "appexchange/quick_install",
               "appexchange/install",
               "appexchange/datamodel",
               "appexchange/objectdictionary",
-              "appexchange/faq"
+              "appexchange/faq",
+              "appexchange/roi_guide"
             ]
           },
           {
