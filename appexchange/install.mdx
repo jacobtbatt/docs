@@ -69,11 +69,67 @@ If selecting **“Install for Specific Profiles”**, you will be able to choose
 
 At this point, you should receive an email from Salesforce confirming successful installation and should be redirected to this page with all of your installed packages. You’ve successfully installed the Thnks Salesforce App!
 
-### Upgrading from v1.1 to v1.3 of the AppExchange Listing
+## Upgrading to v1.8
 
-If you have an old version of the Thnks AppExchange app installed in your instant of Salesforce, please follow the same instructions for install as if you were installing for the first time as seen above using [this link](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT\&preview=%222021-02-10T20%3A06%3A08.000Z%22).
+### Upgrading from v1.3 to v1.8 of the AppExchange Listing
 
-The main considerations to keep in mind when upgrading:
+<Note>
+**Good News!** Upgrading from v1.3 to v1.8 is seamless with no breaking changes, new required permissions, or manual data migration needed.
+</Note>
+
+To upgrade your existing Thnks AppExchange app:
+
+1. Navigate to the [Thnks AppExchange listing](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT)
+2. Click **"Get It Now"** and select your Salesforce instance
+3. Follow the same installation process as a new installation
+4. The upgrade will preserve all your existing configuration and data
+
+#### What's New in v1.8
+
+After upgrading, you'll have access to these new features:
+
+**🎯 Send Thnks from Salesforce**
+- Add the "Send Thnks" Lightning component to your record pages
+- Configure your Organization Token (contact support@thnks.com)
+- Enable users to send Thnks directly from Contact, Account, and Opportunity records
+
+**🔄 Thnks Request Object**
+- New object for automated Thnks workflows
+- Salesforce Flow integration capabilities
+- Configurable approval processes
+
+**📊 Enhanced ROI Tracking**
+- Improved field mapping for ROI data
+- "Backfill ROI Fields" functionality
+- Better reporting capabilities
+
+#### Post-Upgrade Steps
+
+<Steps>
+  <Step title="Configure Organization Token">
+    1. Contact your Thnks Account Manager or support@thnks.com to obtain your Organization Token
+    2. Navigate to **Manage Thnks Settings** → **Send Thnks** tab
+    3. Enter your Organization Token and configure settings
+  </Step>
+  
+  <Step title="Add Send Thnks Component">
+    1. Use Lightning App Builder to add the "Send Thnks" component to your record pages
+    2. Configure component settings as needed
+    3. Test the functionality with your users
+  </Step>
+  
+  <Step title="Update Page Layouts (Optional)">
+    1. Add Thnks Request related lists to relevant page layouts
+    2. Configure new fields if using ROI tracking
+    3. Update user permissions as needed
+  </Step>
+</Steps>
+
+### Upgrading from v1.1 to v1.8 of the AppExchange Listing
+
+If you have a very old version (v1.1) of the Thnks AppExchange app installed, please follow the same installation process as a new installation using [this link](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT).
+
+The main considerations to keep in mind when upgrading from v1.1:
 
 * The Thnks Status Log object will no longer be syncing records (but the old records will remain)
 
@@ -276,3 +332,73 @@ In the scenario where a Thnks is sent and the phone number or email address used
 The other three fields in this section deal with the creation of Task records:
 
 * First, the Task Syncing field is a simple toggle of whether or not Tasks should be created. If this is checked, a Task will be created and it will be associated with both the Thnks record and a Contact. If the Thnks is associated with a Lead, then only the Thnks record will be associated (Tasks cannot be associated with a Lead and another object). More on the Task fields being set below.
+
+* The Default Task Type field allows you to specify what Type value should be populated on automatically created Tasks.
+
+* The Task Close Status field allows you to specify the status Tasks should be set to when the corresponding Thnks activity is considered complete.
+
+### Send Thnks
+
+<Frame>
+  ![Send Thnks Settings](/thnks_sf_doc_images/send_thnks_settings.png)
+</Frame>
+
+**New in v1.8**, the Send Thnks tab enables users to send Thnks directly from within Salesforce. This powerful feature requires proper configuration:
+
+**Enable 'Send Thnks' Feature**
+Check this box to activate the ability for Salesforce users to send Thnks from within Salesforce records (like Contacts or Leads).
+
+**Default New Requests to Auto-Approve**
+When checked, new Thnks Request records created in Salesforce will automatically be marked for 'Auto-Approve'. This means they can be processed and sent without requiring a separate approval step. Note: Users can manually uncheck 'Auto-Approve' on individual Thnks Request records if specific approval is needed.
+
+**Thnks API Endpoint** (Required)
+The technical API address used by Salesforce to communicate with Thnks. Do not edit this value unless instructed by Thnks Support.
+- Default: `https://api.thnks.com/`
+
+**Thnks Sending Interface URL** (Required)
+The URL used to display the Thnks sending interface within Salesforce. Do not edit this value unless instructed by Thnks Support.
+- Default: `https://app.thnks.com/#/auto-login`
+
+**Thnks Organization Token** (Required)
+Enter the unique Organization Token provided by Thnks. This token authenticates your Salesforce organization with Thnks, enabling the 'Send Thnks' feature. Salesforce Admins can retrieve this token from the Salesforce Settings page within the Thnks platform.
+
+<Warning>
+**Important**: You must obtain your Organization Token from your Thnks Account Manager or by contacting [support@thnks.com](mailto:support@thnks.com) before users can send Thnks from within Salesforce.
+</Warning>
+
+## Adding Send Thnks Component to Lightning Pages
+
+To enable the "Send a Thnks" button on your Salesforce records:
+
+<Steps>
+  <Step title="Navigate to Lightning App Builder">
+    1. Go to **Setup** → **Object Manager**
+    2. Select the object where you want to add the component (Contact, Account, or Opportunity)
+    3. Navigate to **Lightning Record Pages**
+    4. Select the page layout you want to edit
+  </Step>
+  
+  <Step title="Add the Send Thnks Component">
+    1. In the Lightning App Builder, look for the **"Send Thnks"** component in the component palette
+    2. Drag and drop it to your desired location on the page
+    3. Configure any component-specific settings
+    4. Click **Save**
+  </Step>
+  
+  <Step title="Activate the Page">
+    1. Click **Activation** to set the page as the default for your users
+    2. Choose the appropriate profiles and record types
+    3. Click **Next** and then **Save**
+  </Step>
+</Steps>
+
+## User Requirements for Send Thnks Feature
+
+For users to successfully send Thnks from within Salesforce:
+
+1. **Matching Email Addresses**: The user's Salesforce email address must match their Thnks account email address
+2. **Active Thnks Account**: Users must have an active Thnks account
+3. **Proper Permissions**: Users must have the "Thnks Standard User" or "Thnks Admin" permission set assigned
+4. **Organization Token**: The Organization Token must be properly configured in the Send Thnks settings
+
+If any of these requirements are not met, users will receive an error message when attempting to use the Send Thnks feature.
