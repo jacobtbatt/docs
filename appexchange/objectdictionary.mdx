@@ -2,49 +2,108 @@
 title: "Object Data Dictionary"
 ---
 
+---
+
+## Object Data Dictionary v1.8
+
+Version 1.8 introduces the new Thnks Request object alongside the existing Thnks object, providing comprehensive workflow automation capabilities.
+
 ### Thnks Object Data Dictionary
 
 Below is a table with the default labels, API names and definitions for all fields that come with the AppExchange listing within the Thnks object.
 
 **Object Label**: Thnks
-**Object API Name**: thnksdev1\_\_Gift\_\_c
+**Object API Name**: thnksdev1__Gift__c
 
-| Field Label               | API Name                                        | Field Type                  | Purpose                                                                                               |
-| -------------------------- | ----------------------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Account                   | thnksdev1\_\_Account\_\_c                       | Lookup(Account)             | Account that Thnks is related with (only associated if a Contact match is made).                      |
-| Actual Sender             | thnksdev1\_\_Actual\_Sender\_\_c                | Lookup(User)                | Internal Salesforce User that initiated the sending of the Thnks.                                     |
-| Carbon Neutral Cost       | thnksdev1\_\_Carbon\_Neutral\_Cost\_\_c         | Currency(16, 2)             | Cost for carbon-neutral Thnks delivery.                                                               |
-| Created By                | CreatedById                                     | Lookup(User)                | Standard Salesforce field displaying what user created the record. Will be the same as Actual Sender. |
-| Deal Stage                | thnksdev1\_\_Deal\_Stage\_\_c                   | Text(255)                   | If an Opportunity is matched, this is a stamp of the Opportunity’s Stage at the time of Thnks send.   |
-| Delivered                 | thnksdev1\_\_Delivered\_\_c                     | Formula (Checkbox)          | Indicates whether the Thnks has been delivered to the recipient.                                      |
-| Delivered By              | thnksdev1\_\_DeliveryType\_\_c                  | Picklist                    | Whether Thnks was sent via Email or SMS.                                                              |
-| Delivered Date/Time       | thnksdev1\_\_Delivered\_Date\_Time\_\_c         | Date/Time                   | Timestamp of when the Thnks was delivered.                                                            |
-| Description               | thnksdev1\_\_Description\_\_c                   | Long Text Area(131072)      | The item description of the Thnks that was sent.                                                      |
-| Donated Date/Time         | thnksdev1\_\_Donated\_Date\_Time\_\_c           | Date/Time                   | Timestamp of when the Thnks was donated.                                                              |
-| Expired Date/Time         | thnksdev1\_\_Expired\_Date\_Time\_\_c           | Date/Time                   | Timestamp of when the Thnks expired.                                                                  |
-| Item Cost                 | thnksdev1\_\_Item\_Cost\_\_c                    | Currency(16, 2)             | Base cost of the Thnks that was sent.                                                                 |
-| Last Modified By          | LastModifiedById                                | Lookup(User)                | Standard Salesforce field.                                                                            |
-| Link                      | thnksdev1\_\_RecipientTransactionLink\_\_c      | URL(255)                    | Link to the Thnks within the Thnks app.                                                               |
-| Message                   | thnksdev1\_\_Message\_\_c                       | Long Text Area(131072)      | The custom message that was entered when sending the Thnks.                                           |
-| Name                      | Name                                            | Text(80)                    | Standard Salesforce field. This is the name of the Thnks being sent.                                  |
-| Opened                    | thnksdev1\_\_Opened\_\_c                        | Formula (Checkbox)          | Indicates whether the Thnks has been opened by the recipient.                                         |
-| Opened Date/Time          | thnksdev1\_\_Opened\_Date\_Time\_\_c            | Date/Time                   | Timestamp of when the Thnks was opened by the recipient.                                              |
-| Opportunity               | thnksdev1\_\_Opportunity\_\_c                   | Lookup(Opportunity)         | Account that Thnks is related with (only associated if a Contact match is made)                       |
-| Owner                     | OwnerId                                         | Lookup(User,Group)          | Standard Salesforce field.                                                                            |
-| Recipient Contact         | thnksdev1\_\_RecipientContactId\_\_c            | Lookup(Contact)             | Contact that Thnks is related with.                                                                   |
-| Recipient Email           | thnksdev1\_\_Recipient\_Email\_\_c              | Email                       | The actual email that the Thnks was sent to.                                                          |
-| Recipient Lead            | thnksdev1\_\_RecipientLeadId\_\_c               | Lookup(Lead)                | Lead that Thnks is related with.                                                                      |
-| Recipient Phone Number    | thnksdev1\_\_Recipient\_Phone\_Number\_\_c      | Phone                       | The actual phone number that the Thnks was sent to.                                                   |
-| Redeemed                  | thnksdev1\_\_Redeemed\_\_c                      | Formula (Checkbox)          | Indicates whether the Thnks has been redeemed by the recipient.                                       |
-| Redeemed Date/Time        | thnksdev1\_\_Redeemed\_Date\_Time\_\_c          | Date/Time                   | Timestamp of when the Thnks was redeemed.                                                             |
-| Refunded Date/Time        | thnksdev1\_\_Refunded\_Date\_Time\_\_c          | Date/Time                   | Timestamp of when the Thnks was refunded.                                                             |
-| Sender                    | thnksdev1\_\_SenderId\_\_c                      | Lookup(User)                | Internal Salesforce User that initiated the sending of the Thnks.                                     |
-| Sender Email              | thnksdev1\_\_Sender\_Email\_\_c                 | Email                       | The actual email of the person sending the Thnks.                                                     |
-| Shipping Cost             | thnksdev1\_\_Shipping\_Cost\_\_c                | Currency(16, 2)             | Shipping cost of the Thnks (physical items only).                                                     |
-| Status                    | thnksdev1\_\_RecipientTransactionStatus\_\_c    | Picklist                    | Picklist field tracking the current status of the Thnks (controlled by Thnks app)                     |
-| Thnks Item Id             | thnksdev1\_\_GiftId\_\_c                        | Number(18, 0)               | Unique item ID of the Thnks.                                                                          |
-| Thnks Sent At             | thnksdev1\_\_RecipientTransactionCreatedAt\_\_c | Date/Time                   | Timestamp of when the Thnks was sent.                                                                 |
-| Total Price               | thnksdev1\_\_RecipientTransactionPrice\_\_c     | Currency(16, 2)             | Total cost of the Thnks send.                                                                         |
-| Transaction Fee           | thnksdev1\_\_Transaction\_Fee\_\_c              | Currency(16, 2)             | Transaction fee of the Thnks send.                                                                    |
-| Transaction Id            | thnksdev1\_\_RecipientTransactionId\_\_c        | Number(18, 0) (External ID) | Unique transaction ID for Thnks send.                                                                 |
-| Undelivered Date/Time     | thnksdev1\_\_Undelivered\_Date\_Time\_\_c       | Date/Time                   | Timestamp of when the Thnks was undelivered.                                                          |
+| Field Label            | API Name                                    | Field Type                  | Purpose                                                                                               |
+| ---------------------- | ------------------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Account                | thnksdev1__Account__c                       | Lookup(Account)             | Account that Thnks is related with (only associated if a Contact match is made).                      |
+| Actual Sender          | thnksdev1__Actual_Sender__c                 | Lookup(User)                | Internal Salesforce User that initiated the sending of the Thnks.                                     |
+| Carbon Neutral Cost    | thnksdev1__Carbon_Neutral_Cost__c           | Currency(16, 2)             | Cost for carbon-neutral Thnks delivery.                                                               |
+| Created By             | CreatedById                                 | Lookup(User)                | Standard Salesforce field displaying what user created the record. Will be the same as Actual Sender. |
+| Deal Stage             | thnksdev1__Deal_Stage__c                    | Text(255)                   | If an Opportunity is matched, this is a stamp of the Opportunity’s Stage at the time of Thnks send.   |
+| Delivered              | thnksdev1__Delivered__c                     | Formula (Checkbox)          | Indicates whether the Thnks has been delivered to the recipient.                                      |
+| Delivered By           | thnksdev1__DeliveryType__c                  | Picklist                    | Whether Thnks was sent via Email or SMS.                                                              |
+| Delivered Date/Time    | thnksdev1__Delivered_Date_Time__c           | Date/Time                   | Timestamp of when the Thnks was delivered.                                                            |
+| Description            | thnksdev1__Description__c                   | Long Text Area(131072)      | The item description of the Thnks that was sent.                                                      |
+| Donated Date/Time      | thnksdev1__Donated_Date_Time__c             | Date/Time                   | Timestamp of when the Thnks was donated.                                                              |
+| Expired Date/Time      | thnksdev1__Expired_Date_Time__c             | Date/Time                   | Timestamp of when the Thnks expired.                                                                  |
+| Item Cost              | thnksdev1__Item_Cost__c                     | Currency(16, 2)             | Base cost of the Thnks that was sent.                                                                 |
+| Last Modified By       | LastModifiedById                            | Lookup(User)                | Standard Salesforce field.                                                                            |
+| Link                   | thnksdev1__RecipientTransactionLink__c      | URL(255)                    | Link to the Thnks within the Thnks app.                                                               |
+| Message                | thnksdev1__Message__c                       | Long Text Area(131072)      | The custom message that was entered when sending the Thnks.                                           |
+| Name                   | Name                                        | Text(80)                    | Standard Salesforce field. This is the name of the Thnks being sent.                                  |
+| Opened                 | thnksdev1__Opened__c                        | Formula (Checkbox)          | Indicates whether the Thnks has been opened by the recipient.                                         |
+| Opened Date/Time       | thnksdev1__Opened_Date_Time__c              | Date/Time                   | Timestamp of when the Thnks was opened by the recipient.                                              |
+| Opportunity            | thnksdev1__Opportunity__c                   | Lookup(Opportunity)         | Account that Thnks is related with (only associated if a Contact match is made)                       |
+| Owner                  | OwnerId                                     | Lookup(User,Group)          | Standard Salesforce field.                                                                            |
+| Recipient Contact      | thnksdev1__RecipientContactId__c            | Lookup(Contact)             | Contact that Thnks is related with.                                                                   |
+| Recipient Email        | thnksdev1__Recipient_Email__c               | Email                       | The actual email that the Thnks was sent to.                                                          |
+| Recipient Lead         | thnksdev1__RecipientLeadId__c               | Lookup(Lead)                | Lead that Thnks is related with.                                                                      |
+| Recipient Phone Number | thnksdev1__Recipient_Phone_Number__c        | Phone                       | The actual phone number that the Thnks was sent to.                                                   |
+| Redeemed               | thnksdev1__Redeemed__c                      | Formula (Checkbox)          | Indicates whether the Thnks has been redeemed by the recipient.                                       |
+| Redeemed Date/Time     | thnksdev1__Redeemed_Date_Time__c            | Date/Time                   | Timestamp of when the Thnks was redeemed.                                                             |
+| Refunded Date/Time     | thnksdev1__Refunded_Date_Time__c            | Date/Time                   | Timestamp of when the Thnks was refunded.                                                             |
+| Sender                 | thnksdev1__SenderId__c                      | Lookup(User)                | Internal Salesforce User that initiated the sending of the Thnks.                                     |
+| Sender Email           | thnksdev1__Sender_Email__c                  | Email                       | The actual email of the person sending the Thnks.                                                     |
+| Shipping Cost          | thnksdev1__Shipping_Cost__c                 | Currency(16, 2)             | Shipping cost of the Thnks (physical items only).                                                     |
+| Status                 | thnksdev1__RecipientTransactionStatus__c    | Picklist                    | Picklist field tracking the current status of the Thnks (controlled by Thnks app)                     |
+| Thnks Item Id          | thnksdev1__GiftId__c                        | Number(18, 0)               | Unique item ID of the Thnks.                                                                          |
+| Thnks Sent At          | thnksdev1__RecipientTransactionCreatedAt__c | Date/Time                   | Timestamp of when the Thnks was sent.                                                                 |
+| Total Price            | thnksdev1__RecipientTransactionPrice__c     | Currency(16, 2)             | Total cost of the Thnks send.                                                                         |
+| Transaction Fee        | thnksdev1__Transaction_Fee__c               | Currency(16, 2)             | Transaction fee of the Thnks send.                                                                    |
+| Transaction Id         | thnksdev1__RecipientTransactionId__c        | Number(18, 0) (External ID) | Unique transaction ID for Thnks send.                                                                 |
+| Undelivered Date/Time  | thnksdev1__Undelivered_Date_Time__c         | Date/Time                   | Timestamp of when the Thnks was undelivered.                                                          |
+
+### Thnks Request Object Data Dictionary
+
+**New in v1.8**, the Thnks Request object enables workflow automation and approval processes for Thnks sending.
+
+**Object Label**: Thnks Request
+**Object API Name**: Thnks__Request__c
+
+| Field Label                 | API Name                              | Field Type          | Purpose                                                                                |
+| --------------------------- | ------------------------------------- | ------------------- | -------------------------------------------------------------------------------------- |
+| Account                     | Thnks__Account__c                     | Lookup(Account)     | Account that Thnks Request is related with.                                            |
+| Auto-Approved               | Thnks__Auto_Approved__c               | Checkbox            | Indicates if the request should be automatically approved without manual intervention. |
+| Created By                  | CreatedById                           | Lookup(User)        | Standard Salesforce field displaying what user created the record.                     |
+| Credit Card Id              | Thnks__Credit_Card_Id__c              | Text(255)           | Reference to the credit card used for payment processing.                              |
+| Gift Category Id            | Thnks__Gift_Category_Id__c            | Text(255)           | Category identifier for the selected gift type.                                        |
+| Gift Id                     | Thnks__Gift_Id__c                     | Text(255)           | Unique identifier for the specific gift selected.                                      |
+| Gift Item Description       | Thnks__Gift_Item_Description__c       | Text(255)           | Description of the gift item being sent.                                               |
+| Include Amazon Shipping     | Thnks__Include_Amazon_Shipping__c     | Checkbox            | Indicates if Amazon shipping should be included for physical gifts.                    |
+| Include Carbon Neutral Cost | Thnks__Include_Carbon_Neutral_Cost__c | Checkbox            | Indicates if carbon neutral shipping cost should be included.                          |
+| Item in Thnks               | Thnks__Item_in_Thnks__c               | URL(255)            | Direct link to the gift item in the Thnks catalog.                                     |
+| Last Modified By            | LastModifiedById                      | Lookup(User)        | Standard Salesforce field for tracking last modification.                              |
+| Opportunity                 | Thnks__Opportunity__c                 | Lookup(Opportunity) | Opportunity that Thnks Request is related with.                                        |
+| Owner                       | OwnerId                               | Lookup(User,Group)  | Standard Salesforce field for record ownership.                                        |
+| Payment Method              | Thnks__Payment_Method__c              | Text(255)           | Payment method selected for the Thnks request.                                         |
+| Request Status              | Thnks__Request_Status__c              | Picklist            | Current status of the Thnks request (Pending, Approved, Rejected, Sent).               |
+| Root Gift Id                | Thnks__Root_Gift_Id__c                | Text(255)           | Root identifier for gift categorization.                                               |
+| Send Type                   | Send_Type__c                          | Text Area(255)      | Type of send method (email, SMS, etc.).                                                |
+| Third Party Gift Id         | Thnks__Third_Party_Gift_Id__c         | Text(255)           | Third-party vendor gift identifier.                                                    |
+| Third Party Vendor          | Thnks__Third_Party_Vendor__c          | Text(255)           | Third-party vendor name for gift fulfillment.                                          |
+| Thnks Error Log             | Thnks__Thnks_Error_Log__c             | Text(255)           | Error log for troubleshooting failed requests.                                         |
+| Thnks Request Number        | Name                                  | Auto Number         | Auto-generated unique number for the Thnks request.                                    |
+| Use User Balance            | Thnks__Use_User_Balance__c            | Checkbox            | Indicates if user's account balance should be used for payment.                        |
+
+### Field Usage Notes
+
+**Status Field Values:**
+
+- **Pending**: Request created but not yet processed
+- **Approved**: Request approved and ready for sending
+- **Rejected**: Request rejected by approver
+- **Sent**: Thnks successfully sent and Thnks record created
+
+**Auto-Approved Field:**
+
+- When checked, requests bypass manual approval process
+- Controlled by "Default New Requests to Auto-Approve" setting in Manage Thnks Settings
+- Can be manually unchecked on individual records if approval is needed
+
+**Gift ID Fields:**
+
+- Multiple gift ID fields support different gift catalog structures
+- Root Gift Id provides categorization
+- Third Party fields enable vendor-specific gift fulfillment
