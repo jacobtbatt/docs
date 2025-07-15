@@ -1,59 +1,110 @@
 ---
-title: 'Overview'
-description: 'Use the latest version (v1.3) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities.'
+title: "Overview"
+description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange app to capture all of your company's Thnks activity and send Thnks directly from within Salesforce. The app provides comprehensive integration between Thnks and Salesforce Leads, Contacts, Accounts and Opportunities."
 ---
 
 The custom Thnks objects allow you to build more robust reporting and understand your ROI by pulling detailed reports on user activity and messaging effectiveness.
 
-New features of the App:
+## What's New in v1.8
 
-* Automatic association of the Thnks object with open Opportunities and Accounts (in addition to Lead or Contact)
+**🎯 Send Thnks Directly from Salesforce**
 
-* More streamlined reporting on key date/time stamping on Thnks Status (delivered, opened, redeemed, etc.)
+- Send Thnks directly from Contact, Account, and Opportunity pages
+- Embedded Thnks interface within Salesforce using secure iframe technology
+- Automatic recipient detection from Salesforce records
 
-* Pre-built dashboard and underlying reports
+**🔄 Automated Thnks Workflows**
 
-* Admin configuration page to control:
+- New Thnks Request object for workflow automation
+- Salesforce Flow integration for triggered Thnks sending
+- Configurable auto-approval or manual approval processes
+- Perfect for marketing automation and sales cadences
 
-  * How Thnks is matched when there are duplicate Contacts, Leads, or Opportunities
+**📊 Enhanced ROI Tracking**
 
-  * Toggle for matching to Opportunities
+- Custom ROI field mapping from Thnks to Salesforce
+- Backfill capabilities for historical ROI data
+- Improved reporting on Thnks effectiveness
 
-  * Toggle for creating Tasks
+**⚙️ Advanced Configuration**
 
-  * What to do when no matching Lead/Contact is found
-
-  * Matching on custom phone and/or email fields on the Lead and Contact
-
-* Enhanced Activity logging via the Task object
-
-* Support for Thnks Required Field syncing
+- Flexible matching logic for Contacts, Leads, and Opportunities
+- Enhanced Task creation and management
+- Improved field mapping capabilities
+- Organization-level authentication tokens
 
 ## Integration Overview
 
-Thnks has partnered with Salesforce to provide our clients with an application built specifically for Salesforce and available on the AppExchange. Currently, this is a one-way integration, meaning that data is being sent from the Thnks product into your Salesforce environment.
+Thnks has partnered with Salesforce to provide our clients with an application built specifically for Salesforce and available on the AppExchange. Version 1.8 introduces **bidirectional functionality**, allowing you to both:
+
+- **Send Thnks from Salesforce** → Initiate Thnks directly from Salesforce records
+- **Receive Thnks data in Salesforce** → Capture all Thnks activity from web, mobile, and extension usage
 
 ## What Does It Do?
 
-The Thnks Salesforce AppExchange application provides enhanced reporting capabilities by creating a Thnks record within Salesforce whenever a Thnks transaction is initiated.
-The data model in Salesforce is simple: there is a single object called “Thnks”, which is created shortly after a Thnks is sent out, and then updated as the status changes. Additionally, there is automation that is controlled within the Salesforce App (which you may customize the logic for) which determines what records in Salesforce a Thnks is associated with (Lead, Contact, Account and Opportunity). You may also configure a Task to be created so you can have visibility of Thnks in Salesforce’s standard activity feed.
+The Thnks Salesforce AppExchange application provides comprehensive Thnks management within your Salesforce environment through two main approaches:
 
-Date/times are stamped on the Thnks record as the Thnks is delivered, undelivered, opened, redeemed, expired, refunded and/or donated.
+### 1. Send Thnks from Salesforce
+
+- **Direct Sending**: Click "Send a Thnks" button on Contact, Account, or Opportunity pages
+- **Automated Workflows**: Configure Salesforce Flows to automatically trigger Thnks based on business events
+- **Approval Processes**: Set up approval workflows for Thnks requests before they're sent
+
+### 2. Track Thnks Activity
+
+- **Comprehensive Reporting**: All Thnks activity is captured and associated with relevant Salesforce records
+- **Real-time Updates**: Status changes are automatically tracked with timestamps
+- **ROI Insights**: Custom field mapping provides detailed ROI analytics
+
+### Data Model
+
+The application uses two primary objects:
+
+- **Thnks Object**: Tracks all sent Thnks with status updates and associations
+- **Thnks Request Object**: Manages workflow-triggered Thnks with approval processes
+
+Both objects automatically associate with Lead, Contact, Account, and Opportunity records using intelligent matching logic. Task creation provides visibility in Salesforce's standard activity feed.
 
 ## How Does It Work?
 
-When a Thnks user sends a Thnks, whether it’s via the web/mobile app, Chrome extension, an automated webhook, or a scheduled campaign, a record with the transaction information is created as a Thnks in Salesforce. As part of the creation of the Thnks record, and depending on what settings you have customized, the following may happen:
+### Sending Thnks from Salesforce
 
-* Thnks is associated with a Lead or Contact (never both)
+**Direct Sending Process:**
 
-  * If Thnks is associated with a Contact, Thnks is associated with an open Opportunity if that Contact is tied to an Opportunity via the Opportunity Contact Role object
+1. User clicks "Send a Thnks" button on a Salesforce record
+2. Thnks interface opens in an embedded iframe
+3. Recipient information is automatically populated from the Salesforce record
+4. User selects Thnks, adds message, and sends
+5. Thnks record is created in Salesforce with full tracking
 
-  * If Thnks is associated with a Contact, the Account that the Contact belongs to is also associated with the Thnks record
+**Automated Workflow Process:**
 
-  * It is also possible that no association is made, if no matching Contact or Lead is found
+1. Business event triggers a Salesforce Flow (e.g., demo scheduled, deal closed)
+2. Flow creates a Thnks Request record with recipient and Thnks details
+3. If auto-approval is enabled, Thnks is sent immediately
+4. If manual approval is required, request goes to approval queue
+5. Once approved, Thnks is sent and tracked in Salesforce
 
-* A Task is created, associated with the Thnks record as the WhatId, and the Contact as the WhoId (more on this below)
+### Tracking Thnks Activity
 
-* As the Thnks transaction moves through various statuses (e.g. Opened, Redeemed), the Status field on the Thnks record will update accordingly, and the date and time at which this occurs will be stamped on dedicated fields
+When a Thnks is sent from any source (Salesforce, web app, mobile app, Chrome extension, etc.), a Thnks record is created in Salesforce with:
 
-* Other important details about the Thnks are included in the sync and placed on fields on the Thnks object such as the sender, various pricing fields, the Transaction ID, a link to the Thnks, and any custom fields you configure within the Thnks App.
+**Automatic Associations:**
+
+- Lead or Contact matching (never both)
+- Account association (when Contact is matched)
+- Opportunity association (when Contact has open Opportunity via Contact Role)
+- Task creation for activity timeline visibility
+
+**Real-time Status Updates:**
+
+- Status field updates as Thnks progresses (Delivered, Opened, Redeemed, etc.)
+- Timestamp fields capture exact date/time of each status change
+- ROI field data synchronization for custom analytics
+
+**Comprehensive Data Capture:**
+
+- Sender information and pricing details
+- Transaction ID and direct link to Thnks
+- Custom ROI fields configured in your Thnks account
+- Integration with Salesforce reporting and dashboards
