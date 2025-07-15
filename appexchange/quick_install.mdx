@@ -1,0 +1,148 @@
+---
+title: 'Quick Install'
+description: 'Get up and running with Thnks v1.8 in minutes. This streamlined guide covers the essential steps for new installations.'
+---
+
+## Prerequisites
+
+Before starting, ensure you have:
+
+- **Salesforce Edition**: Professional, Enterprise, Unlimited, or Developer
+- **Admin Access**: System Administrator permissions in your Salesforce org
+- **Thnks Account**: Active Thnks organization account
+- **Email Matching**: User email addresses must match between Thnks and Salesforce accounts
+
+<Note>
+**New in v1.8**: Users must have matching email addresses between their Thnks and Salesforce accounts to use the "Send Thnks" feature within Salesforce.
+</Note>
+
+## 5-Step Quick Install
+
+### Step 1: Configure Thnks Platform Connection
+
+Contact your Thnks Account Manager or [support@thnks.com](mailto:support@thnks.com) to:
+- Enable Salesforce integration on your Thnks account
+- Choose your connection method:
+  - **User Connection**: Each user enables their own Thnks ↔ Salesforce connection
+  - **Org Connection**: Single admin-managed connection for all users
+
+### Step 2: Install the Salesforce App
+
+1. Navigate to the [Thnks AppExchange listing](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT)
+2. Click **"Get It Now"** and select your Salesforce instance
+3. Choose installation option:
+   - **Install for Admins Only** (recommended for initial setup)
+   - **Install for Specific Profiles** (configure access levels)
+4. Complete the installation process
+
+### Step 3: Configure Organization Token
+
+<Warning>
+**Required for Send Thnks Feature**: You must obtain an Organization Token from Thnks to enable sending Thnks from within Salesforce.
+</Warning>
+
+1. Contact your Thnks Account Manager or [support@thnks.com](mailto:support@thnks.com) to get your Organization Token
+2. In Salesforce, go to **App Launcher** → search "Thnks" → **"Manage Thnks Settings"**
+3. Navigate to the **"Send Thnks"** tab
+4. Enter your Organization Token in the **"Thnks Organization Token"** field
+5. Configure additional settings:
+   - **Thnks API Endpoint**: `https://api.thnks.com/` (default)
+   - **Thnks Sending Interface URL**: `https://app.thnks.com/#/auto-login` (default)
+   - **Enable 'Send Thnks' Feature**: Check this box
+   - **Default New Requests to Auto-Approve**: Check if you want automatic approval (Only applies to Thnks Requests send via Flow automation, not Thnks sent via iframe)
+
+### Step 4: Add Send Thnks Component to Lightning Pages
+
+To enable the "Send a Thnks" button on record pages:
+
+1. Navigate to **Setup** → **Object Manager**
+2. Select **Contact**, **Account**, or **Opportunity**
+3. Go to **Lightning Record Pages**
+4. Edit the relevant page layout
+5. In Lightning App Builder:
+   - Drag the **"Send Thnks"** component to your desired location
+   - Configure component settings as needed
+   - **Save** and **Activate** the page
+
+Repeat for all object types where you want the Send Thnks functionality.
+
+### Step 5: Add Thnks Related Lists (Optional)
+
+For better visibility of Thnks activity:
+
+1. **Setup** → **Object Manager** → Select object (Contact, Account, Lead, Opportunity)
+2. **Page Layouts** → Select the relevant layout
+3. **Related Lists** section → Drag **"Thnks"** into the layout
+4. Configure the related list fields and **Save**
+
+## Post-Installation Checklist
+
+<Steps>
+  <Step title="Verify Installation">
+    - [ ] Thnks app appears in App Launcher
+    - [ ] "Manage Thnks Settings" is accessible
+    - [ ] All tabs (Contact Settings, Leads Settings, etc.) are visible
+  </Step>
+  
+  <Step title="Configure Permissions">
+    - [ ] Assign **"Thnks Admin"** permission set to administrators
+    - [ ] Assign **"Thnks Standard User"** permission set to end users
+    - [ ] Test access levels are working correctly
+  </Step>
+  
+  <Step title="Test Send Thnks Feature">
+    - [ ] "Send a Thnks" button appears on configured record pages
+    - [ ] Iframe loads correctly when clicked
+    - [ ] User can authenticate and send test Thnks
+    - [ ] Thnks record is created in Salesforce after sending
+  </Step>
+</Steps>
+
+## Testing Your Installation
+
+### Test Direct Sending
+1. Navigate to a Contact record
+2. Click **"Send a Thnks"** button
+3. Verify the Thnks interface loads in the iframe
+4. Send a test Thnks to yourself
+5. Confirm the Thnks record appears in Salesforce
+
+### Test Data Synchronization
+1. Send a Thnks from the Thnks web app or mobile app
+2. Verify the Thnks record is created in Salesforce
+3. Check that the record is associated with the correct Contact/Lead
+4. Confirm status updates as the Thnks progresses
+
+## Common Issues & Solutions
+
+<AccordionGroup>
+  <Accordion title="Send Thnks button not appearing">
+    - Verify the Lightning component was added to the page layout
+    - Check user has proper permission sets assigned
+    - Ensure Organization Token is configured correctly
+  </Accordion>
+  
+  <Accordion title="Authentication error in iframe">
+    - Confirm user's Salesforce email matches their Thnks account email
+    - Verify user has an active Thnks account
+    - Check Organization Token is valid and properly configured
+  </Accordion>
+  
+  <Accordion title="Thnks records not syncing">
+    - Verify Thnks account has Salesforce integration enabled
+    - Check Contact/Lead matching settings in Manage Thnks Settings
+    - Confirm user connection is properly established
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+After successful installation:
+- Review the [Install Guide](install-guide) for detailed configuration options
+- Configure [automated workflows](data-model#automated-workflows) using Salesforce Flows
+- Set up [custom field mapping](install-guide#fields-mapping) for ROI tracking
+- Train users on the new Send Thnks functionality
+
+## Support
+
+Need help? Contact us at [support@thnks.com](mailto:support@thnks.com) or reach out to your Thnks Account Manager.
