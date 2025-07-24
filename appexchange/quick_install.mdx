@@ -1,6 +1,6 @@
 ---
-title: 'Quick Install'
-description: 'Get up and running with Thnks v1.8 in minutes. This streamlined guide covers the essential steps for new installations.'
+title: "Quick Install"
+description: "Get up and running with Thnks v1.8 in minutes. This streamlined guide covers the essential steps for new installations."
 ---
 
 ## Prerequisites
@@ -13,14 +13,15 @@ Before starting, ensure you have:
 - **Email Matching**: User email addresses must match between Thnks and Salesforce accounts
 
 <Note>
-**New in v1.8**: Users must have matching email addresses between their Thnks and Salesforce accounts to use the "Send Thnks" feature within Salesforce.
+  **New in v1.8**: Users must have matching email addresses between their Thnks and Salesforce accounts to use the "Send Thnks" feature within Salesforce.
 </Note>
 
 ## 5-Step Quick Install
 
 ### Step 1: Configure Thnks Platform Connection
 
-Contact your Thnks Account Manager or [support@thnks.com](mailto:support@thnks.com) to:
+Contact your Thnks Account Manager or [integrations@thnks.com](mailto:support@thnks.com) to:
+
 - Enable Salesforce integration on your Thnks account
 - Choose your connection method:
   - **User Connection**: Each user enables their own Thnks ↔ Salesforce connection
@@ -38,10 +39,10 @@ Contact your Thnks Account Manager or [support@thnks.com](mailto:support@thnks.c
 ### Step 3: Configure Organization Token
 
 <Warning>
-**Required for Send Thnks Feature**: You must obtain an Organization Token from Thnks to enable sending Thnks from within Salesforce.
+  **Required for Send Thnks Feature**: You must obtain an Organization Token from Thnks to enable sending Thnks from within Salesforce.
 </Warning>
 
-1. Contact your Thnks Account Manager or [support@thnks.com](mailto:support@thnks.com) to get your Organization Token
+1. Contact your Thnks Account Manager or [integrations@thnks.com](mailto:support@thnks.com) to get your Organization Token
 2. In Salesforce, go to **App Launcher** → search "Thnks" → **"Manage Thnks Settings"**
 3. Navigate to the **"Send Thnks"** tab
 4. Enter your Organization Token in the **"Thnks Organization Token"** field
@@ -79,28 +80,27 @@ For better visibility of Thnks activity:
 
 <Steps>
   <Step title="Verify Installation">
-    - [ ] Thnks app appears in App Launcher
-    - [ ] "Manage Thnks Settings" is accessible
-    - [ ] All tabs (Contact Settings, Leads Settings, etc.) are visible
+    - Thnks app appears in App Launcher
+    - "Manage Thnks Settings" is accessible
+    - All tabs (Contact Settings, Leads Settings, etc.) are visible
   </Step>
-  
   <Step title="Configure Permissions">
-    - [ ] Assign **"Thnks Admin"** permission set to administrators
-    - [ ] Assign **"Thnks Standard User"** permission set to end users
-    - [ ] Test access levels are working correctly
+    - Assign **"Thnks Admin"** permission set to administrators
+    - Assign **"Thnks Standard User"** permission set to end users
+    - Test access levels are working correctly
   </Step>
-  
   <Step title="Test Send Thnks Feature">
-    - [ ] "Send a Thnks" button appears on configured record pages
-    - [ ] Iframe loads correctly when clicked
-    - [ ] User can authenticate and send test Thnks
-    - [ ] Thnks record is created in Salesforce after sending
+    - "Send a Thnks" button appears on configured record pages
+    - Iframe loads correctly when clicked
+    - User can authenticate and send test Thnks
+    - Thnks record is created in Salesforce after sending
   </Step>
 </Steps>
 
 ## Testing Your Installation
 
 ### Test Direct Sending
+
 1. Navigate to a Contact record
 2. Click **"Send a Thnks"** button
 3. Verify the Thnks interface loads in the iframe
@@ -108,6 +108,7 @@ For better visibility of Thnks activity:
 5. Confirm the Thnks record appears in Salesforce
 
 ### Test Data Synchronization
+
 1. Send a Thnks from the Thnks web app or mobile app
 2. Verify the Thnks record is created in Salesforce
 3. Check that the record is associated with the correct Contact/Lead
@@ -121,13 +122,11 @@ For better visibility of Thnks activity:
     - Check user has proper permission sets assigned
     - Ensure Organization Token is configured correctly
   </Accordion>
-  
   <Accordion title="Authentication error in iframe">
     - Confirm user's Salesforce email matches their Thnks account email
     - Verify user has an active Thnks account
     - Check Organization Token is valid and properly configured
   </Accordion>
-  
   <Accordion title="Thnks records not syncing">
     - Verify Thnks account has Salesforce integration enabled
     - Check Contact/Lead matching settings in Manage Thnks Settings
@@ -138,6 +137,7 @@ For better visibility of Thnks activity:
 ## Next Steps
 
 After successful installation:
+
 - Review the [Install Guide](install-guide) for detailed configuration options
 - Configure [automated workflows](data-model#automated-workflows) using Salesforce Flows
 - Set up [custom field mapping](install-guide#fields-mapping) for ROI tracking
@@ -145,4 +145,4 @@ After successful installation:
 
 ## Support
 
-Need help? Contact us at [support@thnks.com](mailto:support@thnks.com) or reach out to your Thnks Account Manager.
+Need help? Contact us at [integrations@thnks.com](mailto:support@thnks.com) or reach out to your Thnks Account Manager.
