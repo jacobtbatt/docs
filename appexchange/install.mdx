@@ -1,6 +1,6 @@
 ---
-title: 'Install Guide'
-description: 'Use the latest version (v1.3) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities.'
+title: "Install Guide"
+description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities."
 ---
 
 ## System Requirements
@@ -20,31 +20,26 @@ In this section, we’ll walk through installing the AppExchange application in 
 
 ### Preparing Your Thnks Account for Salesforce
 
-Contact your Thnks Account Manager (or support@thnks.com) to enable the Salesforce App connection in your organization’s Thnks account.
+Contact your Thnks Account Manager (or [integrations@thnks.com](mailto:support@thnks.com)) to enable the Salesforce App connection in your organization’s Thnks account.
 
 Thnks offers two ways to connect your users’ Thnks activity to Salesforce:
 
-* **User Connection** - each user must enable their own Thnks \<> Salesforce connection via their Thnks account profile.
-
-  * Note: if a user does not enable their connection, their Thnks activity will not appear in Salesforce.
-
-* **Org Connection** - an SF admin can enable a single connection between Thnks and Salesforce. Individual users will not have to perform their own connections.
-
-  * Note: For Thnks activity to appear in Salesforce, the email address of the Thnks user must match the email address of their Salesforce account.
+- **User Connection** - each user must enable their own Thnks \<\> Salesforce connection via their Thnks account profile.
+  - Note: if a user does not enable their connection, their Thnks activity will not appear in Salesforce.
+- **Org Connection** - an SF admin can enable a single connection between Thnks and Salesforce. Individual users will not have to perform their own connections.
+  - Note: For Thnks activity to appear in Salesforce, the email address of the Thnks user must match the email address of their Salesforce account.
 
 ### Installing from the AppExchange
 
-To install Thnks, you’ll need to navigate to the Thnks App listing in the Salesforce AppExchange. [Here](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT\&preview=%222021-02-10T20%3A06%3A08.000Z%22) is a direct link. Click on **“Get It Now”**, make sure you’re logged into the correct account, and a dialog box will appear:
+To install Thnks, you’ll need to navigate to the Thnks App listing in the Salesforce AppExchange. [Here](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT&preview=%222021-02-10T20%3A06%3A08.000Z%22) is a direct link. Click on **“Get It Now”**, make sure you’re logged into the correct account, and a dialog box will appear:
 
 <Steps>
   <Step title="Choose The Instance">
     Select the correct Salesforce instance, and decide whether you want to install in Production or in Sandbox, and proceed.
   </Step>
-
   <Step title="Confirm Details">
     After confirming details and agreeing to the terms and conditions, click “Confirm and Install” to continue.
   </Step>
-
   <Step title="Determine Install Preferences">
     Lastly, determine which users you’d like to initially install the application for.
     We recommend installing for specific profiles or for admins only and reconfiguring as needed.
@@ -57,24 +52,22 @@ To install Thnks, you’ll need to navigate to the Thnks App listing in the Sale
 
 If selecting **“Install for Specific Profiles”**, you will be able to choose one of three options for each individual profile:
 
-* No Access (Users with this profile will not be able to see any Thnks data)
-
-* Thnks Standard User (Users with this profile will be able to view all Thnks data, but will not be able to configure the Thnks settings)
-
-* Thnks Admin (Users with this profile will be able to view and edit all Thnks data, as well as configure the Thnks settings)
+- No Access (Users with this profile will not be able to see any Thnks data)
+- Thnks Standard User (Users with this profile will be able to view all Thnks data, but will not be able to configure the Thnks settings)
+- Thnks Admin (Users with this profile will be able to view and edit all Thnks data, as well as configure the Thnks settings)
 
 <Frame>
   ![Access Levels](/thnks_sf_doc_images/access_levels.png)
 </Frame>
 
-At this point, you should receive an email from Salesforce confirming successful installation and should be redirected to this page with all of your installed packages. You’ve successfully installed the Thnks Salesforce App!
+At this point, you should receive an email from Salesforce confirming successful installation and should be redirected to this page with all of your installed packages. You’ve successfully installed the Thnks Salesforce App\!
 
 ## Upgrading to v1.8
 
 ### Upgrading from v1.3 to v1.8 of the AppExchange Listing
 
 <Note>
-**Good News!** Upgrading from v1.3 to v1.8 is seamless with no breaking changes, new required permissions, or manual data migration needed.
+  **Good News\!** Upgrading from v1.3 to v1.8 is seamless with no breaking changes, new required permissions, or manual data migration needed.
 </Note>
 
 To upgrade your existing Thnks AppExchange app:
@@ -89,16 +82,19 @@ To upgrade your existing Thnks AppExchange app:
 After upgrading, you'll have access to these new features:
 
 **🎯 Send Thnks from Salesforce**
+
 - Add the "Send Thnks" Lightning component to your record pages
-- Configure your Organization Token (contact support@thnks.com)
+- Configure your Organization Token (contact [integrations@thnks.com](mailto:support@thnks.com))
 - Enable users to send Thnks directly from Contact, Account, and Opportunity records
 
 **🔄 Thnks Request Object**
+
 - New object for automated Thnks workflows
 - Salesforce Flow integration capabilities
 - Configurable approval processes
 
 **📊 Enhanced ROI Tracking**
+
 - Improved field mapping for ROI data
 - "Backfill ROI Fields" functionality
 - Better reporting capabilities
@@ -107,17 +103,15 @@ After upgrading, you'll have access to these new features:
 
 <Steps>
   <Step title="Configure Organization Token">
-    1. Contact your Thnks Account Manager or support@thnks.com to obtain your Organization Token
+    1. Contact your Thnks Account Manager or [integrations@thnks.com](mailto:support@thnks.com) to obtain your Organization Token
     2. Navigate to **Manage Thnks Settings** → **Send Thnks** tab
     3. Enter your Organization Token and configure settings
   </Step>
-  
   <Step title="Add Send Thnks Component">
     1. Use Lightning App Builder to add the "Send Thnks" component to your record pages
     2. Configure component settings as needed
     3. Test the functionality with your users
   </Step>
-  
   <Step title="Update Page Layouts (Optional)">
     1. Add Thnks Request related lists to relevant page layouts
     2. Configure new fields if using ROI tracking
@@ -131,11 +125,9 @@ If you have a very old version (v1.1) of the Thnks AppExchange app installed, pl
 
 The main considerations to keep in mind when upgrading from v1.1:
 
-* The Thnks Status Log object will no longer be syncing records (but the old records will remain)
-
-* There will be many new fields on the Thnks object, such as Opportunity and Account lookups, as well as several new date/time fields to replace the need of the Thnks Status Log
-
-* There is now a tab called “Manage Thnks Settings” to configure various settings in the integration (see “Thnks Configuration” section below)
+- The Thnks Status Log object will no longer be syncing records (but the old records will remain)
+- There will be many new fields on the Thnks object, such as Opportunity and Account lookups, as well as several new date/time fields to replace the need of the Thnks Status Log
+- There is now a tab called “Manage Thnks Settings” to configure various settings in the integration (see “Thnks Configuration” section below)
 
 #### Backfilling Thnks Records in 1.3
 
@@ -166,33 +158,31 @@ This will automatically scan all Thnks Status Log records, take the date/time fo
 If after installing the Thnks app following the install instructions above you need to change permissions, the recommended path is by assigning Permission Sets to the appropriate Users. Alternatively, you may also grant permissions to the Thnks objects at the Profile level.
 
 <Steps>
-  <Step title="Enter Setup" />
-
+  <Step title="Enter Setup">
+    
+  </Step>
   <Step title="Click Into Profiles Under the User Section">
     <Frame>
       ![Specific Profiles](/thnks_sf_doc_images/profiles_settings.png)
     </Frame>
   </Step>
-
-  <Step title="Select the Profile You Wish to Change" />
-
+  <Step title="Select the Profile You Wish to Change">
+    
+  </Step>
   <Step title="Click Edit at the Top of the Page">
     <Frame>
       ![Specific Profiles](/thnks_sf_doc_images/standard_user.png)
     </Frame>
   </Step>
-
   <Step title="Scroll Down to “Custom Object Permissions” and Look for “Thnks”">
     <Frame>
       ![Specific Profiles](/thnks_sf_doc_images/custom_object.png)
     </Frame>
   </Step>
-
   <Step title="Check the Various Access You Wish for This Profile to Have (Read, Create, Edit, Delete, View All, Modify All)">
     <Frame>
       ![Specific Profiles](/thnks_sf_doc_images/profile_access.png)
     </Frame>
-
     You can ignore Thnks Status Logs, as this is no longer used in the integration
 
     View All would be the recommended access for the majority of end users
@@ -209,9 +199,8 @@ Alternatively, you can assign a Permission Set to individual users. From Setup, 
 
 There are two Permission Sets to choose from:
 
-* Thnks Admin (grants View/Modify All access to the Thnks object, as well as allowing this User to configure the Thnks settings)
-
-* Thnks Standard User (grants View All access to the Thnks object)
+- Thnks Admin (grants View/Modify All access to the Thnks object, as well as allowing this User to configure the Thnks settings)
+- Thnks Standard User (grants View All access to the Thnks object)
 
 <Frame>
   ![Specific Profiles](/thnks_sf_doc_images/user_permissions.png)
@@ -223,20 +212,20 @@ Once you have Thnks installed in your Salesforce environment, you will want to r
 
 <Frame>
   ![Specific Profiles](/thnks_sf_doc_images/9_dots.png)
+
+  
+  
+
   ![Specific Profiles](/thnks_sf_doc_images/thnks_typing.png)
 </Frame>
 
 There are 5 tabs:
 
-* Contact Settings
-
-* Lead Settings
-
-* Opportunity Settings
-
-* Fields Mapping
-
-* Others
+- Contact Settings
+- Lead Settings
+- Opportunity Settings
+- Fields Mapping
+- Others
 
 <Frame>
   ![Specific Profiles](/thnks_sf_doc_images/thnks_tabs.png)
@@ -252,6 +241,10 @@ However, you can change these so that Thnks matches Contacts based on any other 
 
 <Frame>
   ![Specific Profiles](/thnks_sf_doc_images/contact_settings.png)
+
+  
+  
+
   ![Phone Matching](/thnks_sf_doc_images/contact_phone_match.png)
 </Frame>
 
@@ -284,15 +277,12 @@ The matching logic you use for the Contact has no impact on the matching logic f
 The Opportunity matching is even more simple. There are two things you can configure:
 
 1. Whether or not you wish to match Opportunities
-
 2. Similar to Leads and Contacts, how to decide which Opportunity you wish to match in the scenario that there is more than one matched Opportunity
 
 Opportunities can only be matched if the following criteria are met:
 
 1. A Contact is matched to the Thnks record
-
 2. That Contact is associated with
-
 3. The Opportunity is open
 
 ### Fields Mapping
@@ -315,15 +305,13 @@ Contact your Thnks Account Manager to coordinate the addition of Thnks Required 
 
 The last tab is for miscellaneous settings, which for now consists of two primary features:
 
-* How to handle Thnks when no Lead or Contact match is found
-
-* Syncing Thnks as Activities (Tasks)
+- How to handle Thnks when no Lead or Contact match is found
+- Syncing Thnks as Activities (Tasks)
 
 In the scenario where a Thnks is sent and the phone number or email address used is unable to find a corresponding match with a Salesforce Lead or Contact, then you have one of two options:
 
-* Create Thnks (with no matching Lead or Contact)
-
-* Do not create a Thnks
+- Create Thnks (with no matching Lead or Contact)
+- Do not create a Thnks
 
 <Frame>
   ![Create Thnks](/thnks_sf_doc_images/create_thnks.png)
@@ -331,11 +319,9 @@ In the scenario where a Thnks is sent and the phone number or email address used
 
 The other three fields in this section deal with the creation of Task records:
 
-* First, the Task Syncing field is a simple toggle of whether or not Tasks should be created. If this is checked, a Task will be created and it will be associated with both the Thnks record and a Contact. If the Thnks is associated with a Lead, then only the Thnks record will be associated (Tasks cannot be associated with a Lead and another object). More on the Task fields being set below.
-
-* The Default Task Type field allows you to specify what Type value should be populated on automatically created Tasks.
-
-* The Task Close Status field allows you to specify the status Tasks should be set to when the corresponding Thnks activity is considered complete.
+- First, the Task Syncing field is a simple toggle of whether or not Tasks should be created. If this is checked, a Task will be created and it will be associated with both the Thnks record and a Contact. If the Thnks is associated with a Lead, then only the Thnks record will be associated (Tasks cannot be associated with a Lead and another object). More on the Task fields being set below.
+- The Default Task Type field allows you to specify what Type value should be populated on automatically created Tasks.
+- The Task Close Status field allows you to specify the status Tasks should be set to when the corresponding Thnks activity is considered complete.
 
 ### Send Thnks
 
@@ -353,17 +339,19 @@ When checked, new Thnks Request records created in Salesforce will automatically
 
 **Thnks API Endpoint** (Required)
 The technical API address used by Salesforce to communicate with Thnks. Do not edit this value unless instructed by Thnks Support.
+
 - Default: `https://api.thnks.com/`
 
 **Thnks Sending Interface URL** (Required)
 The URL used to display the Thnks sending interface within Salesforce. Do not edit this value unless instructed by Thnks Support.
+
 - Default: `https://app.thnks.com/#/auto-login`
 
 **Thnks Organization Token** (Required)
 Enter the unique Organization Token provided by Thnks. This token authenticates your Salesforce organization with Thnks, enabling the 'Send Thnks' feature. Salesforce Admins can retrieve this token from the Salesforce Settings page within the Thnks platform.
 
 <Warning>
-**Important**: You must obtain your Organization Token from your Thnks Account Manager or by contacting [support@thnks.com](mailto:support@thnks.com) before users can send Thnks from within Salesforce.
+  **Important**: You must obtain your Organization Token from your Thnks Account Manager or by contacting [support@thnks.com](mailto:support@thnks.com) before users can send Thnks from within Salesforce.
 </Warning>
 
 ## Adding Send Thnks Component to Lightning Pages
@@ -377,14 +365,12 @@ To enable the "Send a Thnks" button on your Salesforce records:
     3. Navigate to **Lightning Record Pages**
     4. Select the page layout you want to edit
   </Step>
-  
   <Step title="Add the Send Thnks Component">
     1. In the Lightning App Builder, look for the **"Send Thnks"** component in the component palette
     2. Drag and drop it to your desired location on the page
     3. Configure any component-specific settings
     4. Click **Save**
   </Step>
-  
   <Step title="Activate the Page">
     1. Click **Activation** to set the page as the default for your users
     2. Choose the appropriate profiles and record types
