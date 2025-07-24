@@ -1,8 +1,7 @@
 ---
-title: 'Thnks Request Flow Setup Guide'
-description: 'Learn how to create automated Thnks workflows using Salesforce Flows and the Thnks Request object. Perfect for marketing automation and sales cadences.'
+title: "Thnks Request Flow Setup Guide"
+description: "Learn how to create automated Thnks workflows using Salesforce Flows and the Thnks Request object. Perfect for marketing automation and sales cadences."
 ---
-
 
 ## Overview
 
@@ -42,6 +41,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 **Purpose**: Retrieve information about the triggering event or record.
 
 **Configuration**:
+
 - **Element Type**: Get Records
 - **Label**: "Get Task Information"
 - **API Name**: "Get_Task_Information"
@@ -61,6 +61,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 **Purpose**: Identify and retrieve the Contact who will receive the Thnks.
 
 **Configuration**:
+
 - **Element Type**: Get Records
 - **Label**: "Get Scheduled Recipient Info"
 - **API Name**: "Get_Scheduled_Recipient_Info"
@@ -79,6 +80,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 **Purpose**: Create the Thnks Request record that will trigger the actual Thnks sending.
 
 **Configuration**:
+
 - **Element Type**: Create Records
 - **Label**: "Create Scheduled Thnks Request"
 - **API Name**: "Create_Scheduled_Thnks_Request"
@@ -86,6 +88,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 - **How to Set Record Field Values**: Manually
 
 **Required Field Mappings**:
+
 - **Owner ID**: `Task from Get Task Information > Assigned To ID`
 - **Account**: `Get Scheduled Recipient Info > Account ID`
 - **Gift Id**: `34226` (or your specific Thnks ID from Thnks catalog)
@@ -93,7 +96,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 - **Request Status**: `New`
 
 <Note>
-**Thnks ID Reference**: The Thnks ID (34226 in this example) corresponds to a specific item in your Thnks catalog. Contact your Thnks Account Manager to get the correct Thnks IDs for your automation.
+  **Thnks ID Reference**: The Thnks ID (34226 in this example) corresponds to a specific item in your Thnks catalog. Contact your Thnks Account Manager to get the correct Thnks IDs for your automation.
 </Note>
 
 ### Step 5: Create Recipients
@@ -105,6 +108,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 **Purpose**: Create the recipient record that links the Thnks Request to the specific Contact.
 
 **Configuration**:
+
 - **Element Type**: Create Records
 - **Label**: "Create Recipients"
 - **API Name**: "Create_Recipients"
@@ -112,6 +116,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 - **How to Set Record Field Values**: Manually
 
 **Field Mappings**:
+
 - **Email**: `Get Scheduled Recipient Info > Email`
 - **First Name**: `Get Scheduled Recipient Info > First Name`
 - **Last Name**: `Get Scheduled Recipient Info > Last Name`
@@ -127,15 +132,17 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 **Purpose**: Create a personalized message for the Thnks.
 
 **Text Template Configuration**:
+
 - **API Name**: "Message"
 - **Body**: Create your personalized message using merge fields
-- **Example**: "Hi {!Get_Scheduled_Recipient_Info.FirstName}, thank you for your time today. Looking forward to our next conversation!"
+- **Example**: "Hi \!Get_Scheduled_Recipient_Info.FirstName, thank you for your time today. Looking forward to our next conversation\!"
 
 ## Common Flow Triggers
 
 ### Marketing Automation Examples
 
 **Survey Completion**
+
 ```
 Trigger: Record Created on Survey Response
 Condition: Survey Type = "Customer Satisfaction"
@@ -143,6 +150,7 @@ Action: Send thank you Thnks
 ```
 
 **Event Registration**
+
 ```
 Trigger: Contact field updated
 Condition: Event Status = "Registered"
@@ -150,6 +158,7 @@ Action: Send welcome Thnks
 ```
 
 **Email Engagement**
+
 ```
 Trigger: Marketing Cloud Journey
 Condition: Email Opened + Link Clicked
@@ -159,6 +168,7 @@ Action: Send engagement Thnks
 ### Sales Cadence Examples
 
 **Demo Scheduled**
+
 ```
 Trigger: Event Created
 Condition: Subject contains "Demo" AND Type = "Meeting"
@@ -166,6 +176,7 @@ Action: Send anticipation Thnks
 ```
 
 **Deal Closed Won**
+
 ```
 Trigger: Opportunity Updated
 Condition: Stage = "Closed Won"
@@ -173,6 +184,7 @@ Action: Send celebration Thnks
 ```
 
 **Contract Signed**
+
 ```
 Trigger: Contract Status Updated
 Condition: Status = "Signed"
@@ -190,6 +202,7 @@ For automated sending without manual intervention:
 3. All new Thnks Requests will be processed immediately
 
 **Best for**:
+
 - Marketing automation
 - Standard Thnks amounts
 - High-volume campaigns
@@ -204,6 +217,7 @@ For review before sending:
 3. Requests go to approval queue for review
 
 **Best for**:
+
 - Sales cadences requiring personalization
 - High-value Thnks
 - Executive outreach
@@ -222,12 +236,14 @@ For review before sending:
 ### Debugging Tips
 
 **Common Issues**:
+
 - **No recipients found**: Check your Contact filter conditions
 - **Missing field mappings**: Ensure all required fields are populated
 - **Auto-approval not working**: Verify organization settings
 - **Thnks ID errors**: Confirm Thnks ID exists in your Thnks catalog
 
 **Debug Steps**:
+
 1. Use Flow Builder's debug feature
 2. Check Flow Interview details for errors
 3. Review Thnks Request records for status updates
@@ -236,18 +252,21 @@ For review before sending:
 ## Best Practices
 
 ### Flow Design
+
 - Use clear, descriptive names for flow elements
 - Add descriptions to complex filter conditions
 - Test thoroughly before activating
 - Monitor flow performance and error rates
 
 ### Data Management
+
 - Ensure Contact data quality (valid emails)
 - Use consistent Thnks IDs across flows
 - Implement proper error handling
 - Consider volume limits for high-frequency triggers
 
 ### Approval Strategy
+
 - Use auto-approval for standardized campaigns
 - Require manual approval for personalized outreach
 - Set up proper approval routing
@@ -285,6 +304,6 @@ For sending to multiple contacts:
 
 - **Thnks Account Manager**: For Thnks ID references and catalog questions
 - **Salesforce Flows Documentation**: For advanced flow building techniques
-- **Thnks Support**: [support@thnks.com](mailto:support@thnks.com) for integration assistance
+- **Thnks Support**: [integrations@thnks.com](mailto:support@thnks.com) for integration assistance
 
 Need help setting up your flows? Contact your Thnks Account Manager or reach out to support for personalized assistance with your automation strategy.
