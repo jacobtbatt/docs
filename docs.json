@@ -20,27 +20,7 @@
               "get-started/request"
             ]
           },
-          {
-            "group": "Start An Integration",
-            "pages": [
-              "thnks_integrations/overview",
-              "thnks_integrations/hubspot",
-              "thnks_integrations/make",
-              "thnks_integrations/marketo",
-              "thnks_integrations/msft_power_automate",
-              "thnks_integrations/n8n",
-              "thnks_integrations/salesforce",
-              "thnks_integrations/workato",
-              "thnks_integrations/zapier"
-            ]
-          },
-          {
-            "group": "Browser Extension",
-            "pages": [
-              "browser-extension/overview"
-            ]
-          },
-          {
+                    {
             "group": "Salesforce AppExchange",
             "pages": [
               "appexchange/overview",
@@ -50,6 +30,25 @@
               "appexchange/objectdictionary",
               "appexchange/faq",
               "appexchange/roi_guide"
+            ]
+          },
+          {
+            "group": "Start An Integration",
+            "pages": [
+              "thnks_integrations/overview",
+              "thnks_integrations/hubspot",
+              "thnks_integrations/make",
+              "thnks_integrations/marketo",
+              "thnks_integrations/msft_power_automate",
+              "thnks_integrations/n8n",
+              "thnks_integrations/workato",
+              "thnks_integrations/zapier"
+            ]
+          },
+          {
+            "group": "Browser Extension",
+            "pages": [
+              "browser-extension/overview"
             ]
           },
           {
