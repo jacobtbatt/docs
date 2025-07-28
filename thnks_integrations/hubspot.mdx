@@ -1,145 +1,220 @@
 ---
 title: "HubSpot"
-description: "This integration allows you to set up a workflow in HubSpot that automatically triggers sending a Thnks through an action."
+description: "Integrate Thnks with HubSpot workflows using custom code actions to automatically send gifts."
 ---
 
-# Configuring a Workflow in HubSpot to Automatically Send a Thnks
+# Integrating Thnks with HubSpot Using Python
 
-This guide walks you through automatically triggering the sending of a Thnks as part of a HubSpot workflow.
+This guide shows you how to automatically send Thnks gifts through HubSpot workflows using custom code actions with Python.
 
 ## Prerequisites
 
-* Access to the Thnks API.
+* HubSpot Operations Hub Professional or Enterprise license (required for custom code actions)
+* Thnks API Key (Authorization Token)
+* Thnks Gift ID for the gift you want to send
+* Access to HubSpot Workflows
 
-* Thnks API Key (Authorization Token).
+## Python Code for HubSpot Custom Code Action
 
-* URL for Thnks API endpoint.
+Use the following Python code in your HubSpot custom code action to send Thnks gifts:
 
-* Hubspot Operations Hub Professional, Enterprise License
+```python
+import requests
 
-## Setup
+def main(event):
+    url = "https://api.thnks.com/api/v1/gift_requests"
+    
+    # Get data from event
+    email = event["inputFields"]["email"]
+    first_name = event["inputFields"]["firstname"]
+    owner_name = event["inputFields"]["hubspot_owner_id"]
+    
+    message = f"{first_name}, thank you for having a meeting with me. Please enjoy this box of delicious cookies as a token of my appreciation. I look forward to talking about your goals and objectives soon. - {owner_name}"
+    
+    payload = {
+        "gift_id": <GIFT ID>,
+        "recipients": [
+            {
+                "email": email,
+                "first_name": first_name,
+                "last_name": event["inputFields"]["lastname"],
+                "message": message,
+                "gift_redeem_type": "email"
+            }
+        ]
+    }
+    
+    headers = {
+        "Authorization": "<API TOKEN>",
+        "Content-Type": "application/json"
+    }
+    
+    try:
+        response = requests.request("POST", url, json=payload, headers=headers)
+        response.raise_for_status()  # Raise an exception for 4XX/5XX responses
+        result = response.json()
+        
+        # Return the output data for later workflow actions
+        return {
+            "outputFields": {
+                "email": email,
+                "response_status": response.status_code,
+                "response_data": str(result)
+            }
+        }
+    except Exception as e:
+        # Handle errors
+        return {
+            "outputFields": {
+                "email": email,
+                "error": str(e)
+            }
+        }
+```
+
+## Setup Instructions
 
 <Steps>
-  <Step title="Prepare Webhook Data">
-    Before setting up the webhook, ensure you have the following details:
-
-    <Steps>
-      <Step title="Thnks API URL">
-        `https://api.thnks.com/api/v1/gift_requests`
-      </Step>
-
-      <Step title="HTTP Method">
-        `POST`
-      </Step>
-
-      <Step title="Data (JSON format)">
-        Here’s an example of the JSON payload you will need to include in the request. You’ll need to replace the placeholders with the appropriate HubSpot contact tokens:
-
-        ```json
-        {  
-          "gift_id": <GIFT_ID>,  
-          "recipients": [  
-            {  
-              "email": "{{contact.email}}",  
-              "first_name": "{{contact.firstname}}",  
-              "last_name": "{{contact.lastname}}",  
-              "message": "Thank you for your time and support!",  
-              "gift_redeem_type": "email"  
-            }  
-          ]  
-        }  
-        ```
-
-        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
-
-        * Use HubSpot tokens (e.g., `{{contact.email}}`) to populate dynamic contact information.
-      </Step>
-
-      <Step title="Headers">
-        You will need to add the following headers in the webhook:
-
-        * **Content-Type**: `application/json`
-
-        * **Authorization**: Your Thnks API key (Authorization Token).
-      </Step>
-    </Steps>
+  <Step title="Create or Edit a HubSpot Workflow">
+    1. Log into HubSpot and navigate to **Automation** > **Workflows**
+    2. Create a new workflow or edit an existing one
+    3. Choose your enrollment trigger (e.g., after a meeting is logged, contact property change, etc.)
   </Step>
 
-  <Step title="Create a Workflow in HubSpot">
-    <Steps>
-      <Step title="Log into HubSpot and navigate to Workflows">
-        Go to the HubSpot Workflows tool in your account.
-      </Step>
-
-      <Step title="Create a New Workflow or Edit an Existing One">
-        * Choose whether to create a new workflow or edit an existing one.
-
-        * Define the workflow trigger criteria, such as `Contact enrollment` or any custom property change.
-      </Step>
-
-      <Step title="Add the Webhook Action">
-        * In the workflow editor, click **+** to add an action.
-
-        * Select **Trigger a Webhook**.
-
-        * Configure the webhook as follows:
-
-          * **Webhook URL**: `https://api.thnks.com/api/v1/gift_requests`
-
-          * **Method**: `POST`
-
-          * **Request Body**: Add the JSON template mentioned above, adjusting it with HubSpot tokens.
-
-          * **Headers**:
-
-            * **Content-Type**: `application/json`
-
-            * **Authorization**: Paste your Thnks API Key.
-
-        * Save the webhook configuration.
-      </Step>
-    </Steps>
+  <Step title="Add a Custom Code Action">
+    1. In the workflow editor, click the **+** button to add an action
+    2. Select **Custom code** from the action options
+    3. Choose **Python 3.9** as the language
   </Step>
 
-  <Step title="Test and Activate the Workflow">
-    <Steps>
-      <Step title="Run a Test">
-        Test the workflow using a test contact to ensure the webhook triggers correctly.
-      </Step>
-
-      <Step title="Check Response Logs">
-        Verify the response from Thnks in the webhook execution logs within HubSpot.
-      </Step>
-
-      <Step title="Activate the Workflow">
-        Once verified, activate the workflow for live use.
-      </Step>
-    </Steps>
+  <Step title="Configure Input Fields">
+    Set up the following input fields in the custom code action:
+    
+    * `email` - Contact's email address
+    * `firstname` - Contact's first name
+    * `lastname` - Contact's last name
+    * `hubspot_owner_id` - The HubSpot owner's name or ID
+    
+    Map these to the appropriate contact properties using the dropdown menus.
   </Step>
 
-  <Step title="Best Practices">
-    <Steps>
-      <Step title="Error Handling">
-        Include error handling in your workflow to manage cases where the webhook might fail, such as retry mechanisms.
-      </Step>
+  <Step title="Add the Python Code">
+    1. Copy the Python code provided above
+    2. Paste it into the code editor
+    3. Replace the placeholders:
+       * Replace `<GIFT ID>` with your actual Thnks gift ID (e.g., `12345`)
+       * Replace `<API TOKEN>` with your Thnks API authorization token
+  </Step>
 
-      <Step title="Security">
-        Ensure your API Key is securely stored and not exposed in public or shared workflows.
-      </Step>
+  <Step title="Configure Output Fields">
+    The code returns the following output fields that you can use in subsequent workflow actions:
+    
+    * `email` - The recipient's email address
+    * `response_status` - HTTP status code from the API call
+    * `response_data` - Full response from the Thnks API
+    * `error` - Error message if the request fails
+  </Step>
 
-      <Step title="Testing">
-        Test the workflow extensively with different contact scenarios to ensure all tokens and data mapping work as expected.
-      </Step>
-    </Steps>
+  <Step title="Test the Workflow">
+    1. Save the custom code action
+    2. Use the **Test** feature to run the workflow with a test contact
+    3. Check the workflow execution logs to verify the gift was sent successfully
+    4. Look for a 200 or 201 status code in the response
+  </Step>
+
+  <Step title="Activate the Workflow">
+    Once testing is successful, turn on the workflow to start automatically sending Thnks gifts based on your trigger criteria.
   </Step>
 </Steps>
 
-Following this process, you can automatically trigger a Thnks gift to be sent as part of a HubSpot workflow using webhooks.
+## Customization Options
+
+### Dynamic Messages
+
+You can customize the message using any HubSpot contact properties. For example:
+
+```python
+# Use company name in the message
+company_name = event["inputFields"]["company"]
+message = f"Hi {first_name}, thank you for taking the time to discuss how {company_name} can benefit from our solutions. Please enjoy this gift! - {owner_name}"
+```
+
+### Different Gifts for Different Scenarios
+
+You can use conditional logic to send different gifts:
+
+```python
+# Send different gifts based on deal size
+deal_amount = event["inputFields"]["deal_amount"]
+if deal_amount > 50000:
+    gift_id = 12345  # Premium gift
+else:
+    gift_id = 67890  # Standard gift
+```
+
+### Multiple Recipients
+
+To send to multiple recipients, expand the recipients array:
+
+```python
+payload = {
+    "gift_id": <GIFT ID>,
+    "recipients": [
+        {
+            "email": email,
+            "first_name": first_name,
+            "last_name": event["inputFields"]["lastname"],
+            "message": message,
+            "gift_redeem_type": "email"
+        },
+        {
+            "email": event["inputFields"]["manager_email"],
+            "first_name": event["inputFields"]["manager_firstname"],
+            "last_name": event["inputFields"]["manager_lastname"],
+            "message": "Thank you for your team's time!",
+            "gift_redeem_type": "email"
+        }
+    ]
+}
+```
+
+## Error Handling
+
+The code includes error handling to catch and report issues:
+
+* Network errors
+* Invalid API credentials
+* Missing required fields
+* API rate limits
+
+Check the workflow execution history to see any errors returned in the `error` output field.
+
+## Best Practices
+
+1. **Test thoroughly** - Always test with a small group before rolling out to all contacts
+2. **Secure your API key** - Never share your Thnks API token
+3. **Monitor usage** - Keep track of gifts sent to manage your Thnks account balance
+4. **Use delays** - Consider adding delays between enrollment and gift sending for better timing
+5. **Add conditions** - Use workflow branches to send gifts only for qualified contacts
+
+## Troubleshooting
+
+### Common Issues
+
+* **401 Unauthorized** - Check your API token is correct and active
+* **400 Bad Request** - Verify all required fields are populated and gift ID is valid
+* **Network errors** - Ensure HubSpot can reach the Thnks API endpoint
+* **Missing data** - Confirm all input fields are mapped to existing contact properties
+
+### Debug Tips
+
+1. Use the `print()` function to log values during testing
+2. Check the workflow history for detailed execution logs
+3. Verify your gift ID is active in your Thnks account
+4. Test with your own email first before sending to contacts
 
 ## References
 
-* [Using Webhooks in HubSpot Workflows](https://knowledge.hubspot.com/workflows/how-do-i-use-webhooks-with-hubspot-workflows)
-
+* [HubSpot Custom Code Actions Documentation](https://knowledge.hubspot.com/workflows/use-custom-code-in-workflows)
 * [Thnks API Documentation](/api-reference/endpoint/create_gift_request)
-
-* [HubSpot Workflow Tool Overview](https://knowledge.hubspot.com/workflows/create-workflows)
+* [HubSpot Workflow Best Practices](https://knowledge.hubspot.com/workflows/workflow-best-practices)
