@@ -1,0 +1,130 @@
+---
+title: "Overview"
+description: "The Thnks HubSpot Integration enables seamless Thnks management and automatic transaction tracking directly within your HubSpot CRM. Send Thnks, track engagement, and measure ROI without leaving HubSpot."
+---
+
+<Note>
+  **Preview Release**: The Thnks HubSpot Integration is currently in preview. Contact your Thnks Account Manager or [integrations@thnks.com](mailto:integrations@thnks.com) for access.
+</Note>
+
+The Thnks HubSpot Integration brings the power of gratitude-based engagement directly into your CRM workflow. With automatic transaction synchronization, real-time status tracking, and native HubSpot UI components, your team can manage the entire Thnks lifecycle without switching between platforms.
+
+## Key Features
+
+**🔄 Automatic Transaction Sync**
+
+- Hourly synchronization of all Thnks transactions to HubSpot
+- Historical backfill of past transactions on first connection
+- Real-time status updates (Sent, Delivered, Opened, Redeemed, Refunded)
+- No manual data entry required
+
+**📊 Comprehensive Tracking**
+
+- Custom Thnks object in HubSpot stores complete Thnks history
+- Auto-association with Contacts, Companies, and Deals
+- Track Thnks sent and received per contact
+- Full visibility into Thnks engagement metrics
+
+**📈 ROI & Analytics**
+
+- Portal-level statistics and reporting
+- Total Thnks sent, total value, and popular Thnks types
+- Thnks status breakdown and engagement tracking
+- Native HubSpot reporting integration
+
+## How It Works
+
+### Automatic Synchronization
+
+Once connected, the integration automatically synchronizes your Thnks activity with HubSpot:
+
+1. **Initial Backfill**: All historical Thnks transactions are imported into HubSpot as custom object records
+2. **Hourly Sync**: New transactions are synchronized every hour automatically
+3. **Status Updates**: Thnks status changes are tracked and updated in real-time
+4. **Auto-Association**: Thnks records are automatically linked to matching Contacts and Deals based on email addresses
+
+### Data Flow
+
+```
+Thnks Platform (Web, Mobile, Extension)
+              ↓
+     Automatic Sync Service
+              ↓
+    HubSpot Custom Objects
+              ↓
+┌─────────────────────────────────┐
+│  Contact Records                │
+│  Company Records                │
+│  Deal Records                   │
+│  HubSpot Reports & Dashboards   │
+└─────────────────────────────────┘
+```
+
+### What Gets Synced
+
+Each Thnks transaction synced to HubSpot includes:
+
+| Field | Description |
+|-------|-------------|
+| Gift Name | The name of the Thnks Thnks sent |
+| Gift Amount | Dollar value of the Thnks |
+| Sender | Name and email of the sender |
+| Recipient | Name and email of the recipient |
+| Status | Current status (Sent, Delivered, Opened, Redeemed, etc.) |
+| Message | Personal message included with the Thnks |
+| Sent Date | When the Thnks was sent |
+| Status Dates | Timestamps for each status change |
+| Tracking URL | Direct link to the Thnks transaction |
+
+## Integration Benefits
+
+### For Sales Teams
+
+- **Relationship Building**: Track all Thnks touchpoints with prospects and customers
+- **Pipeline Insights**: See which deals have received Thnks and their engagement
+- **Activity Visibility**: Thnks appear in contact activity timelines
+
+### For Marketing Teams
+
+- **Campaign Tracking**: Measure Thnks-based campaign effectiveness
+- **Engagement Metrics**: Track open and redemption rates
+- **Attribution**: Link Thnks to specific campaigns or initiatives
+- **Reporting**: Build custom reports on Thnks activity
+
+### For Operations Teams
+
+- **Automated Data Flow**: Eliminate manual data entry
+- **Data Accuracy**: Single source of truth for Thnks data
+- **Compliance**: Complete audit trail of all Thnks activity
+- **Scalability**: Support growing teams without additional admin overhead
+
+## Prerequisites
+
+Before setting up the integration, ensure you have:
+
+- **Thnks Account**: Enterprise or Enterprise+ plan with HubSpot integration enabled
+- **HubSpot Account**: Professional or Enterprise tier (required for custom objects)
+- **Admin Access**: HubSpot Super Admin permissions for initial setup
+- **Matching Emails**: User email addresses should match between Thnks and HubSpot
+
+## Next Steps
+
+<Steps>
+  <Step title="Install the Integration">
+    Follow the [Installation Guide](/hubspot/install) to connect your HubSpot portal with Thnks.
+  </Step>
+  <Step title="Explore Features">
+    Learn about [auto-sync, tracking, and sending features](/hubspot/features) in detail.
+  </Step>
+  <Step title="Review FAQs">
+    Check the [FAQ](/hubspot/faq) for common questions and troubleshooting tips.
+  </Step>
+</Steps>
+
+## Support
+
+Need help with the HubSpot integration?
+
+- **Email**: [integrations@thnks.com](mailto:integrations@thnks.com)
+- **Documentation**: Check the guides linked above
+- **Account Manager**: Contact your Thnks Account Manager for personalized assistance

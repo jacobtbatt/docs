@@ -1,0 +1,260 @@
+---
+title: "Features"
+description: "Detailed guide to the Thnks HubSpot Integration features including automatic synchronization, Thnks tracking, and CRM integration capabilities."
+---
+
+<Note>
+  **Preview Release**: The Thnks HubSpot Integration is currently in preview. Some features may be enhanced before general availability.
+</Note>
+
+## Automatic Transaction Synchronization
+
+The core feature of the Thnks HubSpot Integration is automatic, bidirectional synchronization of your Thnks activity with HubSpot CRM.
+
+### How Sync Works
+
+The integration synchronizes Thnks transactions to HubSpot automatically:
+
+| Sync Event | Timing | Description |
+|------------|--------|-------------|
+| Initial Backfill | On first connection | All historical transactions are imported |
+| Scheduled Sync | Every hour | New transactions and status updates are synced |
+| Status Updates | With each sync | Thnks status changes are propagated to HubSpot |
+
+### What Gets Synchronized
+
+Every Thnks transaction creates a custom object record in HubSpot with the following data:
+
+**Thnks Information**
+- Thnks name and type
+- Thnks amount (dollar value)
+- Personal message included with the Thnks
+- Tracking URL for the transaction
+
+**Sender Details**
+- Sender name
+- Sender email address
+- Sending timestamp
+
+**Recipient Details**
+- Recipient name
+- Recipient email address
+- Recipient phone (if applicable)
+
+**Status Tracking**
+- Current status (see Status Lifecycle below)
+- Timestamp for each status change
+- Delivery and redemption dates
+
+### Status Lifecycle
+
+Thnks progress through a defined status lifecycle. The integration tracks each status change:
+
+```
+Sent → Delivered → Opened → Redeemed
+                         ↘ Refunded
+                         ↘ Expired
+```
+
+| Status | Description |
+|--------|-------------|
+| **Sent** | Thnks has been sent to the recipient |
+| **Scheduled** | Thnks is scheduled for future delivery |
+| **Delivered** | Thnks notification delivered to recipient |
+| **Opened** | Recipient has viewed the Thnks |
+| **Redeemed** | Recipient has claimed/used the Thnks |
+| **Refunded** | Thnks was refunded (unclaimed or cancelled) |
+| **Expired** | Thnks expired before redemption |
+
+Each status change is timestamped, enabling detailed engagement analysis.
+
+## Auto-Association
+
+The integration automatically links Thnks records to relevant HubSpot CRM objects, eliminating manual data entry.
+
+### Contact Association
+
+When a Thnks is synced, the integration:
+
+1. Searches for a Contact with a matching email address
+2. Associates the Thnks record with the Contact
+3. Links appear in the Contact's associated records section
+
+**Handling Duplicates**: If multiple Contacts share the same email, the integration associates with the most recently active Contact.
+
+### Company Association
+
+Thnks records are associated with Companies through the Contact relationship:
+
+1. Contact is matched by email
+2. Contact's primary Company is identified
+3. Thnks record is associated with both Contact and Company
+
+### Deal Association
+
+Thnks records can be associated with Deals when specific criteria are met:
+
+<Steps>
+  <Step title="Contact Match">
+    The recipient must match a Contact in HubSpot
+  </Step>
+  <Step title="Contact Role">
+    The Contact must be associated with a Deal via Contact Role
+  </Step>
+  <Step title="Deal Status">
+    The Deal must be open (not Closed Won or Closed Lost)
+  </Step>
+</Steps>
+
+This enables powerful pipeline visibility—see exactly which deals have received Thnks engagement.
+
+### Re-Association
+
+If Contacts are added or updated after Thnks have been synced, you can request a re-association:
+
+- Contact [integrations@thnks.com](mailto:integrations@thnks.com) to trigger a re-association job
+- Orphaned Thnks records (those without Contact matches) will be re-evaluated
+- New associations are created based on current Contact data
+
+## Thnks Custom Object
+
+The integration creates a custom object in HubSpot to store Thnks transaction data.
+
+### Object Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Gift Name | Text | Name of the Thnks |
+| Gift Amount | Currency | Dollar value of the Thnks |
+| Sender Name | Text | Full name of sender |
+| Sender Email | Email | Email address of sender |
+| Recipient Name | Text | Full name of recipient |
+| Recipient Email | Email | Email address of recipient |
+| Status | Dropdown | Current Thnks status |
+| Message | Text (Long) | Personal message included |
+| Sent Date | DateTime | When the Thnks was sent |
+| Delivered Date | DateTime | When delivery was confirmed |
+| Opened Date | DateTime | When recipient viewed the Thnks |
+| Redeemed Date | DateTime | When recipient claimed the Thnks |
+| Tracking URL | URL | Direct link to transaction |
+| Transaction ID | Text | Unique Thnks transaction identifier |
+
+### Viewing Thnks Records
+
+Access Thnks records in HubSpot:
+
+**From Global Search**
+- Search for "Thnks" in the HubSpot global search
+- View all Thnks records in a list view
+
+**From CRM Navigation**
+- Navigate to **CRM** → **Thnks**
+- Use filters to find specific records
+
+**From Contact Records**
+- Open any Contact record
+- View associated Thnks in the associations panel
+
+### Building Reports
+
+Leverage HubSpot's reporting tools with Thnks data:
+
+**Example Report Ideas**
+- Total Thnks sent per month
+- Redemption rate by Thnks type
+- Top senders on your team
+- Thnks sent per pipeline stage
+- Average Thnks value by deal size
+
+<Note>
+  Custom object reporting requires HubSpot Professional or Enterprise plans.
+</Note>
+
+## Thnks Sending (Coming Soon)
+
+<Note>
+  The Thnks sending feature is currently in development and will be available in a future release.
+</Note>
+
+The integration will support sending Thnks directly from HubSpot Contact records:
+
+**Planned Capabilities**
+- Send Thnks button on Contact records
+- Browse Thnks catalog within HubSpot
+- Customize messages
+- Schedule future Thnks
+- Track sent Thnks in real-time
+
+## Portal Statistics
+
+Track your organization's Thnks activity at a glance:
+
+| Metric | Description |
+|--------|-------------|
+| Total Thnks Sent | Cumulative count of all Thnks sent |
+| Total Value | Sum of all Thnks amounts |
+| Average Thnks Value | Mean Thnks amount |
+| Top Thnks Types | Most frequently sent Thnks |
+| Redemption Rate | Percentage of Thnks redeemed |
+| Recent Activity | Latest sending and redemption events |
+
+## Security & Compliance
+
+### OAuth 2.0 Authentication
+
+The integration uses OAuth 2.0 for secure authentication:
+
+- **No password sharing**: Users authorize via HubSpot's secure login
+- **Scoped access**: Integration only requests necessary permissions
+- **Token refresh**: Access tokens are automatically refreshed
+- **Revocable**: Disconnect anytime from HubSpot settings
+
+### Data Handling
+
+- **Encrypted transmission**: All data transferred via HTTPS
+- **Per-organization isolation**: Each organization's data is isolated
+- **Audit trail**: Complete history of all synced transactions
+- **Data retention**: Thnks records persist in HubSpot until deleted
+
+### Permission Requirements
+
+The integration requires these HubSpot scopes:
+
+| Scope | Purpose |
+|-------|---------|
+| `crm.objects.contacts.read` | Read Contact records for matching |
+| `crm.objects.contacts.write` | Update Contact associations |
+| `crm.objects.custom.read` | Read Thnks custom object records |
+| `crm.objects.custom.write` | Create and update Thnks records |
+| `crm.schemas.custom.read` | Read custom object schema definitions |
+
+## Best Practices
+
+### Maximize Data Quality
+
+1. **Consistent Emails**: Ensure recipient emails in Thnks match Contact emails in HubSpot
+2. **Avoid Duplicates**: Merge duplicate Contacts before connecting the integration
+3. **Update Contact Roles**: Keep Deal Contact Roles current for accurate Deal associations
+
+### Optimize for Reporting
+
+1. **Create Custom Views**: Build filtered views of Thnks records by status, date, or Thnks type
+2. **Schedule Reports**: Set up automated reports on Thnks activity
+3. **Use Dashboards**: Add Thnks metrics to your HubSpot dashboards
+
+### Team Coordination
+
+1. **Match User Emails**: Ensure Thnks user emails match HubSpot user emails
+2. **Train Your Team**: Share best practices for effective Thnks usage
+3. **Review Activity**: Regularly review Thnks activity for team coaching
+
+## Feature Roadmap
+
+The following features are planned for future releases:
+
+- **Direct Sending**: Send Thnks from within HubSpot UI
+- **Workflow Triggers**: Trigger Thnks based on HubSpot workflow events
+- **Enhanced Reporting**: Pre-built Thnks dashboards and reports
+- **Real-time Sync**: Immediate synchronization (vs. hourly)
+
+Contact your Thnks Account Manager for the latest roadmap updates.

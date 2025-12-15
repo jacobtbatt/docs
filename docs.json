@@ -33,6 +33,15 @@
             ]
           },
           {
+            "group": "HubSpot Integration",
+            "pages": [
+              "hubspot/overview",
+              "hubspot/install",
+              "hubspot/features",
+              "hubspot/faq"
+            ]
+          },
+          {
             "group": "Start An Integration",
             "pages": [
               "thnks_integrations/overview",

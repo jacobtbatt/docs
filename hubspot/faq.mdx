@@ -1,0 +1,244 @@
+---
+title: "FAQ"
+description: "Frequently asked questions about the Thnks HubSpot Integration, including setup, synchronization, troubleshooting, and best practices."
+---
+
+## General Questions
+
+<AccordionGroup>
+
+  <Accordion title="What Thnks plan do I need?">
+    The HubSpot integration is available for organizations on the **Enterprise or Enterprise+** plan level. Contact your Thnks Account Manager or [sales@thnks.com](mailto:sales@thnks.com) for information on upgrading.
+  </Accordion>
+
+  <Accordion title="Is the integration available in the HubSpot App Marketplace?">
+    The Thnks HubSpot Integration is currently in **preview** and not yet available in the HubSpot App Marketplace. Contact your Thnks Account Manager or [integrations@thnks.com](mailto:integrations@thnks.com) to request access.
+  </Accordion>
+
+  <Accordion title="Can I use this integration alongside the webhook/custom code integration?">
+    Yes, you can use both. The native HubSpot integration provides automatic synchronization and a richer experience, while the [custom code integration](/thnks_integrations/hubspot) gives you more flexibility for workflow automation. They can complement each other depending on your use case.
+  </Accordion>
+</AccordionGroup>
+
+## Setup & Installation
+
+<AccordionGroup>
+  <Accordion title="How do I get started with the integration?">
+    1. Contact your Thnks Account Manager or email [integrations@thnks.com](mailto:integrations@thnks.com)
+    2. Confirm your Thnks organization has the integration enabled
+    3. Receive your personalized setup link
+    4. Authorize the connection using HubSpot Super Admin credentials
+    5. Wait for the initial data backfill to complete
+
+    See the full [Installation Guide](/hubspot/install) for detailed steps.
+  </Accordion>
+
+  <Accordion title="What permissions does the integration need?">
+    The integration requires the following HubSpot permissions:
+
+    - **CRM Contacts**: Read and write access to match recipients
+    - **Custom Objects**: Create and manage Thnks records
+    - **Schema Access**: Read custom object schemas
+
+    These permissions are requested during the OAuth authorization flow and can be revoked at any time.
+  </Accordion>
+
+  <Accordion title="Who can authorize the integration?">
+    A **HubSpot Super Admin** must authorize the initial connection. This is required because the integration creates custom objects and needs elevated permissions.
+
+    After setup, all users with access to the Thnks custom object can view synchronized data.
+  </Accordion>
+
+  <Accordion title="How long does the initial sync take?">
+    The initial backfill typically completes within **a few minutes**. Timing depends on your transaction history volume. Organizations with thousands of historical transactions may take longer.
+
+    You'll receive confirmation when the backfill is complete.
+  </Accordion>
+</AccordionGroup>
+
+## Synchronization
+
+<AccordionGroup>
+  <Accordion title="How often does data sync?">
+    The integration synchronizes data **every hour**. This includes:
+
+    - New Thnks transactions
+    - Status updates on existing transactions (Delivered, Opened, Redeemed, etc.)
+    - New associations with Contacts and Deals
+
+    If you need immediate sync, contact [integrations@thnks.com](mailto:integrations@thnks.com).
+  </Accordion>
+
+  <Accordion title="What data is synchronized?">
+    Each Thnks transaction syncs with the following data:
+
+    - Thnks name, type, and amount
+    - Sender name and email
+    - Recipient name and email
+    - Personal message
+    - Current status and status timestamps
+    - Tracking URL
+    - Transaction ID
+
+    See [Features](/hubspot/features) for the complete list of fields.
+  </Accordion>
+
+  <Accordion title="Does the integration sync historical transactions?">
+    Yes. When you first connect the integration, it performs a **complete historical backfill** of all past Thnks transactions. This means your entire Thnks history will be available in HubSpot.
+  </Accordion>
+
+  <Accordion title="Can I trigger a manual sync?">
+    Manual sync triggers are available by request. Contact your Thnks Account Manager or [integrations@thnks.com](mailto:integrations@thnks.com) if you need to sync immediately after a large batch of Thnks.
+  </Accordion>
+
+  <Accordion title="What happens if the sync fails?">
+    The integration includes automatic retry logic. If a sync fails due to a temporary issue (network, rate limits, etc.), it will retry automatically.
+
+    If syncs repeatedly fail, the Thnks team will be notified and will investigate. Contact [integrations@thnks.com](mailto:integrations@thnks.com) if you notice missing data.
+  </Accordion>
+</AccordionGroup>
+
+## Associations & Matching
+
+<AccordionGroup>
+  <Accordion title="How are Thnks matched to Contacts?">
+    The integration matches Thnks to Contacts based on **recipient email address**. When a Thnks is synced:
+
+    1. The integration searches for a Contact with the recipient's email
+    2. If found, the Thnks record is associated with that Contact
+    3. If not found, the Thnks record is created without a Contact association
+
+    Orphaned records (without Contact matches) can be re-associated later when Contacts are added.
+  </Accordion>
+
+  <Accordion title="What if multiple Contacts have the same email?">
+    If duplicate Contacts exist with the same email, the integration associates the Thnks with the **most recently active** Contact. We recommend merging duplicate Contacts in HubSpot for best results.
+  </Accordion>
+
+  <Accordion title="How does Deal association work?">
+    Thnks records are associated with Deals when:
+
+    1. The recipient matches a Contact in HubSpot
+    2. That Contact is linked to a Deal via Contact Role
+    3. The Deal is currently open (not Closed Won or Closed Lost)
+
+    This enables you to track which deals have received Thnks engagement.
+  </Accordion>
+
+  <Accordion title="Can I manually associate Thnks records?">
+    Yes. You can manually associate Thnks records with Contacts, Companies, and Deals directly in HubSpot using the standard association interface.
+  </Accordion>
+
+  <Accordion title="What is re-association and when should I use it?">
+    Re-association scans all Thnks records and attempts to link them with Contacts based on current data. Use it when:
+
+    - You've added new Contacts that should match existing Thnks
+    - You've updated Contact email addresses
+    - You've merged duplicate Contacts
+
+    Contact [integrations@thnks.com](mailto:integrations@thnks.com) to trigger a re-association job.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I don't see any Thnks data in HubSpot">
+    Check the following:
+
+    1. **Wait for sync**: Initial backfill may take a few minutes
+    2. **Verify connection**: Confirm the OAuth connection is active
+    3. **Check your Thnks account**: Ensure there are transactions to sync
+    4. **Correct portal**: Verify you connected the correct HubSpot portal
+
+    If issues persist, contact [integrations@thnks.com](mailto:integrations@thnks.com).
+  </Accordion>
+
+  <Accordion title="Thnks aren't associated with the right Contacts">
+    This usually indicates an email mismatch. Verify that:
+
+    1. The recipient email in Thnks matches the Contact email in HubSpot
+    2. There aren't duplicate Contacts with the same email
+    3. The Contact existed when the Thnks was synced (or request re-association)
+  </Accordion>
+
+  <Accordion title="The OAuth connection failed">
+    Try these steps:
+
+    1. Ensure you're logged in as a HubSpot Super Admin
+    2. Verify your HubSpot plan supports custom objects (Professional or Enterprise)
+    3. Clear your browser cache and cookies
+    4. Try a different browser or incognito mode
+    5. Contact [integrations@thnks.com](mailto:integrations@thnks.com) for assistance
+  </Accordion>
+
+  <Accordion title="Token expired or authentication errors">
+    The integration automatically refreshes OAuth tokens. If you see authentication errors:
+
+    1. The refresh may be in progress—wait a few minutes
+    2. If errors persist, you may need to re-authorize the connection
+    3. Contact [integrations@thnks.com](mailto:integrations@thnks.com) for help
+
+    Re-authorizing will not cause data loss; existing Thnks records remain in HubSpot.
+  </Accordion>
+
+  <Accordion title="How do I disconnect the integration?">
+    To disconnect:
+
+    1. Go to **Settings** → **Integrations** → **Connected Apps** in HubSpot
+    2. Find the Thnks integration
+    3. Click **"Uninstall"** or **"Disconnect"**
+
+    Existing Thnks records will remain in HubSpot unless manually deleted. Sync will stop for new transactions.
+  </Accordion>
+</AccordionGroup>
+
+## Data & Privacy
+
+<AccordionGroup>
+  <Accordion title="Is my data secure?">
+    Yes. The integration uses industry-standard security:
+
+    - **OAuth 2.0**: Secure authentication without password sharing
+    - **HTTPS**: All data transmitted over encrypted connections
+    - **Per-organization isolation**: Each organization's data is isolated
+    - **Token rotation**: Access tokens are automatically refreshed
+  </Accordion>
+
+  <Accordion title="What happens to my data if I disconnect?">
+    When you disconnect the integration:
+
+    - **Sync stops**: No new Thnks will be synced to HubSpot
+    - **Data remains**: Existing Thnks custom object records stay in HubSpot
+    - **Manual deletion**: You can delete records manually if needed
+
+    Reconnecting will resume sync and backfill any missed transactions.
+  </Accordion>
+
+  <Accordion title="Can I delete Thnks records from HubSpot?">
+    Yes. You can delete individual Thnks records or bulk delete from the custom object list view in HubSpot. Deleting records in HubSpot does not affect your Thnks account data.
+  </Accordion>
+</AccordionGroup>
+
+## Support
+
+<AccordionGroup>
+  <Accordion title="How do I get help?">
+    - **Email**: [support@thnks.com](mailto:support@thnks.com)
+    - **Account Manager**: Contact your Thnks Account Manager directly
+    - **Documentation**: Review the [Installation Guide](/hubspot/install) and [Features](/hubspot/features) pages
+
+    Include your HubSpot portal ID and Thnks organization name when contacting support.
+  </Accordion>
+
+  <Accordion title="How do I report a bug or request a feature?">
+    Email [integrations@thnks.com](mailto:integrations@thnks.com) with:
+
+    - Description of the issue or feature request
+    - Steps to reproduce (for bugs)
+    - Your HubSpot portal ID
+    - Screenshots if applicable
+
+    We review all feedback and prioritize based on user needs.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,166 @@
+---
+title: "Installation Guide"
+description: "Step-by-step guide to installing and configuring the Thnks HubSpot Integration for your organization."
+---
+
+<Note>
+  **Preview Release**: The Thnks HubSpot Integration is currently in preview. Contact your Thnks Account Manager or [integrations@thnks.com](mailto:integrations@thnks.com) to request access.
+</Note>
+
+## Prerequisites
+
+Before beginning installation, ensure you have:
+
+- **Thnks Account**: Enterprise or Enterprise+ plan level
+- **HubSpot Account**: Professional or Enterprise tier (custom objects require paid plans)
+- **HubSpot Permissions**: Super Admin access to authorize the integration
+- **Integration Enabled**: Contact Thnks to enable HubSpot integration for your organization
+
+## Installation Process
+
+### Step 1: Request Access
+
+Contact your Thnks Account Manager or email [integrations@thnks.com](mailto:integrations@thnks.com) to:
+
+1. Enable the HubSpot integration for your Thnks organization
+2. Receive your unique setup link
+3. Confirm your HubSpot portal ID
+
+### Step 2: Authorize the Connection
+
+<Steps>
+  <Step title="Access Setup Link">
+    Click the personalized setup link provided by your Thnks Account Manager. This link is unique to your organization and includes your enterprise credentials.
+  </Step>
+  <Step title="Sign In to HubSpot">
+    You'll be redirected to HubSpot's authorization page. Sign in with your HubSpot Super Admin account.
+  </Step>
+  <Step title="Review Permissions">
+    Review the permissions requested by the Thnks integration:
+
+    - **CRM Objects**: Read and write access to Contacts, Companies, and Deals
+    - **Custom Objects**: Create and manage Thnks custom object records
+    - **Schema Access**: Read custom object schemas for data mapping
+
+    These permissions are required for the integration to sync Thnks data and associate records with your CRM objects.
+  </Step>
+  <Step title="Authorize Access">
+    Click **"Grant Access"** or **"Connect App"** to authorize the integration. You'll be redirected back to confirm the connection was successful.
+  </Step>
+</Steps>
+
+### Step 3: Initial Data Sync
+
+Once authorized, the integration automatically performs an initial backfill:
+
+1. **Historical Import**: All past Thnks transactions are imported into HubSpot
+2. **Record Creation**: Thnks custom object records are created for each transaction
+3. **Auto-Association**: Records are linked to matching Contacts and Deals based on email addresses
+4. **Status Sync**: Current status of each Thnks is imported
+
+<Note>
+  **Timing**: The initial backfill typically completes within a few minutes, depending on your transaction history volume. You'll receive a confirmation once complete.
+</Note>
+
+### Step 4: Verify Installation
+
+After the initial sync completes, verify the installation:
+
+<Steps>
+  <Step title="Check Custom Objects">
+    Navigate to **Settings** → **Data Management** → **Objects** in HubSpot. You should see a "Thnks" custom object listed.
+  </Step>
+  <Step title="View Thnks Records">
+    Go to **CRM** → **Thnks** (or search for "Thnks" in the global search). You should see your historical Thnks transactions.
+  </Step>
+  <Step title="Check Contact Associations">
+    Open a Contact record that has received a Thnks. In the associated records section, you should see linked Thnks records.
+  </Step>
+</Steps>
+
+## Post-Installation Configuration
+
+### User Email Matching
+
+For the integration to correctly attribute Thnks sent by your team members:
+
+- **Matching Requirement**: Thnks user email addresses must match their HubSpot user email addresses
+- **Why It Matters**: This enables proper recipient attribution and allows users to view their sent Thnks within HubSpot
+
+<Warning>
+  If a Thnks user's email doesn't match any HubSpot user, the Thnks will still sync but may not be attributed to the correct sender within HubSpot.
+</Warning>
+
+### Contact Association Settings
+
+The integration automatically associates Thnks records with Contacts based on recipient email addresses. If multiple Contacts share the same email:
+
+- The most recently active Contact is associated
+- You can manually reassociate records if needed
+
+### Deal Association
+
+Thnks records can be associated with Deals when:
+
+1. The recipient Contact is associated with a Deal via Contact Role
+2. The Deal is currently open (not Closed Won or Closed Lost)
+
+## Ongoing Synchronization
+
+After installation, the integration operates automatically:
+
+| Sync Type | Frequency | Description |
+|-----------|-----------|-------------|
+| Transaction Sync | Hourly | New Thnks transactions are synced every hour |
+| Status Updates | Hourly | Thnks status changes are updated (Delivered, Opened, Redeemed) |
+| Token Refresh | Automatic | OAuth tokens are refreshed automatically before expiration |
+
+### Manual Sync Trigger
+
+If you need to trigger an immediate sync (e.g., after sending a large batch of Thnks), contact your Thnks Account Manager or [integrations@thnks.com](mailto:integrations@thnks.com).
+
+## Troubleshooting Installation
+
+### Connection Failed
+
+If the OAuth connection fails:
+
+1. Ensure you're logged into HubSpot with Super Admin credentials
+2. Verify your HubSpot plan supports custom objects (Professional or Enterprise)
+3. Clear browser cache and try again
+4. Contact [integrations@thnks.com](mailto:integrations@thnks.com) if issues persist
+
+### No Data After Connection
+
+If no Thnks records appear after installation:
+
+1. **Wait for backfill**: Initial sync may take a few minutes
+2. **Check your Thnks account**: Ensure there are transactions to sync
+3. **Verify portal ID**: Confirm you connected the correct HubSpot portal
+4. **Contact support**: Reach out to [integrations@thnks.com](mailto:integrations@thnks.com)
+
+### Missing Associations
+
+If Thnks records aren't associated with Contacts:
+
+1. **Email mismatch**: Verify the recipient email exists on a Contact record
+2. **Multiple Contacts**: Check if duplicate Contacts exist with the same email
+3. **Re-association**: Contact support to trigger a re-association job
+
+## Disconnecting the Integration
+
+To disconnect the Thnks integration from HubSpot:
+
+1. Navigate to **Settings** → **Integrations** → **Connected Apps** in HubSpot
+2. Find the Thnks integration
+3. Click **"Uninstall"** or **"Disconnect"**
+
+<Warning>
+  **Data Retention**: Disconnecting the integration will stop future syncs. Existing Thnks custom object records will remain in HubSpot unless manually deleted.
+</Warning>
+
+## Next Steps
+
+- [Explore Features](/hubspot/features) - Learn about auto-sync, tracking, and Thnks sending capabilities
+- [FAQ](/hubspot/faq) - Common questions and answers
+- [Contact Support](mailto:integrations@thnks.com) - Get help with your installation
