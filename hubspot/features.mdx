@@ -62,8 +62,8 @@ Sent → Delivered → Opened → Redeemed
 | **Scheduled** | Thnks is scheduled for future delivery |
 | **Delivered** | Thnks notification delivered to recipient |
 | **Opened** | Recipient has viewed the Thnks |
-| **Redeemed** | Recipient has claimed/used the Thnks |
-| **Refunded** | Thnks was refunded (unclaimed or cancelled) |
+| **Redeemed** | Recipient has redeemed/used the Thnks |
+| **Refunded** | Thnks was refunded (unredeemed or manually expired) |
 | **Expired** | Thnks expired before redemption |
 
 Each status change is timestamped, enabling detailed engagement analysis.
@@ -124,8 +124,8 @@ The integration creates a custom object in HubSpot to store Thnks transaction da
 
 | Property | Type | Description |
 |----------|------|-------------|
-| Gift Name | Text | Name of the Thnks |
-| Gift Amount | Currency | Dollar value of the Thnks |
+| Thnks Name | Text | Name of the Thnks |
+| Thnks Amount | Currency | Dollar value of the Thnks |
 | Sender Name | Text | Full name of sender |
 | Sender Email | Email | Email address of sender |
 | Recipient Name | Text | Full name of recipient |
@@ -135,7 +135,7 @@ The integration creates a custom object in HubSpot to store Thnks transaction da
 | Sent Date | DateTime | When the Thnks was sent |
 | Delivered Date | DateTime | When delivery was confirmed |
 | Opened Date | DateTime | When recipient viewed the Thnks |
-| Redeemed Date | DateTime | When recipient claimed the Thnks |
+| Redeemed Date | DateTime | When recipient redeemed the Thnks |
 | Tracking URL | URL | Direct link to transaction |
 | Transaction ID | Text | Unique Thnks transaction identifier |
 
