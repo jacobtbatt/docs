@@ -9,13 +9,10 @@ This guide walks you through automatically triggering the sending of a Thnks usi
 
 ## Prerequisites
 
-* Access to the Thnks API.
-
-* Thnks API Key (Authorization Token).
-
-* URL for Thnks API endpoint.
-
-* Administrative access to Salesforce for creating custom fields and Apex classes.
+- Access to the Thnks API.
+- Thnks API Key (Authorization Token).
+- URL for Thnks API endpoint.
+- Administrative access to Salesforce for creating custom fields and Apex classes.
 
 ## Setup
 
@@ -27,11 +24,9 @@ This guide walks you through automatically triggering the sending of a Thnks usi
       <Step title="Thnks API URL">
         `https://api.thnks.com/api/v1/gift_requests`
       </Step>
-
       <Step title="HTTP Method">
         `POST`
       </Step>
-
       <Step title="Data (JSON format)">
         Here’s an example of the JSON payload you will need to include in the request. You’ll need to replace the placeholders with the appropriate Salesforce tokens or field variables:
 
@@ -50,27 +45,22 @@ This guide walks you through automatically triggering the sending of a Thnks usi
         }  
         ```
 
-        * Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
-
-        * Use Salesforce merge fields or dynamic data variables (e.g., `{!Contact.Email}`) to populate lead or contact information.
+        - Replace `<GIFT_ID>` with the Thnks ID of the gift you want to send.
+        - Use Salesforce merge fields or dynamic data variables (e.g., `{!Contact.Email}`) to populate lead or contact information.
       </Step>
-
       <Step title="Headers">
         You will need to add the following headers in the API call:
 
-        * **Content-Type**: `application/json`
-
-        * **Authorization**: Your Thnks API key (Authorization Token).
+        - **Content-Type**: `application/json`
+        - **Authorization**: Your Thnks API key (Authorization Token).
       </Step>
     </Steps>
   </Step>
-
   <Step title="Create an Apex Class for the API Callout">
     <Steps>
       <Step title="Navigate to Setup in Salesforce">
         Go to **Setup** and search for **Apex Classes**.
       </Step>
-
       <Step title="Create a New Apex Class">
         Write an Apex class for making the API callout to the Thnks endpoint. Below is an example Apex class:
 
@@ -83,7 +73,7 @@ This guide walks you through automatically triggering the sending of a Thnks usi
                 request.setEndpoint('https://api.thnks.com/api/v1/gift_requests');  
                 request.setMethod('POST');  
                 request.setHeader('Content-Type', 'application/json');  
-                request.setHeader('Authorization', 'Bearer YOUR_API_KEY');  
+                request.setHeader('Authorization', 'YOUR_API_KEY');  
                 String requestBody = '{"gift_id": "' + giftId + '", "recipients": [{"email": "' + email + '", "first_name": "' + firstName + '", "last_name": "' + lastName + '", "message": "' + message + '", "gift_redeem_type": "email"}]}';  
                 request.setBody(requestBody);  
                 HttpResponse response = http.send(request);  
@@ -98,17 +88,13 @@ This guide walks you through automatically triggering the sending of a Thnks usi
       </Step>
     </Steps>
   </Step>
-
   <Step title="Trigger the Apex Class">
     <Steps>
       <Step title="Use Process Builder or Flow">
-        * Create a **Process** in **Process Builder** or a **Flow** in Salesforce to trigger the Apex class.
-
-        * Define the criteria for when the gift should be sent (e.g., Opportunity Stage Closed Won or Lead Status Changed).
-
-        * Use the **Apex Action** to call the `ThnksGiftSender.sendGift` method, passing the required parameters (e.g., Gift ID, Contact Email, First Name, Last Name, and Message).
+        - Create a **Process** in **Process Builder** or a **Flow** in Salesforce to trigger the Apex class.
+        - Define the criteria for when the gift should be sent (e.g., Opportunity Stage Closed Won or Lead Status Changed).
+        - Use the **Apex Action** to call the `ThnksGiftSender.sendGift` method, passing the required parameters (e.g., Gift ID, Contact Email, First Name, Last Name, and Message).
       </Step>
-
       <Step title="Use an Apex Trigger (Optional)">
         If you prefer to automate via triggers, you can create a trigger to call the `ThnksGiftSender.sendGift` method based on object changes. Below is an example trigger for a Contact:
 
@@ -124,33 +110,27 @@ This guide walks you through automatically triggering the sending of a Thnks usi
       </Step>
     </Steps>
   </Step>
-
   <Step title="Test and Verify">
     <Steps>
       <Step title="Run a Test with Sample Data">
         Test the Process Builder workflow, Flow, or Trigger using sample data to ensure the API callout works as expected.
       </Step>
-
       <Step title="Check Logs">
         Verify the API callout response in the **Apex Logs** to ensure the gift was sent successfully.
       </Step>
-
       <Step title="Make Adjustments if Necessary">
         Update your Apex class, parameters, or process settings based on test results.
       </Step>
     </Steps>
   </Step>
-
   <Step title="Best Practices">
     <Steps>
       <Step title="Error Handling">
         Add error handling in your Apex class to manage failed API callouts.
       </Step>
-
       <Step title="Security">
         Store your API key securely using **Custom Metadata Types** or **Named Credentials** in Salesforce.
       </Step>
-
       <Step title="Testing">
         Test the integration thoroughly to ensure tokens, parameters, and triggers function as intended.
       </Step>
@@ -162,8 +142,6 @@ Following this process, you can automatically trigger a Thnks gift to be sent as
 
 ## References
 
-* [Apex Callouts Overview](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_callouts.htm)
-
-* [Using Process Builder](https://help.salesforce.com/s/articleView?id=sf.process_overview.htm)
-
-* [Thnks API Documentation](/api-reference/endpoint/create_gift_request)
+- [Apex Callouts Overview](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_callouts.htm)
+- [Using Process Builder](https://help.salesforce.com/s/articleView?id=sf.process_overview.htm)
+- [Thnks API Documentation](/api-reference/endpoint/create_gift_request)
