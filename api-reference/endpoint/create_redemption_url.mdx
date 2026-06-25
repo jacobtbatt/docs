@@ -1,17 +1,20 @@
 ---
-title: 'Create a Thnks Redemption URL via Webhook'
-api: 'POST /webhooks/gift_requests'
+title: "Create a Thnks Redemption URL via Webhook"
+api: "POST /webhooks/gift_requests"
 ---
 
-Use this Thnks webhook to automatically generate a unique Thnks Redemption URL for
-embedding in non-Thnks managed campaigns.
+Use this Thnks webhook to automatically generate a unique Thnks Redemption URL for embedding in non-Thnks managed campaigns.
 
-<ParamField header="Content-Type" type="string" default="application/json" initialValue="application/json">
+<ParamField header="Content-Type" default="application/json" type="string">
   This should always be `application/json`
 </ParamField>
 
 <ParamField body="gift_id" type="integer" required="true">
   Variable containing Thnks id of the item(s) the Customer wants to send
+</ParamField>
+
+<ParamField body="utm_campaign_id" type="string">
+  Optional campaign identifier for tracking attribution in non-Thnks managed campaigns
 </ParamField>
 
 <ParamField body="recipients" type="array">
@@ -29,12 +32,70 @@ embedding in non-Thnks managed campaigns.
     </ParamField>
 
     <ParamField body="message" type="string" required="true">
-      Variable containing the Thnks message.
-      Use
-      `"Hello,\nThank you"` instead of
-      `"Hello,
-                              Thank You"`
-      for a multiline Thnks
+      Variable containing the Thnks message. Use `"Hello,\nThank you"` instead of `"Hello,
+                              Thank You"` for a multiline Thnks
     </ParamField>
   </Expandable>
 </ParamField>
+
+## Response
+
+On success, the API returns a `200` response with the following JSON body.
+
+<ResponseField name="message" type="string">
+  Success message. Returns `"GiftRequest created successfully."` when the gift request is created.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      The unique ID of the created gift request
+    </ResponseField>
+
+    <ResponseField name="recipients" type="array">
+      <Expandable title="properties">
+        <ResponseField name="recipient_transaction_id" type="integer">
+          The unique ID of the recipient transaction
+        </ResponseField>
+
+        <ResponseField name="email" type="string">
+          Email address of the recipient
+        </ResponseField>
+
+        <ResponseField name="phone_number" type="string">
+          Phone number of the recipient. Returns an empty string when not provided.
+        </ResponseField>
+
+        <ResponseField name="gift_redemption_url" type="string">
+          Unique Thnks Redemption URL for the recipient to accept the Thnks
+        </ResponseField>
+
+        <ResponseField name="gift_donation_url" type="string">
+          URL for the recipient to donate the gift value to charity instead of redeeming it
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json Response
+{
+  "message": "GiftRequest created successfully.",
+  "data": {
+    "id": 123,
+    "recipients": [
+      {
+        "recipient_transaction_id": 456,
+        "email": "some@test.com",
+        "phone_number": "",
+        "gift_redemption_url": "https://...",
+        "gift_donation_url": "https://..."
+      }
+    ]
+  }
+}
+```
+
+</ResponseExample>
