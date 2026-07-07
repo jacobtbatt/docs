@@ -52,8 +52,7 @@
               "thnks_integrations/msft_power_automate",
               "thnks_integrations/n8n",
               "thnks_integrations/salesforce",
-              "thnks_integrations/workato",
-              "thnks_integrations/zapier"
+              "thnks_integrations/workato"
             ]
           },
           {
