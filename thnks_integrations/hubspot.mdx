@@ -9,10 +9,10 @@ This guide shows you how to automatically send Thnks gifts through HubSpot workf
 
 ## Prerequisites
 
-* HubSpot Operations Hub Professional or Enterprise license (required for custom code actions)
-* Thnks API Key (Authorization Token)
-* Thnks Gift ID for the gift you want to send
-* Access to HubSpot Workflows
+- HubSpot Operations Hub Professional or Enterprise license (required for custom code actions)
+- Thnks API Key (Authorization Token)
+- Thnks Gift ID for the gift you want to send
+- Access to HubSpot Workflows
 
 ## Python Code for HubSpot Custom Code Action
 
@@ -76,52 +76,46 @@ def main(event):
 
 <Steps>
   <Step title="Create or Edit a HubSpot Workflow">
-    1. Log into HubSpot and navigate to **Automation** > **Workflows**
+    1. Log into HubSpot and navigate to **Automation** \> **Workflows**
     2. Create a new workflow or edit an existing one
     3. Choose your enrollment trigger (e.g., after a meeting is logged, contact property change, etc.)
   </Step>
-
   <Step title="Add a Custom Code Action">
-    1. In the workflow editor, click the **+** button to add an action
+    1. In the workflow editor, click the **\+** button to add an action
     2. Select **Custom code** from the action options
     3. Choose **Python 3.9** as the language
   </Step>
-
   <Step title="Configure Input Fields">
     Set up the following input fields in the custom code action:
-    
-    * `email` - Contact's email address
-    * `firstname` - Contact's first name
-    * `lastname` - Contact's last name
-    * `hubspot_owner_id` - The HubSpot owner's name or ID
-    
+
+    - `email` - Contact's email address
+    - `firstname` - Contact's first name
+    - `lastname` - Contact's last name
+    - `hubspot_owner_id` - The HubSpot owner's name or ID
+
     Map these to the appropriate contact properties using the dropdown menus.
   </Step>
-
   <Step title="Add the Python Code">
     1. Copy the Python code provided above
     2. Paste it into the code editor
     3. Replace the placeholders:
-       * Replace `<GIFT ID>` with your actual Thnks gift ID (e.g., `12345`)
-       * Replace `<API TOKEN>` with your Thnks API authorization token
+       - Replace `<GIFT ID>` with your actual Thnks gift ID (e.g., `12345`)
+       - Replace `<API TOKEN>` with your Thnks API authorization token
   </Step>
-
   <Step title="Configure Output Fields">
     The code returns the following output fields that you can use in subsequent workflow actions:
-    
-    * `email` - The recipient's email address
-    * `response_status` - HTTP status code from the API call
-    * `response_data` - Full response from the Thnks API
-    * `error` - Error message if the request fails
-  </Step>
 
+    - `email` - The recipient's email address
+    - `response_status` - HTTP status code from the API call
+    - `response_data` - Full response from the Thnks API
+    - `error` - Error message if the request fails
+  </Step>
   <Step title="Test the Workflow">
     1. Save the custom code action
     2. Use the **Test** feature to run the workflow with a test contact
     3. Check the workflow execution logs to verify the gift was sent successfully
     4. Look for a 200 or 201 status code in the response
   </Step>
-
   <Step title="Activate the Workflow">
     Once testing is successful, turn on the workflow to start automatically sending Thnks gifts based on your trigger criteria.
   </Step>
@@ -182,10 +176,10 @@ payload = {
 
 The code includes error handling to catch and report issues:
 
-* Network errors
-* Invalid API credentials
-* Missing required fields
-* API rate limits
+- Network errors
+- Invalid API credentials
+- Missing required fields
+- API rate limits
 
 Check the workflow execution history to see any errors returned in the `error` output field.
 
@@ -201,10 +195,10 @@ Check the workflow execution history to see any errors returned in the `error` o
 
 ### Common Issues
 
-* **401 Unauthorized** - Check your API token is correct and active
-* **400 Bad Request** - Verify all required fields are populated and gift ID is valid
-* **Network errors** - Ensure HubSpot can reach the Thnks API endpoint
-* **Missing data** - Confirm all input fields are mapped to existing contact properties
+- **401 Unauthorized** - Check your API token is correct and active
+- **400 Bad Request** - Verify all required fields are populated and gift ID is valid
+- **Network errors** - Ensure HubSpot can reach the Thnks API endpoint
+- **Missing data** - Confirm all input fields are mapped to existing contact properties
 
 ### Debug Tips
 
@@ -215,6 +209,5 @@ Check the workflow execution history to see any errors returned in the `error` o
 
 ## References
 
-* [HubSpot Custom Code Actions Documentation](https://knowledge.hubspot.com/workflows/use-custom-code-in-workflows)
-* [Thnks API Documentation](/api-reference/endpoint/create_gift_request)
-* [HubSpot Workflow Best Practices](https://knowledge.hubspot.com/workflows/workflow-best-practices)
+- [HubSpot Custom Code Actions Documentation](https://developers.hubspot.com/docs/api-reference/legacy/automation/workflow-actions/custom-code-actions)
+- [Thnks API Documentation](/api-reference/endpoint/create_gift_request)
