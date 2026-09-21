@@ -5,9 +5,7 @@ description: 'Build powerful reports and dashboards to measure the ROI of your T
 
 ## Overview
 
-Demonstrating the ROI of your Thnks investment is crucial for program success and expansion. This guide provides step-by-step instructions for building reports and dashboards that showcase how Thnks accelerates your sales pipeline, improves meeting show rates, and drives revenue growth.
-
-## Key ROI Metrics to Track
+Demonstrating the ROI of your Thnks investment is crucial for program success and expansion. This guide provides step-by-step instructions for building reports and dashboards that showcase how Thnks accelerates your sales pipeline, improves meeting show rates, and drives revenue growth. All reports below are built on the Thnks object in Salesforce and work the same regardless of how a Thnks was sent, whether via the 'Send a Thnks' iframe button, the Thnks Request/Approval Process workflow, or the Send Thnks Apex Action in Flows (new in v1.9). Apex action sends reach the Thnks object asynchronously, through the same organic sync used for web, mobile, and extension activity, rather than at the moment the Flow runs, but they are fully reportable using the same matching logic as any other send .
 
 ### Pipeline Acceleration
 - **Meeting Show Rate Improvement**: % increase in meeting attendance when Thnks are sent
@@ -61,7 +59,7 @@ Demonstrating the ROI of your Thnks investment is crucial for program success an
   
   <Step title="Create Summary Formula">
     Add a summary formula to calculate show rate:
-    ```
+    ```text
     Show Rate = (Events with Status = "Held") / (Total Events) * 100
     ```
   </Step>
@@ -277,22 +275,26 @@ Create a comprehensive monthly report package including:
 ## Sample ROI Calculations
 
 ### Basic ROI Formula
-```
+
+```text
 ROI = (Revenue from Thnks-influenced deals - Total Thnks cost) / Total Thnks cost × 100
 ```
 
 ### Meeting Show Rate Impact
-```
+
+```text
 Show Rate Improvement = (Show Rate with Thnks - Show Rate without Thnks) / Show Rate without Thnks × 100
 ```
 
 ### Deal Velocity Improvement
-```
+
+```text
 Velocity Improvement = (Average days without Thnks - Average days with Thnks) / Average days without Thnks × 100
 ```
 
 ### Customer Lifetime Value Impact
-```
+
+```text
 CLV Impact = (Average CLV with Thnks - Average CLV without Thnks) / Average CLV without Thnks × 100
 ```
 
@@ -304,6 +306,10 @@ CLV Impact = (Average CLV with Thnks - Average CLV without Thnks) / Average CLV 
 - Use clear tagging system for Thnks-influenced opportunities
 - Create custom fields to track Thnks impact
 - Implement consistent process for sales team
+
+<Note>
+  **Send Thnks Apex Action and ROI Reporting (new in v1.9)**: Sends triggered by the Send Thnks Apex Action are captured in the same Thnks object reports as any other send. The underlying record is created asynchronously rather than at the moment the Flow runs, so expect a short reporting lag rather than a gap. Populate the optional UTM Campaign Id input on the Apex action to tag automation-driven sends for attribution reporting.
+</Note>
 
 ### Challenge 2: Data Quality Issues
 **Problem**: Incomplete or inconsistent data entry

@@ -1,0 +1,67 @@
+---
+title: "Thnks Release Notes (v1.9)"
+---
+
+## Overview
+
+Version 1.9 adds a new way to send Thnks directly from a Salesforce Flow, plus reliability fixes for the automated Thnks Request workflows introduced in version 1.8.
+
+## What's New
+
+### Send Thnks Directly from Flow
+
+- A new Send Thnks action is now available in Flow Builder's Action picker.
+- Use it to trigger a Thnks send from any Flow, record triggered, scheduled, or screen flow, without first building a Thnks Request record.
+- Good fit for advanced automation such as sales cadences, renewal triggers, and deal close celebrations.
+- If a send fails and is linked to a source record, Salesforce automatically creates a follow up Task so your team can review it.
+- Before this action appears in Flow Builder, the running user needs the Thnks Admin or the Thnks Standard User permission sets assigned.
+
+### Reliability Improvements
+
+- Sender attribution is fixed. Approved requests now correctly identify the sending user, resolving an issue where some automated sends were rejected.
+- Recipient names now flow through correctly on automated sends, instead of falling back to the recipient's email address.
+- Both fixes apply automatically. No setup changes are needed.
+
+## How the New Action Works
+
+- Your Flow determines the sender, recipient, and gift details.
+- The Flow passes these into the Send Thnks action.
+- The action sends the request to Thnks in the background.
+- On success, a linked source record (such as a Task) is automatically marked complete.
+- On failure, a follow up Task is automatically created for review.
+
+This path does not require a Thnks Request record or Approval Process. It is built for teams that want full control over their own automation logic, while still relying on Thnks's standard send infrastructure.
+
+## Inputs
+
+| **Input** | **Type** | **Required** | **Description** |
+| :-- | :-- | :-- | :-- |
+| Gift Id | Text | Yes | The Thnks unique identifier, not a Salesforce record Id. Usually a fixed value your Thnks account team gives you. |
+| Sender Email | Text | Yes | The sending user's email. Must belong to an existing, active Thnks user. |
+| Recipient Email | Text | Yes | The recipient's email address. |
+| Recipient First/Last Name | Text | No | Personalizes the gift and message. |
+| Recipient Message | Text | No | A custom note included with the gift. |
+| Include Carbon Neutral Cost | Boolean | No | Adds a carbon neutral offset to the gift cost. Defaults to false. |
+| UTM Campaign Id | Text | No | An optional campaign identifier for attribution reporting. |
+| Source Record Id | Text | No | A Task or other record to link the send to. Required for the automatic follow up Task and completion behavior described above. If left blank, those behaviors are skipped. |
+
+<br />
+
+## Good to Know
+
+**Salesforce sending limit**
+
+Each send counts against Salesforce's future call limit of 50 per transaction. If a Flow processes a large batch of records in a single transaction, split the work into smaller batches.
+
+**Task creation permissions**
+
+The follow up Task on failure requires the running user to have Task creation permissions. If that permission is missing, the follow up Task will not be created.
+
+**Asynchronous sends**
+
+Sends happen in the background. A Flow cannot check success or failure of the send within the same interview.
+
+## Upgrade Notes
+
+- No configuration changes are required for existing installations. The reliability fixes apply automatically.
+- To use the new Send Thnks action, add it to a Flow from Flow Builder's Action picker (search "Send Thnks"), and confirm the running user has the Thnks Admin or the Thnks Standard User permission sets assigned

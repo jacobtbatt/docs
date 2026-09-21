@@ -5,7 +5,7 @@ description: "Learn how to create automated Thnks workflows using Salesforce Flo
 
 ## Overview
 
-**New in v1.8**, Thnks Request flows enable you to automatically trigger Thnks based on business events in Salesforce. This powerful feature allows you to create sophisticated automation for marketing campaigns, sales cadences, and customer success workflows.
+**New in v1.9**, Thnks Request flows enable you to automatically trigger Thnks based on business events in Salesforce. This powerful feature allows you to create sophisticated automation for marketing campaigns, sales cadences, and customer success workflows.
 
 ## Flow Architecture
 
@@ -135,7 +135,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 
 - **API Name**: "Message"
 - **Body**: Create your personalized message using merge fields
-- **Example**: "Hi \!Get_Scheduled_Recipient_Info.FirstName, thank you for your time today. Looking forward to our next conversation\!"
+- **Example**: "Hi !Get_Scheduled_Recipient_Info.FirstName, thank you for your time today. Looking forward to our next conversation!"
 
 ## Common Flow Triggers
 
@@ -143,7 +143,7 @@ The Thnks Request flow follows a specific pattern to ensure proper recipient sel
 
 **Survey Completion**
 
-```
+```text
 Trigger: Record Created on Survey Response
 Condition: Survey Type = "Customer Satisfaction"
 Action: Send thank you Thnks
@@ -151,7 +151,7 @@ Action: Send thank you Thnks
 
 **Event Registration**
 
-```
+```text
 Trigger: Contact field updated
 Condition: Event Status = "Registered"
 Action: Send welcome Thnks
@@ -159,7 +159,7 @@ Action: Send welcome Thnks
 
 **Email Engagement**
 
-```
+```text
 Trigger: Marketing Cloud Journey
 Condition: Email Opened + Link Clicked
 Action: Send engagement Thnks
@@ -169,7 +169,7 @@ Action: Send engagement Thnks
 
 **Demo Scheduled**
 
-```
+```text
 Trigger: Event Created
 Condition: Subject contains "Demo" AND Type = "Meeting"
 Action: Send anticipation Thnks
@@ -177,7 +177,7 @@ Action: Send anticipation Thnks
 
 **Deal Closed Won**
 
-```
+```text
 Trigger: Opportunity Updated
 Condition: Stage = "Closed Won"
 Action: Send celebration Thnks
@@ -185,7 +185,7 @@ Action: Send celebration Thnks
 
 **Contract Signed**
 
-```
+```text
 Trigger: Contract Status Updated
 Condition: Status = "Signed"
 Action: Send appreciation Thnks
@@ -278,7 +278,7 @@ For review before sending:
 
 Instead of hardcoding Thnks IDs, you can create dynamic Thnks selection:
 
-```
+```text
 Decision Element: Check Opportunity Amount
 If Amount > $100,000: Thnks ID = "Premium Thnks"
 If Amount > $50,000: Thnks ID = "Standard Thnks"

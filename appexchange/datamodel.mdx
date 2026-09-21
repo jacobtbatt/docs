@@ -14,9 +14,13 @@ title: "Data Model"
 
 The following events trigger a change on the Salesforce side (either creating or updating records):
 
-* A new Thnks is sent
+* A new Thnks is sent, whether from the 'Send a Thnks' iframe button, the Thnks Request/Approval Process workflow, or the Send Thnks Apex Action in Flows (new in v1.9)
 
 * The status of an existing Thnks is changed (e.g. opened, undelivered, redeemed, etc.)
+
+<Note>
+  **Send Thnks Apex Action (new in v1.9):** The Apex action sends directly to the Thnks platform via API, bypassing the Thnks Request object and Approval Process entirely, no Thnks Request record is created. The resulting Thnks record in Salesforce is still created through the same organic sync used for web, mobile, and extension activity (see Tracking Thnks Activity below), and goes through the same Contact/Lead/Opportunity matching logic described on this page. This happens asynchronously, the record is not created at the same moment the Flow runs. Separately, the Apex action creates or updates a Task, for its own follow-up (on failure) and completion (on success, via the Source Record Id input), independent of the organic Thnks record's own Task Syncing behavior.
+</Note>
 
 Upon creation, this is the general flow of what is occurring (note that a Task being created is possible at the very end, but this is not being shown in this diagram):
 
@@ -88,4 +92,8 @@ The WhoId (Name) field can only be related to Leads or Contacts. The WhatId (Rel
   ![Thnks Creation Flowchart](/thnks_sf_doc_images/thnks_task_contact.png)
 </Frame>
 
-* If the Thnks is not associated with a Lead nor a Contact, then the Task will only be associated with the Thnks record via the Related To field (WhatId),
+* If the Thnks is not associated with a Lead nor a Contact, then the Task will only be associated with the Thnks record via the Related To field (WhatId).
+
+<Note>
+  **Task Syncing vs. Apex Action follow up Tasks (new in v1.9):** The Task Syncing setting above governs Tasks created automatically whenever any Thnks is sent, and is unrelated to the Send Thnks Apex action's own Task behavior. The Apex action instead marks a Flow supplied Source Record Id (often a Task) as complete on success, or creates a separate follow up Task on failure, independent of whether Task Syncing is enabled. See the Install Guide for details on configuring the Apex action.
+</Note>

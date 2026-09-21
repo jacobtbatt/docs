@@ -1,11 +1,32 @@
 ---
 title: "FAQ"
-description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities."
+description: "Use the latest version (v1.9) of the Thnks Salesforce AppExchange app to capture all of your company's Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities."
 ---
 
 ## Frequently Asked Questions
 
-### v1.8 New Features
+### v1.9 New Features
+
+- **Q. What does the new Send Thnks Apex Action in Flows do, and how is it different from a Thnks Request?**
+  - A. It's a new action in Flow Builder that sends a Thnks directly from any Flow (record triggered, scheduled, or screen flow), without creating a Thnks Request record or going through an Approval Process first. It's built for teams that want full control over their own automation logic, while still relying on Thnks's standard send infrastructure underneath.
+- **Q. I can't find "Send Thnks" in Flow Builder's Action picker. How do I fix this?**
+  - A. Confirm the running user has the **Thnks Admin** or **Thnks Standard User** permission set assigned, that's required before the action appears. Also confirm your org has upgraded to v1.9 or later.
+- **Q. What inputs does the Send Thnks Apex Action need?**
+  - A. Three are required: **Gift Id** (the Thnks catalog gift identifier, not a Salesforce record Id), **Sender Email** (must belong to an existing, active Thnks user), and **Recipient Email**. Everything else, Recipient First/Last Name, Recipient Message, Include Carbon Neutral Cost, UTM Campaign Id, and Source Record Id, is optional.
+- **Q. Does the Sender Email need to match a Salesforce user's login email?**
+  - A. No. Unlike the "Send a Thnks" iframe button, the Send Thnks Action's Sender Email just needs to belong to an active Thnks user, it doesn't need to match a Salesforce login.
+- **Q. What happens if a Send Thnks Action fails?**
+  - A. If a **Source Record Id** was provided (for example, a Task), Salesforce automatically creates a follow up Task so your team can review and resolve it. If Source Record Id was left blank, that behavior is skipped. Note the follow up Task also requires the running user to have Task creation permissions, if that permission is missing, the follow up Task won't be created either.
+- **Q. Can my Flow check whether the Send Thnks action succeeded or failed?**
+  - A. Not within the same interview. The send happens in the background, asynchronously, so a Flow can't check success or failure of the send in the same run.
+- **Q. Are there any limits I should know about for batch sends?**
+
+  - A. Yes, each send counts against Salesforce's future call limit of 50 per transaction. If a Flow processes a large batch of records in a single transaction, split the work into smaller batches.
+- **Q. I upgraded to v1.9, will my existing Thnks Request / Approval Process workflows still work?**
+
+  - A. Yes. No configuration changes are required, existing workflows continue to work as before, and two reliability fixes apply automatically: sender attribution on approved requests, and recipient first/last names flowing through correctly instead of falling back to the recipient's email address.
+
+#### v1.8 Features
 
 - **Q. The "Send a Thnks" button isn't appearing on my record pages. How do I fix this?**
   - A. The "Send a Thnks" button requires manual setup. Go to **Setup** → **Object Manager** → select your object (Contact, Account, or Opportunity) → **Lightning Record Pages** → edit your page layout → drag the "Send Thnks" component to your desired location → save and activate the page.
@@ -17,12 +38,6 @@ description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange 
     4. The Organization Token hasn't been configured properly in **Manage Thnks Settings** → **Send Thnks** tab
 - **Q. How do I get the Organization Token needed for the Send Thnks feature?**
   - A. Contact your Thnks Account Manager or email [integrations@thnks.com](mailto:integrations@thnks.com) to obtain your Organization Token. This token is required to enable the Send Thnks functionality.
-- **Q. What's the difference between auto-approved and manual approval for Thnks Requests?**
-  - A. **Auto-approved** requests are processed and sent immediately when triggered by a Salesforce Flow, perfect for marketing automation. **Manual approval** requests go to an approval queue where they can be reviewed, edited, and then approved by the appropriate person, ideal for sales cadences requiring personalization.
-- **Q. Can I create Thnks Requests manually or do they only work with Flows?**
-  - A. Thnks Requests are primarily designed for Salesforce Flow automation. While the object exists, the recommended approach is to use Salesforce Flows to trigger Thnks Requests based on business events.
-- **Q. How do I set up automated Thnks workflows using Salesforce Flows?**
-  - A. Create a Salesforce Flow that triggers on your desired event (e.g., Opportunity stage change), then use the "Create Record" action to create a Thnks Request record with the appropriate fields populated (Account, Opportunity, Thnks details, etc.). The system will process the request based on your auto-approval settings.
 
 ### General Questions
 
@@ -36,12 +51,12 @@ description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange 
   - A.	Please see the permissions section above. Your users may not have access because they were not granted the correct permissions when you installed the Thnks app.
 - **Q. Why are Tasks not being created?**
   - A.	Please ensure that “Task Syncing” has been enabled in the “Others” tab within the “Manage Thnks Settings” page. Check the “Thnks Configuration” section above.
-- **Q. I've upgraded to v1.8, but I don't see the new features. What do I need to do?**
+- **Q. I don't see the Send Thnks button, where can I find it?**
 
   <Frame>
     ![Thnks Page Layout Customization](/thnks_sf_doc_images/page_layout_upgrade.png)
   </Frame>
-  - A.	After upgrading to v1.8, you'll need to:
+  - A.	You'll need to:
     1. Configure your Organization Token in **Manage Thnks Settings** → **Send Thnks** tab
     2. Add the "Send Thnks" component to your Lightning Record Pages
     3. Add Thnks Request related lists to relevant page layouts if desired
@@ -51,6 +66,25 @@ description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange 
     1. Ensure that in the “Manage Thnks Settings'' tab, underneath “Opportunity Settings”, “Opportunity Matching” is toggled on.
     2. Check that the Contacts in question are being related to Opportunities via the Opportunity Contact Role object.
     3. Ensure that at the time of the Thnks being sent, the Opportunity was in an open stage.
+- **Q. The "Send a Thnks" button isn't appearing on my record pages. How do I fix this?**
+
+  - A. The "Send a Thnks" button requires manual setup. Go to **Setup** → **Object Manager** → select your object (Contact, Account, or Opportunity) → **Lightning Record Pages** → edit your page layout → drag the "Send Thnks" component to your desired location → save and activate the page.
+- **Q. I'm getting an authentication error when trying to send a Thnks from Salesforce. What's wrong?**
+
+  - A. This typically happens when:
+    1. Your Salesforce email address doesn't match your Thnks account email address
+    2. You don't have an active Thnks account
+    3. You don't have the proper permission sets (Thnks Standard User or Thnks Admin)
+    4. The Organization Token hasn't been configured properly in **Manage Thnks Settings** → **Send Thnks** tab
+- **Q. How do I get the Organization Token needed for the Send Thnks feature?**
+
+  - A. Contact your Thnks Account Manager or email [integrations@thnks.com](mailto:integrations@thnks.com) to obtain your Organization Token. This token is required to enable the Send Thnks functionality.
+- **Q. What's the difference between auto-approved and manual approval for Thnks Requests?**
+
+  - A. **Auto-approved** requests are processed and sent immediately when triggered by a Salesforce Flow, perfect for marketing automation. **Manual approval** requests go to an approval queue where they can be reviewed, edited, and then approved by the appropriate person, ideal for sales cadences requiring personalization.
+- **Q. Can I create Thnks Requests manually or do they only work with Flows?**
+
+  - A. Thnks Requests are primarily designed for Salesforce Flow automation. While the object exists, the recommended approach is to use Salesforce Flows to trigger Thnks Requests based on business events.
 - **Q. I have a question or need support, who do I contact?**
   - A.	Reach out to our team by emailing [integrations@thnks.com](mailto:support@thnks.com) and we will be happy to assist\!
 - **Q. I have a feature or functionality request, who do I contact?**

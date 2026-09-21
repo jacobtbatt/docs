@@ -26,6 +26,7 @@
               "appexchange/overview",
               "appexchange/quick_install",
               "appexchange/install",
+              "appexchange/release-notes-v1-9",
               "appexchange/datamodel",
               "appexchange/objectdictionary",
               "appexchange/faq",
@@ -150,5 +151,6 @@
     "ga4": {
       "measurementId": "G-J1MSJZ54JW"
     }
-  }
+  },
+  "description": "Provide helpful documentation around Thnks integrations."
 }

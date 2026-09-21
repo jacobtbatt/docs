@@ -1,6 +1,6 @@
 ---
 title: "Install Guide"
-description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities."
+description: "Use the latest version (v1.9) of the Thnks Salesforce AppExchange app to capture all of your company’s Thnks activity from the Thnks web and mobile app (as well as Chrome and LinkedIn extensions) and associate Thnks data with Salesforce Leads, Contacts, Accounts and Opportunities."
 ---
 
 <Note>
@@ -66,12 +66,10 @@ If selecting **“Install for Specific Profiles”**, you will be able to choose
 
 At this point, you should receive an email from Salesforce confirming successful installation and should be redirected to this page with all of your installed packages. You’ve successfully installed the Thnks Salesforce App\!
 
-## Upgrading to v1.8
-
-### Upgrading from v1.3 to v1.8 of the AppExchange Listing
+### Upgrading from v1.8 to v1.9 of the AppExchange Listing
 
 <Note>
-  **Good News\!** Upgrading from v1.3 to v1.8 is seamless with no breaking changes, new required permissions, or manual data migration needed.
+  **Good News\!** Upgrading from v1.8 to v1.9 is seamless with no breaking changes, new required permissions, or manual data migration needed.
 </Note>
 
 To upgrade your existing Thnks AppExchange app:
@@ -103,7 +101,13 @@ After upgrading, you'll have access to these new features:
 - "Backfill ROI Fields" functionality
 - Better reporting capabilities
 
-#### Post-Upgrade Steps
+#### Post-Upgrade Steps when upgrading from v1.8
+
+1. Open Flow Builder for the Flow to which you wish to add the automation
+2. Search the Action picker for "Send Thnks"
+3. Confirm the running user has the Thnks Admin or Thnks Standard User permission set
+
+#### Post-Upgrade Steps when upgrading from v1.3 or earlier
 
 <Steps>
   <Step title="Configure Organization Token">
@@ -123,19 +127,9 @@ After upgrading, you'll have access to these new features:
   </Step>
 </Steps>
 
-### Upgrading from v1.1 to v1.8 of the AppExchange Listing
+#### Backfilling Thnks Records
 
-If you have a very old version (v1.1) of the Thnks AppExchange app installed, please follow the same installation process as a new installation using [this link](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FN7gUUAT).
-
-The main considerations to keep in mind when upgrading from v1.1:
-
-- The Thnks Status Log object will no longer be syncing records (but the old records will remain)
-- There will be many new fields on the Thnks object, such as Opportunity and Account lookups, as well as several new date/time fields to replace the need of the Thnks Status Log
-- There is now a tab called “Manage Thnks Settings” to configure various settings in the integration (see “Thnks Configuration” section below)
-
-#### Backfilling Thnks Records in 1.3
-
-If you have upgraded from 1.1 to 1.3, you will now notice that the Thnks Status Log object is no longer being used. Instead, there are new date/time fields to track the status of key events such as “Delivered Date/Time”, “Redeemed Date/Time”, etc.
+If you have upgraded from 1.1, you will now notice that the Thnks Status Log object is no longer being used. Instead, there are new date/time fields to track the status of key events such as “Delivered Date/Time”, “Redeemed Date/Time”, etc.
 
 In order to backfill your historical Thnks records from 1.1 with the correct dates for these new fields, you’ll need to have a user with the Thnks admin permissions in Salesforce head to the “Manage Thnks Settings” and click “Enrich Old Thnks”.
 
@@ -159,11 +153,12 @@ This will automatically scan all Thnks Status Log records, take the date/time fo
 
 #### Manually Updating Permissions
 
-If after installing the Thnks app following the install instructions above you need to change permissions, the recommended path is by assigning Permission Sets to the appropriate Users. Alternatively, you may also grant permissions to the Thnks objects at the Profile level.
+If after installing the Thnks app following the install instructions above you need to change permissions, the recommended path is by assigning Permission Sets to the appropriate Users. Alternatively, you may also grant permissions to
+
+ the Thnks objects at the Profile level.
 
 <Steps>
   <Step title="Enter Setup">
-    
   </Step>
   <Step title="Click Into Profiles Under the User Section">
     <Frame>
@@ -171,7 +166,6 @@ If after installing the Thnks app following the install instructions above you n
     </Frame>
   </Step>
   <Step title="Select the Profile You Wish to Change">
-    
   </Step>
   <Step title="Click Edit at the Top of the Page">
     <Frame>
@@ -333,7 +327,7 @@ The other three fields in this section deal with the creation of Task records:
   ![Send Thnks Settings](/thnks_sf_doc_images/send_thnks_settings.png)
 </Frame>
 
-**New in v1.8**, the Send Thnks tab enables users to send Thnks directly from within Salesforce. This powerful feature requires proper configuration:
+**As of v1.8**, the Send Thnks tab enables users to send Thnks directly from within Salesforce. This powerful feature requires proper configuration:
 
 **Enable 'Send Thnks' Feature**
 Check this box to activate the ability for Salesforce users to send Thnks from within Salesforce records (like Contacts or Leads).
@@ -353,6 +347,10 @@ The URL used to display the Thnks sending interface within Salesforce. Do not ed
 
 **Thnks Organization Token** (Required)
 Enter the unique Organization Token provided by Thnks. This token authenticates your Salesforce organization with Thnks, enabling the 'Send Thnks' feature. Salesforce Admins can retrieve this token from the Salesforce Settings page within the Thnks platform.
+
+<Note>
+  The settings on this tab configure the "Send a Thnks" iframe button and the Thnks Request/Approval Process workflow. The new Send Thnks Apex action in Flows (v1.9) does not use these settings, it is configured entirely within Flow Builder, and Auto-Approve does not apply to it.
+</Note>
 
 <Warning>
   **Important**: You must obtain your Organization Token from your Thnks Account Manager or by contacting [support@thnks.com](mailto:support@thnks.com) before users can send Thnks from within Salesforce.
@@ -382,13 +380,39 @@ To enable the "Send a Thnks" button on your Salesforce records:
   </Step>
 </Steps>
 
+## Adding the Send Thnks Apex Action to Flows (New in v1.9)
+
+1. **Open Flow Builder**
+   1. Navigate to the Flow you want to add automation to (record triggered, scheduled, or screen flow).
+2. **Add the Send Thnks Apex Action**
+   1. In the Action picker, search for **"Send Thnks"**
+   2. Add it to your Flow at the point where you want the send to fire 
+   3. Map the required inputs: **Gift Id**, **Sender Email**, **Recipient Email**
+   4. Optionally map: **Recipient First/Last Name**, **Include Carbon Neutral Cost**, **UTM Campaign Id**, **Source Record Id**
+3. **Save and Activate**
+   1. Save the Flow and activate it once testing is complete.
+
+**Good to know:**
+
+- **Asynchronous sends**: The send happens in the background. A Flow can't check success or failure of the send within the same interview.
+- **Salesforce sending limit**: Each send counts against Salesforce's future call limit (50 per transaction). Flows processing large batches of records in a single transaction should be split accordingly.
+- **Task creation permissions**: The follow up Task on failure requires the running user to have Task creation permissions. If that permission is missing, the follow up Task won't be created either.
+- **Source Record Id**: Required for the automatic follow up Task and completion behavior. If omitted, those behaviors are skipped.
+
 ## User Requirements for Send Thnks Feature
 
 For users to successfully send Thnks from within Salesforce:
+
+#### Using the "Send a Thnks" iframe button:
 
 1. **Matching Email Addresses**: The user's Salesforce email address must match their Thnks account email address
 2. **Active Thnks Account**: Users must have an active Thnks account
 3. **Proper Permissions**: Users must have the "Thnks Standard User" or "Thnks Admin" permission set assigned
 4. **Organization Token**: The Organization Token must be properly configured in the Send Thnks settings
+
+#### Using the Send Thnks Apex Action in Flows (new in v1.9):
+
+- **Active Thnks Account**: The Sender Email input must belong to an existing, active Thnks user (Salesforce and Thnks emails do not need to match)
+- **Proper Permissions**: The running user must have the "Thnks Standard User" or "Thnks Admin" permission set assigned
 
 If any of these requirements are not met, users will receive an error message when attempting to use the Send Thnks feature.

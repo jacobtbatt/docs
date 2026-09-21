@@ -4,9 +4,9 @@ title: "Object Data Dictionary"
 
 ---
 
-## Object Data Dictionary v1.8
+## Object Data Dictionary v1.9
 
-Version 1.8 introduces the new Thnks Request object alongside the existing Thnks object, providing comprehensive workflow automation capabilities.
+Version 1.9 adds the Send Thnks Apex Action, a new way to send Thnks directly from a Salesforce Flow (see below), alongside reliability fixes for the Thnks Request/Approval workflows introduced in v1.8. No fields were added, removed, or changed on either object in this release.
 
 ### Thnks Object Data Dictionary
 
@@ -55,6 +55,10 @@ Below is a table with the default labels, API names and definitions for all fiel
 | Transaction Id         | thnksdev1__RecipientTransactionId__c        | Number(18, 0) (External ID) | Unique transaction ID for Thnks send.                                                                 |
 | Undelivered Date/Time  | thnksdev1__Undelivered_Date_Time__c         | Date/Time                   | Timestamp of when the Thnks was undelivered.                                                          |
 
+<Warning>
+  **Send Thnks Apex Action in Flows (new in v1.9):** Sends made through the Apex action do still result in a record on this object, created asynchronously through the same organic sync that captures web, mobile, and extension activity, rather than written directly by the Apex action itself. Once created, it uses the same fields and Contact/Lead/Opportunity matching logic as any other send path. The Apex action's own inputs (Gift Id, Sender Email, Recipient Email, etc.) are configured in Flow Builder and are separate from this object's fields, see the note under the Thnks Request Object table below.
+</Warning>
+
 ### Thnks Request Object Data Dictionary
 
 **New in v1.8**, the Thnks Request object enables workflow automation and approval processes for Thnks sending.
@@ -86,6 +90,10 @@ Below is a table with the default labels, API names and definitions for all fiel
 | Thnks Error Log             | Thnks__Thnks_Error_Log__c             | Text(255)           | Error log for troubleshooting failed requests.                                         |
 | Thnks Request Number        | Name                                  | Auto Number         | Auto-generated unique number for the Thnks request.                                    |
 | Use User Balance            | Thnks__Use_User_Balance__c            | Checkbox            | Indicates if user's account balance should be used for payment.                        |
+
+<Warning>
+  **Send Thnks Apex Action in Flows (new in v1.9)**: The Send Thnks Apex Action does not use the Thnks Request object at all, it does not create, read, or update any records here. Its inputs (Gift Id, Sender Email, Recipient Email, Recipient First/Last Name, Recipient Message, Include Carbon Neutral Cost, UTM Campaign Id, Source Record Id) are configured directly in Flow Builder as action parameters, not Salesforce fields, so none of them appear in this table even though some share a name with a field above (e.g. Gift Id, Include Carbon Neutral Cost). See the [Install Guide](/appexchange/install) for the full Apex Action input reference.
+</Warning>
 
 ### Field Usage Notes
 

@@ -1,6 +1,6 @@
 ---
 title: "Quick Install"
-description: "Get up and running with Thnks v1.8 in minutes. This streamlined guide covers the essential steps for new installations."
+description: "Get up and running with Thnks v1.9 in minutes. This streamlined guide covers the essential steps for new installations."
 ---
 
 ## Prerequisites
@@ -13,10 +13,10 @@ Before starting, ensure you have:
 - **Email Matching**: User email addresses must match between Thnks and Salesforce accounts
 
 <Note>
-  **New in v1.8**: Users must have matching email addresses between their Thnks and Salesforce accounts to use the "Send Thnks" feature within Salesforce.
+  **As of v1.8**: Users must have matching email addresses between their Thnks and Salesforce accounts to use the "Send Thnks" feature within Salesforce.
 </Note>
 
-## 5-Step Quick Install
+## 6-Step Quick Install
 
 ### Step 1: Configure Thnks Platform Connection
 
@@ -75,6 +75,21 @@ For better visibility of Thnks activity:
 2. **Page Layouts** → Select the relevant layout
 3. **Related Lists** section → Drag **"Thnks"** into the layout
 4. Configure the related list fields and **Save**
+
+### Step 6: Add the Send Thnks Flow Action (Optional, new in v1.9)
+
+For teams that want to trigger Thnks sends from Salesforce Flow automation, no Thnks Request record required:
+
+1. Open **Flow Builder** and go to the Flow you want to add the action to
+2. In the Action picker, search for **"Send Thnks"**
+3. Confirm the running user has the **Thnks Admin** or **Thnks Standard User** permission set assigned, otherwise the action won't appear
+4. Configure the required inputs: **Gift Id**, **Sender Email**, **Recipient Email**
+5. Optionally set **Recipient First/Last Name**, **Recipient Message**, **Include Carbon Neutral Cost**, **UTM Campaign Id**, and **Source Record Id**
+6. Save and activate your Flow
+
+<Note>
+  **Salesforce Sending limit**: Each send counts against Salesforce's future call limit of 50 per transaction. If a Flow processes a large batch of records in a single transaction, split the work into smaller batches.
+</Note>
 
 ## Post-Installation Checklist
 
@@ -141,7 +156,7 @@ For better visibility of Thnks activity:
 After successful installation:
 
 - Review the [Install Guide](https://docs.thnks.com/appexchange/install) for detailed configuration options
-- Configure [automated workflows](./datamodel#automated-workflows) using Salesforce Flows
+
 - Set up [custom field mapping](https://docs.thnks.com/appexchange/install#fields-mapping) for ROI tracking
 - Train users on the new Send Thnks functionality
 

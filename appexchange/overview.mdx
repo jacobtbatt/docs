@@ -1,24 +1,33 @@
 ---
 title: "Overview"
-description: "Use the latest version (v1.8) of the Thnks Salesforce AppExchange app to capture all of your company's Thnks activity and send Thnks directly from within Salesforce. The app provides comprehensive integration between Thnks and Salesforce Leads, Contacts, Accounts and Opportunities."
+description: "Use the latest version (v1.9) of the Thnks Salesforce AppExchange app to capture all of your company's Thnks activity and send Thnks directly from within Salesforce. The app provides comprehensive integration between Thnks and Salesforce Leads, Contacts, Accounts and Opportunities."
 ---
 
 The custom Thnks objects allow you to build more robust reporting and understand your ROI by pulling detailed reports on user activity and messaging effectiveness.
 
-## What's New in v1.8
+## What's New in v1.9
+
+**⚡ Send Thnks Directly from Flow**
+
+- New "Send Thnks" action available in Flow Builder's Action picker
+- Trigger a send from any Flow (record triggered, scheduled, or screen flow) without first building a Thnks Request record
+- Good fit for advanced automation: sales cadences, renewal triggers, deal close celebrations
+
+- Requires the Thnks Admin or Thnks Standard User permission set before the action appears in Flow Builder's Action picker
+
+**🔧 Reliability Improvements**
+
+- Sender attribution fix — approved requests now correctly identify the sending user, resolving an issue where some automated sends were rejected
+- Recipient name fix — first and last names now flow through correctly on automated sends, instead of falling back to the recipient's email address
+- Both fixes apply automatically, no setup changes needed
+
+## What's New in v1.8 _(history)_
 
 **🎯 Send Thnks Directly from Salesforce**
 
 - Send Thnks directly from Contact, Account, and Opportunity pages
 - Embedded Thnks interface within Salesforce using secure iframe technology
 - Automatic recipient detection from Salesforce records
-
-**🔄 Automated Thnks Workflows**
-
-- New Thnks Request object for workflow automation
-- Salesforce Flow integration for triggered Thnks sending
-- Configurable auto-approval or manual approval processes
-- Perfect for marketing automation and sales cadences
 
 **📊 Enhanced ROI Tracking**
 
@@ -35,9 +44,9 @@ The custom Thnks objects allow you to build more robust reporting and understand
 
 ## Integration Overview
 
-Thnks has partnered with Salesforce to provide our clients with an application built specifically for Salesforce and available on the AppExchange. Version 1.8 introduces **bidirectional functionality**, allowing you to both:
+Thnks has partnered with Salesforce to provide our clients with an application built specifically for Salesforce and available on the AppExchange. The integration **bidirectional functionality**, allowing you to both:
 
-- **Send Thnks from Salesforce** → Initiate Thnks directly from Salesforce records
+- **Send Thnks from Salesforce** → Initiate Thnks directly from Salesforce records, or via automated Flow logic
 - **Receive Thnks data in Salesforce** → Capture all Thnks activity from web, mobile, and extension usage
 
 ## What Does It Do?
@@ -47,8 +56,9 @@ The Thnks Salesforce AppExchange application provides comprehensive Thnks manage
 ### 1. Send Thnks from Salesforce
 
 - **Direct Sending**: Click "Send a Thnks" button on Contact, Account, or Opportunity pages
-- **Automated Workflows**: Configure Salesforce Flows to automatically trigger Thnks based on business events
-- **Approval Processes**: Set up approval workflows for Thnks requests before they're sent
+- **Flow Action**: Add the "Send Thnks" action to any Flow for direct, code free automation _(new in v1.9)_
+- **Automated Workflows**: Configure Salesforce Flows to create Thnks Request records, with optional Approval Processes before sending
+- **Approval Processes**: Set up approval workflows for Thnks Requests before they're sent
 
 ### 2. Track Thnks Activity
 
@@ -77,12 +87,22 @@ Both objects automatically associate with Lead, Contact, Account, and Opportunit
 4. User selects Thnks, adds message, and sends
 5. Thnks record is created in Salesforce with full tracking
 
-**Automated Workflow Process:**
+**Send Thnks Flow Action Process** _(new in v1.9)_**:**
+
+1. Your Flow determines the sender, recipient, and gift details (via Get Records, prior Flow logic, or hardcoded values)
+2. The Flow passes these into the Send Thnks action
+3. The action sends the request to Thnks in the background, asynchronously — a Flow can't check success or failure within the same interview
+4. On success, an optionally linked source record (such as a Task) is automatically marked complete
+5. On failure, a follow up Task is automatically created for review
+
+This path doesn't require a Thnks Request record or Approval Process — it's designed for teams that want full control over their own automation logic while still relying on Thnks's standard send infrastructure underneath.
+
+**Automated Workflow Process (Thnks Request + Approval):**
 
 1. Business event triggers a Salesforce Flow (e.g., demo scheduled, deal closed)
 2. Flow creates a Thnks Request record with recipient and Thnks details
 3. If auto-approval is enabled, Thnks is sent immediately
-4. If manual approval is required, request goes to approval queue
+4. If manual approval is required, request goes to the approval queue
 5. Once approved, Thnks is sent and tracked in Salesforce
 
 ### Tracking Thnks Activity
