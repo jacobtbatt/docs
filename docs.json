@@ -109,7 +109,7 @@
   },
   "api": {
     "mdx": {
-      "server": "https://admin.thnks.com/api/v1",
+      "server": "https://api.thnks.com/api/v1/webhooks",
       "auth": {
         "method": "key",
         "name": "Authorization"
