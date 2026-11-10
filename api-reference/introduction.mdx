@@ -11,11 +11,14 @@ Welcome to the new Thnks API Documentation.  As a Thnks Admin, you have access t
 
 All API endpoints are authenticated using an Authorization API token. This token is tied to the sender’s account. Follow the instructions found in the [Get Started - Request an API Key](https://docs.thnks.com/get-started/request) section.
 
+While "Authorization" and "Content-Type" are both **required** headers, you can **optionally** pass an idempotency key in the header block. This will prevent repeat sends (or Redemption URL Creation) for 3 hours.
+
 ```json
 "headers": [
   {
     "Authorization": "<api_key>",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Idempotency-key": "<optional header field>"
   }
 ]
 ```
