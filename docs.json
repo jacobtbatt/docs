@@ -96,7 +96,8 @@
             "group": "Thnks Endpoints",
             "pages": [
               "api-reference/endpoint/create_gift_request",
-              "api-reference/endpoint/create_redemption_url"
+              "api-reference/endpoint/create_redemption_url",
+              "status-webhooks"
             ]
           }
         ]
