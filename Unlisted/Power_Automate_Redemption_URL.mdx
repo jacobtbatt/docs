@@ -36,6 +36,7 @@ This guide walks you through creating a Thnks Redemption URL as part of a Power 
         {
           "gift_id": <GIFT_ID>,
           "utm_campaign_id": "<string>",
+          "sender_email": "<string>",
           "recipients": [
             {
               "email": "<string>",
@@ -50,6 +51,7 @@ This guide walks you through creating a Thnks Redemption URL as part of a Power 
         - Replace `<GIFT_ID>` with the Thnks ID of the gesture you want to send.
         - Use Power Automate expressions (e.g., `@{triggerOutputs()?['body/email']}`) to dynamically populate recipient data.
         - `utm_campaign_id` is optional and provides the opportunity to link records back to a campaign
+        - `sender_email` is required when using a team API key
       </Step>
       <Step title="Headers">
         You will need to add the following headers in the HTTP action:
