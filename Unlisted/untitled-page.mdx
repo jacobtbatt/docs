@@ -1,6 +1,7 @@
 ---
 title: "Microsoft Power Automate -- Redemption URL"
 description: "This integration allows you to set up a flow in Microsoft Power Automate that creates a Thnks Redemption URL via an HTTP action."
+hidden: true
 ---
 
 # Configuring Microsoft Power Automate to Create and Use a Thnks Redemption URL
@@ -61,9 +62,11 @@ This guide walks you through creating a Thnks Redemption URL as part of a Power 
         - **Idempotency-key**: Any call made with the same key within 3 hours returns the same redemption URL instead of creating a new one. This can be used for deduplication.
 
           Use a value that identifies one intended send: the same every time the flow runs for that send, and different from every other send. A good pattern is the source record's ID plus the gift ID, for example:
+
           ```text
           @{triggerOutputs()?['body/contactid']}-<GIFT_ID>
           ```
+
           Avoid:
           - **`guid()`**: it creates a new key on every run, so a trigger that fires twice creates two thnks URLs.
           - **One fixed value for every call**: every recipient within 3 hours would get the _first_ recipient's URL.
