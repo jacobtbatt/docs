@@ -1,0 +1,197 @@
+---
+title: "Microsoft Power Automate -- Redemption URL"
+description: "This integration allows you to set up a flow in Microsoft Power Automate that creates a Thnks Redemption URL via an HTTP action."
+---
+
+# Configuring Microsoft Power Automate to Create and Use a Thnks Redemption URL
+
+This guide walks you through creating a Thnks Redemption URL as part of a Power Automate flow.
+
+## Prerequisites
+
+- Access to the Thnks API.
+- Thnks API Key (Authorization Token).
+- URL for Thnks API endpoint.
+- Administrative access to your Microsoft Power Automate environment.
+- A Power Automate Premium license (to use HTTP action)
+
+## Setup
+
+<Steps>
+  <Step title="Prepare HTTP Request Data">
+    Before configuring your Power Automate flow, ensure you have the following details:
+
+    <Steps>
+      <Step title="Thnks Create Redemption URL API Address">
+        `https://api.thnks.com/api/v1/webhooks/gift_requests`
+      </Step>
+      <Step title="HTTP Method">
+        `POST`
+      </Step>
+      <Step title="Data (JSON format)">
+        Here's an example of the JSON payload you will need to include in the HTTP action. Replace the placeholders with dynamic data from Power Automate tokens:
+
+        ```json
+        {
+          "gift_id": <GIFT_ID>,
+          "utm_campaign_id": "<string>",
+          "recipients": [
+            {
+              "email": "<string>",
+              "first_name": "<string>",
+              "last_name": "<string>",
+              "message": "<string>"
+            }
+          ]
+        }
+        ```
+
+        - Replace `<GIFT_ID>` with the Thnks ID of the gesture you want to send.
+        - Use Power Automate expressions (e.g., `@{triggerOutputs()?['body/email']}`) to dynamically populate recipient data.
+        - `utm_campaign_id` is optional and provides the opportunity to link records back to a campaign
+      </Step>
+      <Step title="Headers">
+        You will need to add the following headers in the HTTP action:
+
+        - **Content-Type**: `application/json`
+        - **Authorization**: Your Thnks API key (Authorization Token).
+
+        Optional:
+
+        - **Idempotency-key**: Any call made with the same key within 3 hours returns the same redemption URL instead of creating a new one. This can be used for deduplication.
+
+          Use a value that identifies one intended send: the same every time the flow runs for that send, and different from every other send. A good pattern is the source record's ID plus the gift ID, for example:
+          ```text
+          @{triggerOutputs()?['body/contactid']}-<GIFT_ID>
+          ```
+          Avoid:
+          - **`guid()`**: it creates a new key on every run, so a trigger that fires twice creates two thnks URLs.
+          - **One fixed value for every call**: every recipient within 3 hours would get the _first_ recipient's URL.
+
+        ```json
+        "headers":
+          {
+            "Authorization": "<api_key>",
+            "Content-Type": "application/json",
+            "Idempotency-key": "<optional header field>"
+          }
+        ```
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="Create a Flow in Power Automate">
+    <Steps>
+      <Step title="Log into Power Automate and Create a New Flow">
+        Open Power Automate and click **\+ Create** to start building a new flow.
+      </Step>
+      <Step title="Choose a Trigger">
+        Select a trigger to define the event that starts your flow. Examples include:
+
+        - **When a record is updated**: Trigger the flow when a record is updated in a connected app like Microsoft Dynamics, Salesforce, or SharePoint.
+        - **When an HTTP request is received**: Trigger the flow via an incoming webhook.
+        - **Scheduled Flow**: Run the flow on a predefined schedule.
+      </Step>
+      <Step title="Add an HTTP Action">
+        - Click **\+ New step** and search for **HTTP** to add an HTTP action.
+        - Configure the HTTP action as follows:
+          - **Method**: `POST`
+          - **URI**: `https://api.thnks.com/api/v1/webhooks/gift_requests`
+          - **Headers**:
+            - **Content-Type**: `application/json`
+            - **Authorization**: Paste your Thnks API Key.
+            - (Optional) **Idempotency-key**
+          - **Body**: Copy the JSON payload mentioned above and replace placeholders with Power Automate expressions.
+        - Save the HTTP action.
+      </Step>
+      <Step title="Response">
+        On success, the API returns a `200` response with the following JSON body.
+
+        - **Message** `string` : Success message. Returns "GiftRequest created successfully." when the gift request is created.
+        - **Data** `object`
+          - **id** `integer` : Unique ID of the created gift request (`gift_request_id`)
+          - **recipients** : `array`
+            - **recipient transaction id** `integer`: unique id of the recipient transaction
+            - **email** `string`: Email address of the recipient
+            - **phone_number** `string`: Phone number of the recipient. Returns an empty string when not provided in creation call.
+            - **gift_redemption_url** `string`: Unique Thnks Redemption URL for the recipient to accept the Thnks
+            - **gift_donation_url** `string`: URL for the recipient to donate the gift value to charity instead of redeeming it
+
+        Example Payload:
+
+        ```json
+        {
+          "message": "GiftRequest created successfully.",
+          "data": {
+            "id": 123,
+            "recipients": [
+              {
+                "recipient_transaction_id": 456,
+                "email": "some@test.com",
+                "phone_number": "",
+                "gift_redemption_url": "https://...",
+                "gift_donation_url": "https://..."
+              }
+            ]
+          }
+        }
+        ```
+
+        <Note>
+          Status updates for "sent", "undelivered", and "opened" are not available with this flow. Consequently neither are automated reminder emails from Thnks.
+        </Note>
+      </Step>
+      <Step title="Using Response in Your Workflow">
+        To use these values dynamically within your automation use a **Parse JSON** action:
+
+        1. Content: select **body** from the HTTP action
+        2. Click **Use sample payload to generate schema** and paste example response from above
+        3. `gift_redemption_url`, `recipient_transaction_id` and other fields now appear in the Dynamic content picker and can be used in other actions in your workflow.
+
+        <Note>
+          Because recipients is an array, using one of its fields may add an Apply to each loop around the next action automatically.
+        </Note>
+      </Step>
+      <Step title="Add Additional Actions or Conditions (Optional)">
+        Use additional actions or conditions to enhance the flow, such as:
+
+        - **Condition**: Add a condition to determine when the HTTP action should be executed.
+        - **Data Operations**: Use the Compose or Parse JSON actions to transform or manipulate data before sending it.
+        - **Error Handling**: Add a parallel branch to handle errors or log failed requests.
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="Test and Activate the Flow">
+    <Steps>
+      <Step title="Run the Flow Manually or with Test Data">
+        Use Power Automate's test feature to trigger the flow with sample data and ensure the HTTP action sends data correctly to the Thnks API.
+      </Step>
+      <Step title="Check Run History">
+        Review the flow's **Run History** to verify the API call was successful and the Thnks URL was created.
+      </Step>
+      <Step title="Activate the Flow">
+        Once verified, turn on the flow to enable automated Thnks creation.
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="Best Practices">
+    <Steps>
+      <Step title="Error Handling">
+        Add error-handling logic to retry failed API calls or log issues for manual review.
+      </Step>
+      <Step title="Security">
+        Use Power Automate's **Environment Variables** or **Key Vault** connectors to securely store your API Key and other sensitive data. Be sure to turn on **secure inputs** and **secure outputs** in the HTTP action's settings to keep API keys out of run history.
+      </Step>
+      <Step title="Testing">
+        Test the flow thoroughly with various scenarios to ensure all triggers, actions, and conditions work as intended.
+      </Step>
+    </Steps>
+  </Step>
+</Steps>
+
+Following this process, you can automatically trigger a Thnks Redemption URL to be created as part of a Power Automate flow using the HTTP action.
+
+## References
+
+- [HTTP Action Documentation](https://learn.microsoft.com/en-us/azure/connectors/connectors-native-http)
+- [Power Automate Triggers and Actions Overview](https://learn.microsoft.com/en-us/power-automate/get-started-logic-flow)
+- [Thnks API Documentation](https://docs.thnks.com/api-reference/endpoint/create_redemption_url)
