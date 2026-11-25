@@ -23,56 +23,17 @@ Status webhooks notify your systems as each Thnks moves through its lifecycle. O
 
 A webhook is sent when a gift transaction moves to any of these statuses.
 
-<table>
-  <colgroup>
-    <col width="113" />
-    <col width="349" />
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sent</td>
-      <td>Sent to the recipient</td>
-    </tr>
-    <tr>
-      <td>Delivered</td>
-      <td>Successfully delivered</td>
-    </tr>
-    <tr>
-      <td>Undelivered</td>
-      <td>Could not be delivered</td>
-    </tr>
-    <tr>
-      <td>Opened</td>
-      <td>Opened by the recipient</td>
-    </tr>
-    <tr>
-      <td>Redeemed</td>
-      <td>Redeemed by the recipient</td>
-    </tr>
-    <tr>
-      <td>Re-gifted</td>
-      <td>Passed along to someone else</td>
-    </tr>
-    <tr>
-      <td>Donated</td>
-      <td>Value donated by the recipient</td>
-    </tr>
-    <tr>
-      <td>Replaced</td>
-      <td>Exchanged for a different Thnks</td>
-    </tr>
-    <tr>
-      <td>Expired</td>
-      <td>Expired before being opened or redeemed</td>
-    </tr>
-  </tbody>
-</table>
+| Status | Description |
+| --- | --- |
+| Sent | Sent to the recipient |
+| Delivered | Successfully delivered |
+| Undelivered | Could not be delivered |
+| Opened | Opened by the recipient |
+| Redeemed | Redeemed by the recipient |
+| Re-gifted | Passed along to someone else |
+| Donated | Value donated by the recipient |
+| Replaced | Exchanged for a different Thnks |
+| Expired | Expired before being opened or redeemed |
 
 <Note>
   Webhooks are sent per gift transaction. A gift bundle generates one webhook for each gift in the bundle.
@@ -220,6 +181,41 @@ Each webhook is a POST request with a JSON body containing these fields.
   Preview of the gift email the recipient received
 </ResponseField>
 
+## Status values
+
+### `tracking_status`
+
+| Value | Description | Events |
+| --- | --- | --- |
+| `sent` | Sent; the recipient has not acted on it | Sent, Delivered, Expired |
+| `received` | The recipient opened or acted on the Thnks | Opened, Redeemed, Re-gifted, Donated, Replaced |
+| `undelivered` | Could not be delivered | Undelivered |
+
+### `receiving_status`
+
+| Value | Description | Events |
+| --- | --- | --- |
+| `new` | Sent; delivery not yet confirmed | Sent, Undelivered |
+| `delivered` | Delivered | Delivered |
+| `opened` | Opened by the recipient | Opened |
+| `accepted` | Redeemed by the recipient | Redeemed |
+| `re_gifted` | Passed along to someone else | Re-gifted |
+| `donated` | Value donated | Donated |
+| `replaced` | Exchanged for a different Thnks | Replaced |
+| `expired` | Expired before being opened or redeemed | Expired |
+
+<Tip>
+  When `receiving_status` is `new`, check `tracking_status` to tell a Sent event from an Undelivered one.
+</Tip>
+
+## Responding to webhooks
+
+Return an HTTP `200` response to acknowledge receipt.
+
+<Warning>
+  Thnks does not retry failed deliveries. If you think you are missing notifications, contact [developer@thnks.com](mailto:developer@thnks.com) and we can check the delivery log.
+</Warning>
+
 <ResponseExample>
 
 ```json Payload
@@ -269,38 +265,3 @@ Each webhook is a POST request with a JSON body containing these fields.
 ```
 
 </ResponseExample>
-
-## Status values
-
-### `tracking_status`
-
-| Value | Description | Events |
-| --- | --- | --- |
-| `sent` | Sent; the recipient has not acted on it | Sent, Delivered, Expired |
-| `received` | The recipient opened or acted on the Thnks | Opened, Redeemed, Re-gifted, Donated, Replaced |
-| `undelivered` | Could not be delivered | Undelivered |
-
-### `receiving_status`
-
-| Value | Description | Events |
-| --- | --- | --- |
-| `new` | Sent; delivery not yet confirmed | Sent, Undelivered |
-| `delivered` | Delivered | Delivered |
-| `opened` | Opened by the recipient | Opened |
-| `accepted` | Redeemed by the recipient | Redeemed |
-| `re_gifted` | Passed along to someone else | Re-gifted |
-| `donated` | Value donated | Donated |
-| `replaced` | Exchanged for a different Thnks | Replaced |
-| `expired` | Expired before being opened or redeemed | Expired |
-
-<Tip>
-  When `receiving_status` is `new`, check `tracking_status` to tell a Sent event from an Undelivered one.
-</Tip>
-
-## Responding to webhooks
-
-Return an HTTP `200` response to acknowledge receipt.
-
-<Warning>
-  Thnks does not retry failed deliveries. If you think you are missing notifications, contact [developer@thnks.com](mailto:developer@thnks.com) and we can check the delivery log.
-</Warning>
