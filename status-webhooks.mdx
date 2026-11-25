@@ -1,5 +1,306 @@
 ---
 title: "Status Webhooks"
+description: "Receive real-time notifications when a Thnks sent by your team changes status."
 ---
 
-To receive status events (send, delivery, open, redemption, expiry, etc.) please have a Thnks Admin reach out to [developer@thnks.com](mailto:developer@thnks.com) with a listener/catch hook URL and the team(s) whose events you'd like to receive.
+Status webhooks notify your systems as each Thnks moves through its lifecycle. Once a webhook URL is configured for your team, Thnks sends a JSON payload to that URL every time a Thnks sent by a team member changes status.
+
+## Set up a webhook
+
+<Steps>
+  <Step title="Prepare an endpoint">
+    Stand up a URL that accepts HTTP POST requests with a JSON body. Integration platforms such as Workato or Zapier can generate one with a webhook (catch hook) trigger.
+  </Step>
+  <Step title="Request activation">
+    Have a Thnks Admin email [developer@thnks.com](mailto:developer@thnks.com) with your endpoint URL and the team(s) whose events you want to receive. Webhooks can cover a single team or a team and all of its sub-teams.
+  </Step>
+  <Step title="Test the integration">
+    Send a Thnks as a team member, trigger a status change (for example, open the gift email), and confirm your endpoint receives the notification.
+  </Step>
+</Steps>
+
+## Events
+
+A webhook is sent when a gift transaction moves to any of these statuses.
+
+<table>
+  <colgroup>
+    <col width="113" />
+    <col width="349" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sent</td>
+      <td>Sent to the recipient</td>
+    </tr>
+    <tr>
+      <td>Delivered</td>
+      <td>Successfully delivered</td>
+    </tr>
+    <tr>
+      <td>Undelivered</td>
+      <td>Could not be delivered</td>
+    </tr>
+    <tr>
+      <td>Opened</td>
+      <td>Opened by the recipient</td>
+    </tr>
+    <tr>
+      <td>Redeemed</td>
+      <td>Redeemed by the recipient</td>
+    </tr>
+    <tr>
+      <td>Re-gifted</td>
+      <td>Passed along to someone else</td>
+    </tr>
+    <tr>
+      <td>Donated</td>
+      <td>Value donated by the recipient</td>
+    </tr>
+    <tr>
+      <td>Replaced</td>
+      <td>Exchanged for a different Thnks</td>
+    </tr>
+    <tr>
+      <td>Expired</td>
+      <td>Expired before being opened or redeemed</td>
+    </tr>
+  </tbody>
+</table>
+
+<Note>
+  Webhooks are sent per gift transaction. A gift bundle generates one webhook for each gift in the bundle.
+</Note>
+
+## Payload
+
+Each webhook is a POST request with a JSON body containing these fields.
+
+<ResponseField name="gift_transaction_id" type="integer">
+  Unique identifier for each part of a send
+</ResponseField>
+
+<ResponseField name="recipient_transaction_id" type="integer">
+  Unique identifier for a send (that may contain multiple gift transactions)
+</ResponseField>
+
+<ResponseField name="tracking_status" type="string">
+  `sent`, `received`, or `undelivered`. See [Status values](#status-values).
+</ResponseField>
+
+<ResponseField name="receiving_status" type="string">
+  Recipient-side status. See [Status values](#status-values).
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message sent with the Thnks
+</ResponseField>
+
+<ResponseField name="created_at" type="integer">
+  Unix timestamp (seconds)
+</ResponseField>
+
+<ResponseField name="updated_at" type="integer">
+  Unix timestamp (seconds)
+</ResponseField>
+
+<ResponseField name="sender" type="object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Sender user ID
+    </ResponseField>
+
+    <ResponseField name="first_name" type="string">
+      Sender first name
+    </ResponseField>
+
+    <ResponseField name="last_name" type="string">
+      Sender last name
+    </ResponseField>
+
+    <ResponseField name="email" type="string">
+      Sender email
+    </ResponseField>
+
+    <ResponseField name="enterprise" type="object">
+      Sender's enterprise
+
+      <Expandable title="properties">
+        <ResponseField name="id" type="integer">
+          Enterprise ID
+        </ResponseField>
+
+        <ResponseField name="name" type="string">
+          Enterprise name
+        </ResponseField>
+
+        <ResponseField name="api_token" type="string">
+          Enterprise API token
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="recipient" type="object">
+  <Expandable title="properties">
+    <ResponseField name="first_name" type="string">
+      Recipient first name
+    </ResponseField>
+
+    <ResponseField name="last_name" type="string">
+      Recipient last name
+    </ResponseField>
+
+    <ResponseField name="email" type="string">
+      Recipient email
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="gift" type="object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Thnks gift ID
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Gift name
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Gift description
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="cost_breakdown" type="object">
+  All amounts in US cents (`684` = \$6.84).
+
+  <Expandable title="properties">
+    <ResponseField name="cost" type="integer">
+      Gift cost
+    </ResponseField>
+
+    <ResponseField name="commission" type="integer">
+      Thnks commission
+    </ResponseField>
+
+    <ResponseField name="tax" type="integer">
+      Tax
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      Total charged
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="status_history" type="array">
+  Chronological status changes for this gift. For bundles, covers the individual gift only.
+
+  <Expandable title="properties">
+    <ResponseField name="status" type="string">
+      Status the gift moved to
+    </ResponseField>
+
+    <ResponseField name="created_at" type="integer">
+      Unix timestamp (seconds)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="email_preview_url" type="string">
+  Preview of the gift email the recipient received
+</ResponseField>
+
+<ResponseExample>
+
+```json Payload
+{
+  "gift_transaction_id": 123,
+  "recipient_transaction_id": 456,
+  "tracking_status": "received",
+  "receiving_status": "accepted",
+  "message": "Thank you so much",
+  "created_at": 1656434303,
+  "updated_at": 1656435601,
+  "sender": {
+    "id": 123,
+    "first_name": "James",
+    "last_name": "Brown",
+    "email": "test@example.com",
+    "enterprise": {
+      "id": 123,
+      "name": "Thnks",
+      "api_token": "<api_token>"
+    }
+  },
+  "recipient": {
+    "first_name": "John",
+    "last_name": "Smith",
+    "email": "email@example.com"
+  },
+  "gift": {
+    "id": 123,
+    "name": "Red, White & (Cold) Brew Coffee",
+    "description": "Enjoy a grande Starbucks Nitro Cold Brew coffee."
+  },
+  "cost_breakdown": {
+    "cost": 525,
+    "commission": 105,
+    "tax": 54,
+    "total": 684
+  },
+  "status_history": [
+    { "status": "sent", "created_at": 1656435226 },
+    { "status": "delivered", "created_at": 1656435235 },
+    { "status": "opened", "created_at": 1656435602 },
+    { "status": "redeemed", "created_at": 1656435602 }
+  ],
+  "email_preview_url": "https://api.thnks.com/api/v1/email/?purpose=receive_gift&recipient_transaction_token=123"
+}
+```
+
+</ResponseExample>
+
+## Status values
+
+### `tracking_status`
+
+| Value | Description | Events |
+| --- | --- | --- |
+| `sent` | Sent; the recipient has not acted on it | Sent, Delivered, Expired |
+| `received` | The recipient opened or acted on the Thnks | Opened, Redeemed, Re-gifted, Donated, Replaced |
+| `undelivered` | Could not be delivered | Undelivered |
+
+### `receiving_status`
+
+| Value | Description | Events |
+| --- | --- | --- |
+| `new` | Sent; delivery not yet confirmed | Sent, Undelivered |
+| `delivered` | Delivered | Delivered |
+| `opened` | Opened by the recipient | Opened |
+| `accepted` | Redeemed by the recipient | Redeemed |
+| `re_gifted` | Passed along to someone else | Re-gifted |
+| `donated` | Value donated | Donated |
+| `replaced` | Exchanged for a different Thnks | Replaced |
+| `expired` | Expired before being opened or redeemed | Expired |
+
+<Tip>
+  When `receiving_status` is `new`, check `tracking_status` to tell a Sent event from an Undelivered one.
+</Tip>
+
+## Responding to webhooks
+
+Return an HTTP `200` response to acknowledge receipt.
+
+<Warning>
+  Thnks does not retry failed deliveries. If you think you are missing notifications, contact [developer@thnks.com](mailto:developer@thnks.com) and we can check the delivery log.
+</Warning>
